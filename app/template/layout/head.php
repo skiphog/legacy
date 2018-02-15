@@ -15,8 +15,9 @@ if (isset($_GET['storyid'])) {
 <meta charset="utf-8">
 <title><?php echo $site_title; ?></title>
 <meta name="description" content="<?php echo html($site_description); ?>">
-<link rel="stylesheet" href="/css/main-1475653197766.css">
-<link rel="stylesheet" href="/css/new.css">
+<!--<link rel="stylesheet" href="/css/main-1475653197766.css">-->
+<link rel="stylesheet" href="/css/app.css">
+<!--<link rel="stylesheet" href="/css/new.css">-->
 <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png"/>
 <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png"/>
 <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png"/>

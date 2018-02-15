@@ -1,0 +1,52 @@
+@import "~normalize.css";
+
+/** Не применять!!! */
+:focus {
+  outline: none !important;
+  /*outline: none;
+  box-shadow: 0 0 0 .2em rgba(0, 0, 0, 0),
+  0 0 0 0.4em #2f7cc0;*/
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font: 14px/20px Arial, Tahoma, Verdana, sans-serif;
+  color: #333333;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #11638c;
+  text-decoration: none;
+  &:hover {
+    color: #0000ff;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

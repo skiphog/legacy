@@ -1,0 +1,15 @@
+{
+  "autoload": {
+    "files": [
+      "app/Helpers/functions.php",
+      "app/Helpers/users_row.php"
+    ],
+    "psr-4": {
+      "Swing\\": "app/"
+    }
+  },
+  "require": {
+    "mobiledetect/mobiledetectlib": "^2.8",
+    "amstaffix/pagination": "^1.1"
+  }
+}

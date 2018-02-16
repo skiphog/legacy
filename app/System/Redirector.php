@@ -2,28 +2,32 @@
 
 namespace Swing\System;
 
+/**
+ * Class Redirector
+ *
+ * @package Swing\System
+ */
 class Redirector
 {
     /**
      * @param string $url
      *
-     * @return string
+     * @return Redirector
      */
-    public function redirect($url = '/'): ?string
+    public function redirect($url = '/'): Redirector
     {
         header('Location: ' . $url);
 
-        die;
+        return $this;
     }
 
     /**
-     * @param $url
      * @param $name
      * @param $value
      *
-     * @return string
+     * @return Redirector
      */
-    public function redirectWith($url, $name, $value = null): ?string
+    public function with($name, $value = null): Redirector
     {
         $data = \is_array($name) ? $name : [$name => $value];
 
@@ -31,6 +35,6 @@ class Redirector
             $_SESSION[$key] = $item;
         }
 
-        return $this->redirect($url);
+        return $this;
     }
 }

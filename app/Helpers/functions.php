@@ -49,23 +49,11 @@ function app($className)
 /**
  * @param string|null $url
  *
- * @return null|string
+ * @return \Swing\System\Redirector
  */
 function redirect($url = null)
 {
     return (new \Swing\System\Redirector())->redirect($url);
-}
-
-/**
- * @param string       $url
- * @param string|array $name
- * @param string|null  $value
- *
- * @return null|string
- */
-function redirectWith($url, $name, $value = null)
-{
-    return (new \Swing\System\Redirector())->redirectWith($url, $name, $value);
 }
 
 /**

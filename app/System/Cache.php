@@ -2,6 +2,11 @@
 
 namespace Swing\System;
 
+/**
+ * Class Cache
+ *
+ * @package Swing\System
+ */
 class Cache
 {
     private $cache;

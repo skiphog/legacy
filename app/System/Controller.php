@@ -58,6 +58,8 @@ abstract class Controller
     }
 
     /**
+     * Middleware
+     *
      * @return bool
      */
     protected function assess(): bool
@@ -67,6 +69,8 @@ abstract class Controller
 
     /**
      * Инициализирует классы
+     *
+     * //todo:: всё убрать и сделать инициализацию при старте приложения // после изменений шаблонов
      */
     protected function init(): void
     {
@@ -75,17 +79,26 @@ abstract class Controller
         $this->dbh = db();
     }
 
-    protected function after()
+    /**
+     * Post middleware
+     */
+    protected function after(): void
     {
-        $this->myrow->setTimeStamp();
+
     }
 
     /**
-     * @return mixed
+     * Если сформирован шаблон страницы, то подключает Layout
      */
     protected function page()
     {
-        return require __PATH__ . '/app/template/layout/layout.php';
+        if (null !== $this->content) {
+            $this->myrow->setTimeStamp();
+
+            return require __PATH__ . '/app/template/layout/layout.php';
+        }
+
+        return null;
     }
 
     /**
@@ -110,7 +123,7 @@ abstract class Controller
      *
      * @return bool
      */
-    protected function view(string $path, array $params = []): bool
+    protected function content(string $path, array $params = []): bool
     {
         $this->content = $this->render($path, $params);
 

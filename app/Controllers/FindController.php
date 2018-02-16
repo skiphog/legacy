@@ -16,7 +16,7 @@ class FindController extends Controller
      */
     public function actionIndex()
     {
-        return $this->view('find/list');
+        return $this->content('find/list');
     }
 
     /**
@@ -24,6 +24,6 @@ class FindController extends Controller
      */
     public function actionSearch()
     {
-        return $this->view('find/result');
+        return $this->content('find/result');
     }
 }

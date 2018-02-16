@@ -31,7 +31,7 @@ class BootStrap
             $controller = new $controller();
 
             return $controller->action($action);
-        } catch (ForbiddenException | \BadMethodCallException $e) {
+        } catch (ForbiddenException | \BadMethodCallException | \InvalidArgumentException$e) {
             http_response_code(403);
             var_dump(
                 $e->getMessage(),

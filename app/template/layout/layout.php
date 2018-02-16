@@ -161,7 +161,7 @@ endif; ?>
 
             <div id="content" style="min-width:800px;margin-left: -210px">
                 <!-- echo content -->
-                <?php echo $this->content; ?>
+                <?php echo $this->response; ?>
                 <!-- //content -->
             </div>
         </td>

@@ -49,11 +49,31 @@ function app($className)
 /**
  * @param string|null $url
  *
- * @return \Swing\System\Redirector
+ * @return \Swing\System\Response
  */
-function redirect($url = null)
+function redirect($url = '/')
 {
-    return (new \Swing\System\Redirector())->redirect($url);
+    return (new \Swing\System\Response())->redirect($url);
+}
+
+/**
+ * @param mixed $data
+ * @param int   $code
+ *
+ * @return \Swing\System\Response
+ */
+function json($data, $code = 200)
+{
+    return (new \Swing\System\Response())->json($data, $code);
+}
+
+/**
+ * @param int  $code
+ * @param null $data
+ */
+function abort($code = 404, $data = null)
+{
+    \Swing\System\Response::Abort($code, $data);
 }
 
 /**

@@ -34,9 +34,9 @@ abstract class Controller
     public $meta;
 
     /**
-     * @var array $content
+     * @var mixed $response
      */
-    public $content;
+    public $response;
 
     /**
      * @param $action
@@ -51,7 +51,7 @@ abstract class Controller
         }
 
         $this->init();
-        $this->$action();
+        $this->response = $this->$action();
         $this->after();
 
         return $this->page();
@@ -92,13 +92,13 @@ abstract class Controller
      */
     protected function page()
     {
-        if (null !== $this->content) {
-            $this->myrow->setTimeStamp();
-
-            return require __PATH__ . '/app/template/layout/layout.php';
+        if ($this->response instanceof Response) {
+            return \call_user_func($this->response);
         }
 
-        return null;
+        $this->myrow->setTimeStamp();
+
+        return require __PATH__ . '/app/template/layout/layout.php';
     }
 
     /**
@@ -121,12 +121,10 @@ abstract class Controller
      * @param string $path
      * @param array  $params
      *
-     * @return bool
+     * @return mixed
      */
-    protected function content(string $path, array $params = []): bool
+    protected function view(string $path, array $params = [])
     {
-        $this->content = $this->render($path, $params);
-
-        return true;
+        return $this->render($path, $params);
     }
 }

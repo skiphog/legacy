@@ -5,11 +5,11 @@ namespace Swing\System;
 use Swing\Exceptions\ForbiddenException;
 
 /**
- * Class BootStrap
+ * Class Bootstrap
  *
  * @package Swing\System
  */
-class BootStrap
+class Bootstrap
 {
     /**
      * @return mixed

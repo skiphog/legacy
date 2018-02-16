@@ -14,7 +14,7 @@ class IndexController extends Controller
     /**
      * @return mixed
      */
-    public function actionDefault()
+    public function getIndex()
     {
         return $this->view('index/main');
     }

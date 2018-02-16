@@ -119,7 +119,7 @@
 		function coloseTipInfo(){infoPrivat.slideUp();}
 	</script>
 <?php else: ?>
-<form method="post" action="testreg.php">
+<form method="post" action="/authentification">
 		<table border=0 width=235>
 			<tr>
 				<td align=center height=33 style="background: url('/img/tablehead.jpg') no-repeat;">
@@ -138,10 +138,10 @@
 			</tr>
 			<tr>
 				<td style="padding-left: 30px;">
-					<input id="check-1" name="save" type="checkbox" value="1" /> <label for="check-1">Запомнить меня</label>
+					<input id="check-1" name="save" type="checkbox" value="1"><label for="check-1">Запомнить меня</label>
 					<br />
 					<br />
-					<input class="btn btn-default" type="submit" name="testreg" value="Войти" />
+					<input class="btn btn-default" type="submit" value="Войти" />
 					<br />
 					<br />
 					<a href="/registration">Зарегистрироваться</a>

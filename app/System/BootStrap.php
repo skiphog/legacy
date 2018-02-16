@@ -17,7 +17,7 @@ class BootStrap
     public static function run()
     {
         $controller = 'Swing\\Controllers\\' . ucfirst($_REQUEST['c'] ?? 'Index') . 'Controller';
-        $action = 'action' . ucfirst($_REQUEST['a'] ?? 'Default');
+        $action = Request::type() . ucfirst($_REQUEST['a'] ?? 'Index');
 
         try {
             if (!class_exists($controller)) {
@@ -30,7 +30,7 @@ class BootStrap
             /** @var Controller $controller */
             $controller = new $controller();
 
-            return $controller->action($action);
+            return $controller->action($action, new Request());
         } catch (ForbiddenException | \BadMethodCallException | \InvalidArgumentException$e) {
             http_response_code(403);
             var_dump(

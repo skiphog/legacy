@@ -36,22 +36,27 @@ abstract class Controller
     /**
      * @var mixed $response
      */
-    public $response;
+    public $content;
 
     /**
-     * @param $action
+     * @param string  $action
+     * @param Request $request
      *
      * @return mixed
      * @throws ForbiddenException
      */
-    public function action($action)
+    public function action($action, Request $request)
     {
+        $this->init();
+
         if (!$this->assess()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 
-        $this->init();
-        $this->response = $this->$action();
+        if (($response = $this->$action($request)) instanceof Response) {
+            return $response();
+        }
+
         $this->after();
 
         return $this->page();
@@ -92,10 +97,6 @@ abstract class Controller
      */
     protected function page()
     {
-        if ($this->response instanceof Response) {
-            return \call_user_func($this->response);
-        }
-
         $this->myrow->setTimeStamp();
 
         return require __PATH__ . '/app/template/layout/layout.php';
@@ -125,6 +126,8 @@ abstract class Controller
      */
     protected function view(string $path, array $params = [])
     {
-        return $this->render($path, $params);
+        $this->content = $this->render($path, $params);
+
+        return true;
     }
 }

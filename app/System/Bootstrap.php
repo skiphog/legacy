@@ -16,8 +16,8 @@ class Bootstrap
      */
     public static function run()
     {
-        $controller = 'Swing\\Controllers\\' . ucfirst($_REQUEST['c'] ?? 'Index') . 'Controller';
-        $action = Request::type() . ucfirst($_REQUEST['a'] ?? 'Index');
+        $controller = 'Swing\\Controllers\\' . ucfirst($_GET['c'] ?? 'Index') . 'Controller';
+        $action = Request::type() . ucfirst($_GET['a'] ?? 'Index');
 
         try {
             if (!class_exists($controller)) {

@@ -175,11 +175,7 @@
     $(function () {
       $('a.show_popup').click(function () {
         $('div.' + $(this).attr('rel')).fadeIn(300);
-        $('body').append('<div id='
-        overlay;
-        '></div>';
-      )
-        ;
+        $('body').append('<div id="overlay"></div>');
         $('#overlay').show().css({'filter': 'alpha(opacity=80)'});
         return false;
       });

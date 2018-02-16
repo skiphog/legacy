@@ -1,4 +1,8 @@
-<?php defined('vovladey') or die('Access denied');?>
+<?php
+/**
+ * @var \Swing\System\Controller $this
+ */
+?>
 <style xmlns="http://www.w3.org/1999/html">
 	.count-complaints,#moder-count,.moder-anons{color: #F00;font-weight:700;}
     #moder-count{font-size:16px}
@@ -13,12 +17,10 @@
 <td style="padding-left: 30px;">
 <?php
 
-$result = mysql_query('SELECT count(*) FROM users WHERE `status` = 3');
-$result = mysql_result($result,0);
+$result = $this->dbh->query('SELECT count(*) FROM users WHERE `status` = 3')->fetchColumn();
 $total_new_moder = $result ?:'';
 
-$result = mysql_query('SELECT count(*) FROM `events` WHERE `status` = 3');
-$result = mysql_result($result,0);
+$result = $this->dbh->query('SELECT count(*) FROM `events` WHERE `status` = 3')->fetchColumn();
 $total_new_moder1 = $result ?:'' ;
 
 

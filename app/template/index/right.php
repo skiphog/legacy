@@ -345,7 +345,7 @@ if ($this->myrow->rate >= 50) {?>
 <tr><td style="padding: 10px 5px;">
 <?php
 if(!$new_com_photo = $this->cache->get('new_com_photo')) {
-	$sth = $this->dbh->query('SELECT cc.pid,p.aid,u.id,u.login,u.gender,cc.msg_id,cc.msg_body FROM cpg_comments cc JOIN users u on u.id = cc.author_id join photo_pictures p on p.pid = cc.pid  ORDER BY cc.msg_date DESC LIMIT 6',$db);
+	$sth = $this->dbh->query('SELECT cc.pid,p.aid,u.id,u.login,u.gender,cc.msg_id,cc.msg_body FROM cpg_comments cc JOIN users u on u.id = cc.author_id join photo_pictures p on p.pid = cc.pid  ORDER BY cc.msg_date DESC LIMIT 6');
 	ob_start();
 	while ($myrow_diary_f = $sth->fetch()) {?>
 <div id="photocom" class="maindiv border-box">

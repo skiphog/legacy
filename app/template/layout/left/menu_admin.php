@@ -1,8 +1,6 @@
 <?php
-	defined('vovladey') or die('Access denied');
-	$result = mysql_query('SELECT count(*) FROM complaints WHERE status = 0');
-	$result = mysql_result($result,0);
-	$total_new_moder2 = $result ?:'' ;
+$result = $this->dbh->query('SELECT count(*) FROM complaints WHERE status = 0')->fetchColumn();
+$total_new_moder2 = $result ?:'' ;
 ?>
 <style>
 #admin-menu ul{list-style: none;margin: 0;padding: 0;position: relative;width: 100px;transition: all .2s ease-in-out;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;}

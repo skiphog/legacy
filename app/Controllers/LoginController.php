@@ -2,6 +2,7 @@
 
 namespace Swing\Controllers;
 
+use Swing\System\Request;
 use Swing\System\Controller;
 
 /**
@@ -12,8 +13,8 @@ use Swing\System\Controller;
 class LoginController extends Controller
 {
 
-    public function postAuth()
+    public function postAuth(Request $request)
     {
-
+        require __DIR__ . '/../Legacy/testreg.php';
     }
 }

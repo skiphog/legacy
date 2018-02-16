@@ -125,6 +125,20 @@ function hyperlinkAll($text)
 }
 
 /**
+ * @param $txt
+ *
+ * @return null|string|string[]
+ */
+function hyperlink($txt)
+{
+    return preg_replace(
+        "#(?<!\])\bhttps?://swing-kiska.ru[^\s\[<]+#i",
+        '<a href="$0" target="_blank">Ссылка</a>',
+        $txt
+    );
+}
+
+/**
  * @param $text
  *
  * @return string

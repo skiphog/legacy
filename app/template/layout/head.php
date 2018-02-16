@@ -1,5 +1,5 @@
 <?php
-$global = $this->dbh->query('select site_title, site_keywords, site_description, site_main,background,theme from site where site_id = 1')->fetch();
+$global = $this->dbh->query('select site_title, site_keywords, site_description, background from site where site_id = 1')->fetch();
 
 $site_title = $this->myrow->isGuest() ? $global['site_title'] : 'Добро пожаловать!';
 $site_description = $global['site_description'];

@@ -58,8 +58,10 @@ $parse = new \Swing\Components\Parse\Clear();
         <?php  else : ?>
             <?php
                 require __DIR__ . '/baner.php';
+
+                $global = $this->dbh->query('select site_main, theme from site where site_id = 1')->fetch();
                 echo nl2br($global['site_main']), '<br>';
-                $theme = unserialize($global['theme'], null);
+                $theme = unserialize($global['theme'],[]);
             ?>
 
             <?php foreach ((array)$theme as $value) : ?>

@@ -115,4 +115,53 @@ class Myrow extends User
             $cache->set('ts' . $this->id, (int)$_SERVER['REQUEST_TIME']);
         }
     }
+
+    /**
+     * Получить количество заявок в друзья
+     *
+     * @return string
+     */
+    public function getCountFriends(): string
+    {
+        $sql = 'select count(*) from friends where fr_kogo = ' . $this->id . ' and fr_podtv_kogo = 0';
+        $count = db()->query($sql)->fetchColumn();
+
+        return $count ? '<strong style="color: #F00">(+' . $count . ')</strong>' : '';
+    }
+
+    /**
+     * Получить количество новых сообщений
+     *
+     * @return string
+     */
+    public function getCountMessage(): string
+    {
+        $sql = 'select count(*) from privat where pr_id_pol = ' . $this->id . ' and pr_pol_vis = 0';
+
+        return db()->query($sql)->fetchColumn() ?: '';
+    }
+
+    /**
+     * Получить количество новых уведомлений
+     *
+     * @return string
+     */
+    public function getCountNotify(): string
+    {
+        $sql = 'select count(*) from notification where id_user = ' . $this->id . ' and visibled = 0';
+
+        return db()->query($sql)->fetchColumn() ?: '';
+    }
+
+    /**
+     * Получить количество гостей
+     *
+     * @return string
+     */
+    public function getCountGuest(): string
+    {
+        $sql = 'select count(*) from whoisloock where wholoock_kogo = ' . $this->id . ' and looking = 0';
+
+        return db()->query($sql)->fetchColumn() ?: '';
+    }
 }

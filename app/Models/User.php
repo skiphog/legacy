@@ -24,6 +24,25 @@ use Swing\System\Model;
  */
 class User extends Model
 {
+    /**
+     * Статус Активно
+     */
+    public const ACTIVE = 1;
+
+    /**
+     * Статус не активно
+     */
+    public const INACTIVE = 2;
+
+    /**
+     * Статус на модерации
+     */
+    public const ON_MODERATION = 3;
+
+    /**
+     * Забанен
+     */
+    public const BAN = '_БАН_';
 
     protected $vip;
 
@@ -61,5 +80,29 @@ class User extends Model
         }
 
         return $this->vip;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return self::ACTIVE === $this->status;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInActive(): bool
+    {
+        return self::INACTIVE === $this->status;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnModeration(): bool
+    {
+        return self::ON_MODERATION === $this->status;
     }
 }

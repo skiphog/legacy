@@ -87,6 +87,16 @@ class SwingDate extends \DateTimeImmutable
     }
 
     /**
+     * Получить дату в формате MySql
+     *
+     * @return string
+     */
+    public function sqlFormat(): string
+    {
+        return $this->format('Y-m-d H:i:s');
+    }
+
+    /**
      * @return array
      */
     protected function getRealDateDiff(): array

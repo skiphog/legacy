@@ -304,3 +304,15 @@ function nickartGlobal($text)
 {
     return preg_replace('#\|\|(.+?)\|\|#', '<b style="color:#747474">$1</b>', $text);
 }
+
+/**
+ * Очистить строку от тегов
+ *
+ * @param $string
+ *
+ * @return string
+ */
+function clearString($string)
+{
+    return trim(strip_tags($string));
+}

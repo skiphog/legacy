@@ -84,7 +84,7 @@
 				<tr class="td-padding">
 					<td><label for="find_city">Город</label></td>
 					<td>
-						<input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" />
+						<input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" value="<?php echo html($this->myrow->city); ?>">
 					</td>
 				</tr>
 				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>

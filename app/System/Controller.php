@@ -49,7 +49,7 @@ abstract class Controller
     {
         $this->init();
 
-        if (!$this->assess()) {
+        if (false === $this->assess()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 

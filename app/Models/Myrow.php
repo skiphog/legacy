@@ -164,4 +164,26 @@ class Myrow extends User
 
         return db()->query($sql)->fetchColumn() ?: '';
     }
+
+    /**
+     * @return string|null
+     */
+    public function getSgender(): ?string
+    {
+        if ($this->isGuest()) {
+            return null;
+        }
+
+        $sgender = db()->query('select sgender from users where id = ' . $this->id . ' limit 1')->fetchColumn();
+
+        $sgender = array_filter(explode(',', $sgender), function ($v) {
+            return (int)$v;
+        });
+
+        if (empty($sgender)) {
+            $sgender = [1, 2, 3, 4];
+        }
+
+        return implode(',', $sgender);
+    }
 }

@@ -17,6 +17,14 @@ function cache()
 }
 
 /**
+ * @return \Swing\System\Request
+ */
+function request()
+{
+    return app(\Swing\System\Request::class);
+}
+
+/**
  * @return \Swing\Models\Myrow
  */
 function user()

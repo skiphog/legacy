@@ -2,7 +2,6 @@
 
 namespace Swing\Controllers;
 
-use Swing\System\Request;
 use Swing\System\Response;
 use Swing\System\Controller;
 
@@ -17,11 +16,9 @@ class LoginController extends Controller
     /**
      * Вход
      *
-     * @param Request $request
-     *
      * @return mixed
      */
-    public function postAuth(Request $request)
+    public function postAuth()
     {
         if ($this->myrow->isUser()) {
             return redirect('/profile');

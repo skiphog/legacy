@@ -14,6 +14,11 @@ use Swing\Exceptions\ForbiddenException;
 abstract class Controller
 {
     /**
+     * @var Request $request
+     */
+    public $request;
+
+    /**
      * @var Myrow $myrow
      */
     public $myrow;
@@ -39,13 +44,12 @@ abstract class Controller
     public $content;
 
     /**
-     * @param string  $action
-     * @param Request $request
+     * @param string $action
      *
      * @return mixed
      * @throws ForbiddenException
      */
-    public function action($action, Request $request)
+    public function action($action)
     {
         $this->init();
 
@@ -53,7 +57,7 @@ abstract class Controller
             throw new ForbiddenException('Доступ запрещен');
         }
 
-        if (($response = $this->$action($request)) instanceof Response) {
+        if (($response = $this->$action()) instanceof Response) {
             return $response();
         }
 
@@ -79,6 +83,7 @@ abstract class Controller
      */
     protected function init(): void
     {
+        $this->request = request();
         $this->myrow = user();
         $this->cache = cache();
         $this->dbh = db();

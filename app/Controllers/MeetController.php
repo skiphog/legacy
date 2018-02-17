@@ -2,10 +2,10 @@
 
 namespace Swing\Controllers;
 
-use Swing\Components\SwingDate;
-use Swing\System\Request;
-use Swing\System\Controller;
 use Swing\System\Response;
+use Swing\System\Controller;
+use Swing\Components\SwingDate;
+use Swing\Exceptions\ForbiddenException;
 
 /**
  * Class MeetController
@@ -17,27 +17,39 @@ class MeetController extends Controller
     /**
      * @return mixed
      */
-    public function getMeet()
+    public function getHotMeet()
     {
-        return $this->view('meet/index');
+        return $this->view('meet/hot');
     }
 
     /**
-     * @param Request $request
+     * @return mixed
      *
+     * @throws ForbiddenException
+     */
+    public function getNowMeet()
+    {
+        if ($this->myrow->isGuest()) {
+            throw new ForbiddenException('Только для зарегистрированных пользователей');
+        }
+
+        return $this->view('meet/now');
+    }
+
+    /**
      * @return Response
      */
-    public function postMeet(Request $request): Response
+    public function postHotMeet(): Response
     {
         if ($this->myrow->rate < 100) {
             abort(422, 'Недостаточно баллов');
         }
 
-        if ($this->myrow->isInActive()) {
+        if (!$this->myrow->isActive()) {
             abort(422, 'Ваша анкета не прошла модерацию. Вы не можете разместить объявление.');
         }
 
-        $message = clearString($request->post('message'));
+        $message = clearString($this->request->post('message'));
 
         if (empty($message)) {
             return redirect('/hotmeet');

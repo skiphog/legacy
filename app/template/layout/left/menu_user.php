@@ -138,7 +138,7 @@
 					<input class="input-main" style="width: 160px;padding: 5px" name="login" type="text" required="required" placeholder="Логин"/>
 					<label>Пароль:</label>
 					<br />
-					<input class="input-main" style="width: 160px;padding: 5px" name="password" type="password" required="required" placeholder="Пароль"/>
+					<input class="input-main" style="width: 160px;padding: 5px" value="1" name="password" type="password" required="required" placeholder="Пароль"/>
 				</td>
 			</tr>
 			<tr>

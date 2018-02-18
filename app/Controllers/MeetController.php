@@ -15,6 +15,8 @@ use Swing\Exceptions\ForbiddenException;
 class MeetController extends Controller
 {
     /**
+     * Горячие знакомства
+     *
      * @return mixed
      */
     public function getHotMeet()
@@ -23,6 +25,8 @@ class MeetController extends Controller
     }
 
     /**
+     * Кто меня ищет
+     *
      * @return mixed
      *
      * @throws ForbiddenException
@@ -37,6 +41,18 @@ class MeetController extends Controller
     }
 
     /**
+     * Кто онлайн
+     *
+     * @return mixed
+     */
+    public function getOnlineMeet()
+    {
+        return $this->view('meet/online');
+    }
+
+    /**
+     * Добавить заявку в горячие знакомства
+     *
      * @return Response
      */
     public function postHotMeet(): Response

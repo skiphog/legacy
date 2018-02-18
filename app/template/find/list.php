@@ -129,7 +129,7 @@
         <a href="/hotmeet"><img class="f-img" src="/img/meet/01.jpg" width="190" height="112" alt="travel"></a>
     </td>
     <td align=center>
-        <a href="/onlinemeet_1_1"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
+        <a href="/onlinemeet_1"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
     </td>
 </tr>
 <tr>

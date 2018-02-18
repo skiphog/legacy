@@ -53,7 +53,7 @@ abstract class Controller
     {
         $this->init();
 
-        if (false === $this->assess()) {
+        if (false === $this->access()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 
@@ -71,7 +71,7 @@ abstract class Controller
      *
      * @return bool
      */
-    protected function assess(): bool
+    protected function access(): bool
     {
         return true;
     }

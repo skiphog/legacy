@@ -51,6 +51,16 @@ class MeetController extends Controller
     }
 
     /**
+     * Новые анкеты
+     *
+     * @return mixed
+     */
+    public function getNewMeet()
+    {
+        return $this->view('meet/new');
+    }
+
+    /**
      * Добавить заявку в горячие знакомства
      *
      * @return Response

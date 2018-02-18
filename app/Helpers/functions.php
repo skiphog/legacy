@@ -300,7 +300,21 @@ function subText($text, $sub, $end = '')
  */
 function imgart($text)
 {
-    return preg_replace('#{{(.+?)}}#', '<img src="/imgart/$0">', $text);
+    return preg_replace('#{{(.+?)}}#', '<img src="/imgart/$1">', $text);
+}
+
+/**
+ * @param $text
+ *
+ * @return null|string|string[]
+ */
+function imgart_no_reg($text)
+{
+    return preg_replace(
+        '#{{(.+?)}}#',
+        '<img src="/img/imgss.jpg" width="74" height="20" alt="img"> ',
+        $text
+    );
 }
 
 /**
@@ -311,6 +325,31 @@ function imgart($text)
 function nickartGlobal($text)
 {
     return preg_replace('#\|\|(.+?)\|\|#', '<b style="color:#747474">$1</b>', $text);
+}
+
+/**
+ * @param $text
+ *
+ * @return mixed|null|string
+ */
+function nickart($text)
+{
+    return preg_replace_callback('#\|\|(.+?)\|\|#', function ($value) {
+        $color = (!empty($_SESSION['login']) && $_SESSION['login'] === $value[1]) ? '#F00' : '#747474';
+
+        return '<b style="color:' . $color . '">' . html($value[1]) . '</b>';
+    }, $text);
+}
+
+/**
+ * @param string $myCity
+ * @param string $city
+ *
+ * @return int
+ */
+function getCityCompare($myCity, $city)
+{
+    return strcmp(mb_strtolower($myCity), mb_strtolower($city));
 }
 
 /**

@@ -3,6 +3,7 @@
 namespace Swing\System;
 
 use Swing\Exceptions\ForbiddenException;
+use Swing\Exceptions\NotFoundException;
 
 /**
  * Class Bootstrap
@@ -31,8 +32,8 @@ class Bootstrap
             $controller = new $controller();
 
             return $controller->action($action);
-        } catch (ForbiddenException | \BadMethodCallException | \InvalidArgumentException$e) {
-            http_response_code(403);
+        } catch (NotFoundException | ForbiddenException | \BadMethodCallException | \InvalidArgumentException$e) {
+            http_response_code(404);
             var_dump(
                 $e->getMessage(),
                 $e->getCode(),

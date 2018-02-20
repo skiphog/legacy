@@ -18,4 +18,12 @@ class PartyController extends Controller
     {
         return $this->view('party/all');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOne()
+    {
+        return $this->view('party/one');
+    }
 }

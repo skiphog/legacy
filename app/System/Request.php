@@ -10,6 +10,11 @@ namespace Swing\System;
 class Request
 {
 
+    public function __construct()
+    {
+        unset($_GET['c'], $_GET['a']);
+    }
+
     /**
      * @param null $param
      *
@@ -17,8 +22,6 @@ class Request
      */
     public function get($param = null)
     {
-        unset($_GET['c'], $_GET['a']);
-
         return $this->getRequest($_GET, $param);
     }
 
@@ -68,5 +71,4 @@ class Request
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
-
 }

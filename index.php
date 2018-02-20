@@ -6,4 +6,4 @@ require __PATH__ . '/vendor/autoload.php';
 
 session_start();
 
-\Swing\System\Bootstrap::run();
+(new \Swing\System\Bootstrap)->run();

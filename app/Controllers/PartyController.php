@@ -26,4 +26,28 @@ class PartyController extends Controller
     {
         return $this->view('party/one');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreate()
+    {
+        return $this->view('party/create');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEdit()
+    {
+        return $this->view('party/edit');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMy()
+    {
+        return $this->view('party/my');
+    }
 }

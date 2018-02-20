@@ -16,6 +16,6 @@ class IndexController extends Controller
      */
     public function getIndex()
     {
-        return $this->view('index/main');
+        return view('layout/layout');
     }
 }

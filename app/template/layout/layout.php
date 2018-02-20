@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var \Swing\System\View $this
+ */
+
+$dbh = db();
+$cache = cache();
+$myrow = user();
+?>
 <!doctype html>
 <html lang="ru">
 <head>

@@ -1,19 +1,27 @@
 <?php
 
 /**
- * @return \PDO
+ * Получить объект из контейнера
+ *
+ * @param string $name
+ *
+ * @return mixed
  */
-function db()
+function app($name)
 {
-    return app(\Swing\System\DB::class)->dbh();
+    return \Swing\System\App::get($name);
 }
 
 /**
- * @return \Swing\System\Cache
+ * Получить параметр из конфига
+ *
+ * @param string $key
+ *
+ * @return mixed
  */
-function cache()
+function config($key)
 {
-    return app(\Swing\System\Cache::class);
+    return app('config')->get($key);
 }
 
 /**
@@ -21,8 +29,25 @@ function cache()
  */
 function request()
 {
-    return app(\Swing\System\Request::class);
+    return app('request');
 }
+
+/**
+ * @return \PDO
+ */
+function db()
+{
+    return app('db')->dbh();
+}
+
+/**
+ * @return \Swing\System\Cache
+ */
+function cache()
+{
+    return app('cache');
+}
+
 
 /**
  * @return \Swing\Models\Myrow
@@ -32,26 +57,17 @@ function user()
     return \Swing\Components\Auth::user();
 }
 
+/** @noinspection PhpDocMissingThrowsInspection */
 /**
- * @param string $key
+ * @param string $name
+ * @param array  $params
  *
- * @return mixed
+ * @return string
  */
-function config($key)
+function view($name, array $params = [])
 {
-    return app(\Swing\System\Setting::class)->get($key);
-}
-
-/**
- * Получить объект из контейнера
- *
- * @param $className
- *
- * @return mixed
- */
-function app($className)
-{
-    return \Swing\System\App::get($className);
+    /** @noinspection PhpUnhandledExceptionInspection */
+    return (new \Swing\System\View())->render($name, $params);
 }
 
 /**
@@ -115,7 +131,7 @@ function avatar(\Swing\Models\Myrow $myrow, string $pic, int $uVis): string
  */
 function html($string)
 {
-    return htmlspecialchars($string, ENT_QUOTES);
+    return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE);
 }
 
 /**
@@ -350,6 +366,19 @@ function nickart($text)
 function getCityCompare($myCity, $city)
 {
     return strcmp(mb_strtolower($myCity), mb_strtolower($city));
+}
+
+/**
+ * Сравнение двух строк
+ *
+ * @param string $str1
+ * @param string $str2
+ *
+ * @return int
+ */
+function strCompare($str1, $str2)
+{
+    return (int)(mb_strtoupper($str1) === mb_strtoupper($str2));
 }
 
 /**

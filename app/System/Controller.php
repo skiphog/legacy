@@ -19,9 +19,9 @@ abstract class Controller
     public $request;
 
     /**
-     * @var Myrow $myrow
+     * @var \PDO
      */
-    public $myrow;
+    public $dbh;
 
     /**
      * @var Cache $cache
@@ -29,19 +29,19 @@ abstract class Controller
     public $cache;
 
     /**
-     * @var \PDO
+     * Myrow - так повелось на старом сайте
+     *
+     * @var Myrow $myrow
      */
-    public $dbh;
+    public $myrow;
 
-    /**
-     * @var array $meta
-     */
-    public $meta;
-
-    /**
-     * @var mixed $response
-     */
-    public $content;
+    public function __construct()
+    {
+        $this->request = request();
+        $this->dbh = db();
+        $this->cache = cache();
+        $this->myrow = user();
+    }
 
     /**
      * @param string $action
@@ -51,19 +51,19 @@ abstract class Controller
      */
     public function action($action)
     {
-        $this->init();
+        $this->before();
 
         if (false === $this->access()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 
-        if (($response = $this->$action()) instanceof Response) {
-            return $response();
+        if (($result = $this->$action()) instanceof Response) {
+            return $result();
         }
 
         $this->after();
 
-        return $this->page();
+        return $this->page($result);
     }
 
     /**
@@ -77,16 +77,11 @@ abstract class Controller
     }
 
     /**
-     * Инициализирует классы
-     *
-     * //todo:: всё убрать и сделать инициализацию при старте приложения // после изменений шаблонов
+     * Инициализация
      */
-    protected function init(): void
+    protected function before(): void
     {
-        $this->request = request();
-        $this->myrow = user();
-        $this->cache = cache();
-        $this->dbh = db();
+
     }
 
     /**
@@ -94,44 +89,19 @@ abstract class Controller
      */
     protected function after(): void
     {
-
-    }
-
-    /**
-     * Если сформирован шаблон страницы, то подключает Layout
-     */
-    protected function page()
-    {
         $this->myrow->setTimeStamp();
-
-        return require __PATH__ . '/app/template/layout/layout.php';
     }
 
     /**
-     * @param string $path
-     * @param array  $params
+     * Выыводит результат
      *
-     * @return string
-     */
-    protected function render(string $path, array $params = []): string
-    {
-        extract($params, EXTR_SKIP);
-        ob_start();
-        /** @noinspection PhpIncludeInspection */
-        require __PATH__ . '/app/template/' . $path . '.php';
-
-        return ob_get_clean();
-    }
-
-    /**
-     * @param string $path
-     * @param array  $params
+     * @param $result
      *
      * @return mixed
      */
-    protected function view(string $path, array $params = [])
+    protected function page($result)
     {
-        $this->content = $this->render($path, $params);
+        echo $result;
 
         return true;
     }

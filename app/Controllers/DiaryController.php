@@ -16,7 +16,9 @@ class DiaryController extends Controller
      */
     public function getIndex()
     {
-        return $this->view('diary/index');
+        //return $this->view('diary/index');
+
+        return $this->request->get('id');
     }
 
     /**
@@ -24,7 +26,8 @@ class DiaryController extends Controller
      */
     public function getShow()
     {
-        return $this->view('diary/show');
+        //return $this->view('diary/show');
+        return $this->request->get('id');
     }
 
     public function postShow()

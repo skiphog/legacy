@@ -10,7 +10,7 @@ namespace Swing\System;
 class App
 {
     /**
-     * Хранилище классов
+     * Хранилище
      *
      * @var array $registry
      */
@@ -19,17 +19,25 @@ class App
     /**
      * Получить экземпляр зарегистрированного класса для использования как Singleton
      *
-     * @param string $className
+     * @param string $name
      *
      * @return mixed
      */
-    public static function get($className)
+    public static function get($name)
     {
-        if (array_key_exists($className, self::$registry)) {
-            return self::$registry[$className];
+        if (array_key_exists($name, self::$registry)) {
+            return self::$registry[$name];
         }
 
-        // todo:: try cache
-        return self::$registry[$className] = new $className;
+        throw new \InvalidArgumentException('Not exists <b>' . $name . '</b> in App container');
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $value
+     */
+    public static function set($name, $value): void
+    {
+        self::$registry[$name] = $value;
     }
 }

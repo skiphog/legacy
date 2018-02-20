@@ -26,4 +26,10 @@ class DiaryController extends Controller
     {
         return $this->view('diary/show');
     }
+
+    public function postShow()
+    {
+        var_dump($this->request->post(), $this->request->get());
+        die;
+    }
 }

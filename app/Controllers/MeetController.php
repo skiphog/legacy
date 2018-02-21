@@ -21,7 +21,7 @@ class MeetController extends Controller
      */
     public function getHotMeet()
     {
-        return $this->view('meet/hot');
+        return view('meet/hot');
     }
 
     /**
@@ -37,7 +37,7 @@ class MeetController extends Controller
             throw new ForbiddenException('Только для зарегистрированных пользователей');
         }
 
-        return $this->view('meet/now');
+        return view('meet/now');
     }
 
     /**
@@ -47,7 +47,7 @@ class MeetController extends Controller
      */
     public function getOnlineMeet()
     {
-        return $this->view('meet/online');
+        return view('meet/online');
     }
 
     /**
@@ -57,7 +57,7 @@ class MeetController extends Controller
      */
     public function getNewMeet()
     {
-        return $this->view('meet/new');
+        return view('meet/new');
     }
 
     /**

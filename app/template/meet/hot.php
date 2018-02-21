@@ -1,9 +1,12 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  * @var \Swing\Models\RowUser[]  $meets
  * @var \Swing\Models\RowUser[] city_meets
  */
+
+$dbh = db();
+$myrow = user();
 
 $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility, u.real_status, u.visibility, u.hot_time, u.regdate, 
   u.vip_time, u.now_status, u.hot_text, u.vipsmile,u.admin, u.moderator, u.city, u.login, u.fname, u.gender, u.about, 
@@ -26,7 +29,13 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
 }
 ?>
 
-    <table border="0" width="100%">
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Горячие знакомства<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Горячие знакомства<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
+<table border="0" width="100%">
 
         <tr>
             <td height="1" bgcolor="#336699"></td>
@@ -109,3 +118,4 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
         </form>
     </div>
 <?php endif; ?>
+<?php $this->stop(); ?>

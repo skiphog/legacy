@@ -1,10 +1,12 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
-$myrow = $myrow;
-$sort = (int)$request->get('sort');
+$dbh = db();
+$myrow = user();
+
+$sort = (int)request()->get('sort');
 $join = '';
 
 if ($sort !== 1 && $myrow->isUser()) {
@@ -37,8 +39,13 @@ $sql = /** @lang text */ 'select u.id, u.birthday, u.pic1, u.photo_visibility,
  limit 50';
 
 $users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
-
 ?>
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Новые анкеты<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Новые анкеты<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <table border=0 width=100%>
 
     <tr>
@@ -96,3 +103,4 @@ $users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::cl
         <td colspan=2 height=1 bgcolor=#336699></td>
     </tr>
 </table>
+<?php $this->stop(); ?>

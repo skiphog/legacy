@@ -1,10 +1,13 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
+$dbh = db();
+$myrow = user();
+
 $users = [];
-$page = (int)$request->get('page');
+$page = (int)request()->get('page');
 
 $sql = 'select count(*) 
   from users u 
@@ -45,7 +48,12 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
         <?php $paging_page = ob_get_clean();
     }} ?>
 
+<?php $this->extend('layout/layout'); ?>
 
+<?php $this->start('title'); ?>Кто онлайн<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Кто онлайн<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <table border="0" width="100%">
     <tr>
         <td height="1" bgcolor="#336699"></td>
@@ -88,9 +96,8 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
             </td>
         </tr>
     <?php endif; ?>
-
-
     <tr>
         <td height="1" bgcolor="#336699"></td>
     </tr>
 </table>
+<?php $this->stop(); ?>

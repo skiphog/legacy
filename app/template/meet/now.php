@@ -1,10 +1,13 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
+$dbh = db();
+$myrow = user();
+
 $users = [];
-$page = (int)$request->get('page');
+$page = (int)request()->get('page');
 
 
 $sgender = $myrow->getSgender();
@@ -58,6 +61,12 @@ if ($count = $sth->fetchColumn()) {
         <?php $paging_page = ob_get_clean();
     }} ?>
 
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Вас ищут<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Вас ищут<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <table border="0" width="100%">
     <tr>
         <td height="1" bgcolor="#336699"></td>
@@ -113,3 +122,4 @@ if ($count = $sth->fetchColumn()) {
         <td height="1" bgcolor="#336699"></td>
     </tr>
 </table>
+<?php $this->stop(); ?>

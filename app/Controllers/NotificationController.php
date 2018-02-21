@@ -26,7 +26,7 @@ class NotificationController extends Controller
      */
     public function getMessage()
     {
-        return $this->view('notify/message');
+        return view('notify/message');
     }
 
     /**
@@ -34,6 +34,6 @@ class NotificationController extends Controller
      */
     public function getGuests()
     {
-        return $this->view('notify/guests');
+        return view('notify/guests');
     }
 }

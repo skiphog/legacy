@@ -1,8 +1,16 @@
 <?php
 /**
- * @var  \Swing\System\Controller $this
+ * @var  \Swing\System\View $this
  */
+
+$myrow = user();
 ?>
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Сообщения<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Сообщения<?php $this->stop(); ?>
+
+<?php $this->start('style'); ?>
 <style>
     .nav-tabs,.msg-div,.msg-body,.msg-avatar>img{border-radius:4px;}
     .nav-tabs li>a:hover,.nav-active{background-color:#FAFAFA;border-left-color:rgba(0,0,0,.1) !important;border-right-color:rgba(0,0,0,.1) !important;}
@@ -37,7 +45,11 @@
     .nav-down>li>a{padding:4px 10px;}
     .getNewMessage,.getNewNotification,.getContacts,.getHotuns{display: none;}
 </style>
+<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <h2>Сообщения</h2>
+
 <div class="head-nav-message">
     <div class="nav-message">
         <ul class="nav-tabs links">
@@ -76,229 +88,230 @@
                 <li><a href="#" data-action="getSendHotuns">ОТПРАВЛЕННЫЕ</a></li>
             </ul>
         </div>
-
-
         <div style="clear:both"></div>
     </div>
 </div>
 <div id="response"></div>
+<?php $this->stop(); ?>
 
-<script>
-  var resblock = $('#response'),loading = $('#load-mes'),links = $('ul.links'),linksDown = $('ul.nav-down'),pr,count_mes = 0,all_count = 0;
+<?php $this->start('script'); ?>
+    <script>
+      var resblock = $('#response'),loading = $('#load-mes'),links = $('ul.links'),linksDown = $('ul.nav-down'),pr,count_mes = 0,all_count = 0;
 
-  function setOldPrTimeoute() {
-    clearTimeout(pr);
-    pr = setTimeout("show_privat()",30000);
-  }
-
-  function setCurentUrl() {
-    links.find('a').each(function(i,o){
-      o.className = (o.href == window.location.href)?'nav-active':'';
-    });
-  }
-
-  function setCurentLinkDown(data) {
-    linksDown.find('a').each(function(i,o){
-      o.className = ($(o).data('action') == data)?'nav-active':'';
-    });
-  }
-
-
-  function showDelete(e) {
-    $(e).parent().next().toggle();
-  }
-
-  function doWhere(json,callback){
-    if(all_count == 0) {
-      resblock.html(json['html']);
-    }else{
-      resblock.append(json['html']);
-    }
-    if(json['status'] == 1){
-      all_count +=20;
-      addButtonMore(callback,all_count);
-    }
-  }
-
-  var motor = {
-    send: true,
-    getNewMessage: function(json){
-      $(".count-mes").text((json['status'] != 0)? json['status']:'');
-      count_mes = json['status'];
-      clearTimeout(pr);
-      pr = setTimeout("motor.getAjax('get','showPivateNew')",10000);
-      resblock.html(json['html']);
-      setCurentUrl();
-    },
-    getNewNotification: function(json){
-      setOldPrTimeoute();
-      $(".count-nof").text((json['status'] != 0)? json['status']:'');
-      resblock.html(json['html']);
-      setCurentUrl();
-    },
-    getContacts: function(json) {
-      setOldPrTimeoute();
-      doWhere(json,'getContacts');
-      setCurentUrl();
-    },
-    getHotuns : function(json) {
-      setOldPrTimeoute();
-      doWhere(json,'getHotuns');
-      setCurentUrl();
-    },
-
-    getSent : function(json){
-      setOldPrTimeoute();
-      doWhere(json,'getSent');
-    },
-    getReceived : function(json){
-      setOldPrTimeoute();
-      doWhere(json,'getReceived');
-    },
-    getArchive:function(json) {
-      doWhere(json,'getArchive');
-    },
-    getFavorites: function(json){
-      doWhere(json,'getFavorites');
-    },
-    getAllIgnore : function(json) {
-      doWhere(json,'getAllIgnore');
-    },
-    getSendHotuns : function(json){
-      doWhere(json,'getSendHotuns');
-    },
-
-    deleteIgnore : function(json) {
-      if(json['status'] == 1) {
-        $('#msgid' + json['value']).remove();
-      }
-    },
-    deleteDialog : function(json){
-      if(json['status'] == 1) {
-        $('#msgid' + json['value']).remove();
-      }
-    },
-    addFavorit : function(json){
-      if(json['status'] == 1) {
-        $('#msgid' + json['value']).remove();
-      }
-    },
-    delFavorit : function(json){
-      if(json['status'] == 1) {
-        $('#msgid' + json['value']).remove();
-      }
-    },
-
-    setVisibleNot: function(json) {
-      if(json['status'] != 0) {
-        motor.getAjax('get','getNewNotification');
-      }
-    },
-    setVisibleMessage : function(json){
-      if(json['status'] != 0) {
-        motor.getAjax('get','showPivateNew');
-      }
-    },
-
-    showPivateNew: function(json) {
-      if(count_mes != json['status']) {
-        count_mes = json['status'];
+      function setOldPrTimeoute() {
         clearTimeout(pr);
-        $(".count-mes").text((json['status'] != 0)? json['status']:'');
-        resblock.html(json['html']);
+        pr = setTimeout("show_privat()",30000);
       }
-      setTitleCount(json['status']);
-      pr = setTimeout("motor.getAjax('get','showPivateNew')",20000);
-    },
-    getAjax: function(method,action,params) {
-      if(this.send == true) {
-        var data = {cntr:'Message',action:action};
-        if(typeof params == 'object') {
-          for(var cur in params) {
-            if (params.hasOwnProperty(cur)) {
-              data[cur] = params[cur];
-            }
-          }
-        }
-        $.ajax({
-          url: '/ajax/',
-          type: method,
-          dataType: 'json',
-          data: data,
-          beforeSend: function() {
-            motor.send = false;
-          },
-          success: function(json){
-            motor.send = true;
-            motor[action](json);
-            loading.hide();
-          }
+
+      function setCurentUrl() {
+        links.find('a').each(function(i,o){
+          o.className = (o.href == window.location.href)?'nav-active':'';
         });
       }
-    }
-  };
 
-  if(window.history && history.pushState) {
-    window.addEventListener('popstate', function() {
-      getContent();
-    });
-
-    links.on('click','a',function(e){
-      e.preventDefault();
-      if(this.href != window.location.href) {
-        history.pushState(null, '', this.href);
-        history.replaceState(null,'',this.href);
+      function setCurentLinkDown(data) {
+        linksDown.find('a').each(function(i,o){
+          o.className = ($(o).data('action') == data)?'nav-active':'';
+        });
       }
+
+
+      function showDelete(e) {
+        $(e).parent().next().toggle();
+      }
+
+      function doWhere(json,callback){
+        if(all_count == 0) {
+          resblock.html(json['html']);
+        }else{
+          resblock.append(json['html']);
+        }
+        if(json['status'] == 1){
+          all_count +=20;
+          addButtonMore(callback,all_count);
+        }
+      }
+
+      var motor = {
+        send: true,
+        getNewMessage: function(json){
+          $(".count-mes").text((json['status'] != 0)? json['status']:'');
+          count_mes = json['status'];
+          clearTimeout(pr);
+          pr = setTimeout("motor.getAjax('get','showPivateNew')",10000);
+          resblock.html(json['html']);
+          setCurentUrl();
+        },
+        getNewNotification: function(json){
+          setOldPrTimeoute();
+          $(".count-nof").text((json['status'] != 0)? json['status']:'');
+          resblock.html(json['html']);
+          setCurentUrl();
+        },
+        getContacts: function(json) {
+          setOldPrTimeoute();
+          doWhere(json,'getContacts');
+          setCurentUrl();
+        },
+        getHotuns : function(json) {
+          setOldPrTimeoute();
+          doWhere(json,'getHotuns');
+          setCurentUrl();
+        },
+
+        getSent : function(json){
+          setOldPrTimeoute();
+          doWhere(json,'getSent');
+        },
+        getReceived : function(json){
+          setOldPrTimeoute();
+          doWhere(json,'getReceived');
+        },
+        getArchive:function(json) {
+          doWhere(json,'getArchive');
+        },
+        getFavorites: function(json){
+          doWhere(json,'getFavorites');
+        },
+        getAllIgnore : function(json) {
+          doWhere(json,'getAllIgnore');
+        },
+        getSendHotuns : function(json){
+          doWhere(json,'getSendHotuns');
+        },
+
+        deleteIgnore : function(json) {
+          if(json['status'] == 1) {
+            $('#msgid' + json['value']).remove();
+          }
+        },
+        deleteDialog : function(json){
+          if(json['status'] == 1) {
+            $('#msgid' + json['value']).remove();
+          }
+        },
+        addFavorit : function(json){
+          if(json['status'] == 1) {
+            $('#msgid' + json['value']).remove();
+          }
+        },
+        delFavorit : function(json){
+          if(json['status'] == 1) {
+            $('#msgid' + json['value']).remove();
+          }
+        },
+
+        setVisibleNot: function(json) {
+          if(json['status'] != 0) {
+            motor.getAjax('get','getNewNotification');
+          }
+        },
+        setVisibleMessage : function(json){
+          if(json['status'] != 0) {
+            motor.getAjax('get','showPivateNew');
+          }
+        },
+
+        showPivateNew: function(json) {
+          if(count_mes != json['status']) {
+            count_mes = json['status'];
+            clearTimeout(pr);
+            $(".count-mes").text((json['status'] != 0)? json['status']:'');
+            resblock.html(json['html']);
+          }
+          setTitleCount(json['status']);
+          pr = setTimeout("motor.getAjax('get','showPivateNew')",20000);
+        },
+        getAjax: function(method,action,params) {
+          if(this.send == true) {
+            var data = {cntr:'Message',action:action};
+            if(typeof params == 'object') {
+              for(var cur in params) {
+                if (params.hasOwnProperty(cur)) {
+                  data[cur] = params[cur];
+                }
+              }
+            }
+            $.ajax({
+              url: '/ajax/',
+              type: method,
+              dataType: 'json',
+              data: data,
+              beforeSend: function() {
+                motor.send = false;
+              },
+              success: function(json){
+                motor.send = true;
+                motor[action](json);
+                loading.hide();
+              }
+            });
+          }
+        }
+      };
+
+      if(window.history && history.pushState) {
+        window.addEventListener('popstate', function() {
+          getContent();
+        });
+
+        links.on('click','a',function(e){
+          e.preventDefault();
+          if(this.href != window.location.href) {
+            history.pushState(null, '', this.href);
+            history.replaceState(null,'',this.href);
+          }
+          getContent();
+        });
+
+      }
+
+      linksDown.on('click','a',function(e){
+        e.preventDefault();
+        all_count = 0;
+        var data = $(this).data('action');
+        loading.show();
+        motor.getAjax('get',data);
+        setCurentLinkDown(data);
+      });
+
+      resblock.on('click','.action',function(){
+        var active = $(this);
+        loading.show();
+        motor.getAjax('post',active.attr('name'),{value: active.val()});
+      });
+
+      var scrollTop = $("<div/>").addClass('scrollTop').appendTo('body');
+      scrollTop.click(function(e){e.preventDefault();$('html:not(:animated),body:not(:animated)').animate({scrollTop: 400}, 500)});
+      var windowSt = $(window);
+      windowSt.scroll(function(){
+        (windowSt.scrollTop() > 1200 ) ? scrollTop.stop().animate({bottom:0}, 100) : scrollTop.stop().animate({bottom:-50}, 100);
+      });
+
+      function addButtonMore(action,value) {
+        var $more = $('<button/>').addClass('more-info btn btn-success').attr({name:action,value:value}).html('Показать еще').appendTo(resblock);
+        $more.on('click',function() {
+          var name = $more.attr('name');
+          var value = $more.val();
+          $more.remove();
+          motor.getAjax('get',name,{num: value});
+        });
+      }
+
+      function getContent() {
+        var action = window.location.search.substr(1) || window.location.href.replace('http://swing/newmydialog?','');
+        if(action in motor) {
+          setCurentLinkDown(action);
+          loading.show();
+          all_count = 0;
+          motor.getAjax('get',action);
+          $('.' + action).siblings().hide().end().show();
+        }else{
+          resblock.html('Некорректная ссылка');
+        }
+      }
+
       getContent();
-    });
 
-  }
-
-  linksDown.on('click','a',function(e){
-    e.preventDefault();
-    all_count = 0;
-    var data = $(this).data('action');
-    loading.show();
-    motor.getAjax('get',data);
-    setCurentLinkDown(data);
-  });
-
-  resblock.on('click','.action',function(){
-    var active = $(this);
-    loading.show();
-    motor.getAjax('post',active.attr('name'),{value: active.val()});
-  });
-
-  var scrollTop = $("<div/>").addClass('scrollTop').appendTo('body');
-  scrollTop.click(function(e){e.preventDefault();$('html:not(:animated),body:not(:animated)').animate({scrollTop: 400}, 500)});
-  var windowSt = $(window);
-  windowSt.scroll(function(){
-    (windowSt.scrollTop() > 1200 ) ? scrollTop.stop().animate({bottom:0}, 100) : scrollTop.stop().animate({bottom:-50}, 100);
-  });
-
-  function addButtonMore(action,value) {
-    var $more = $('<button/>').addClass('more-info btn btn-success').attr({name:action,value:value}).html('Показать еще').appendTo(resblock);
-    $more.on('click',function() {
-      var name = $more.attr('name');
-      var value = $more.val();
-      $more.remove();
-      motor.getAjax('get',name,{num: value});
-    });
-  }
-
-  function getContent() {
-    var action = window.location.search.substr(1) || window.location.href.replace('http://swing/newmydialog?','');
-    if(action in motor) {
-      setCurentLinkDown(action);
-      loading.show();
-      all_count = 0;
-      motor.getAjax('get',action);
-      $('.' + action).siblings().hide().end().show();
-    }else{
-      resblock.html('Некорректная ссылка');
-    }
-  }
-
-  getContent();
-
-</script>
+    </script>
+<?php $this->stop(); ?>

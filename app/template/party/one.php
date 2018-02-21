@@ -3,7 +3,7 @@
  * @var \Swing\System\Controller $this
  */
 
-$id_event = $this->request->get('id');
+$id_event = $request->get('id');
 
 $sql = 'select a.city, a.title, a.`text`, a.img, a.`status`, a.timer, a.maper, 
       a.address, a.begin_date, a.end_date, a.club, a.coords, a.v_count, a.price, a.site, a.email, a.vkontakte, a.tel,

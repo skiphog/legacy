@@ -4,7 +4,7 @@
  */
 
 $users = [];
-$page = (int)$this->request->get('page');
+$page = (int)$request->get('page');
 
 $sql = 'select count(*) 
   from users u 

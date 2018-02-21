@@ -26,7 +26,7 @@ endif; ?>
 
 <?php if ($myrow->isStels()) : ?>
     <div style="text-align: center;">
-        <p style="margin: 0;font-weight: bold;font-size: 16px;background-color:#ffe4c4;">Включен режим Инкогнито</p>
+        <p style="margin:0;font-weight:bold;font-size:16px;background-color:#ffe4c4;">Включен режим Инкогнито</p>
     </div>
 <?php endif; ?>
 
@@ -152,7 +152,7 @@ endif; ?>
 
 <!-- scripts -->
 <?php require __DIR__ . '/scripts.php' ?>
-<!-- //scripts -->
 <?php echo $this->renderBlock('script') ?>
+<!-- //scripts -->
 </body>
 </html>

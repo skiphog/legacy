@@ -1,10 +1,13 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
+$dbh = db();
+$myrow = user();
+
 $diaries = [];
-$page = (int)$this->request->get('page');
+$page = (int)request()->get('page');
 $parse = new \Swing\Components\Parse\NoSession();
 
 $sql = 'select count(*) from diary where deleted = 0';
@@ -39,6 +42,13 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
         </ul>
         <?php $paging_page = ob_get_clean();
     }} ?>
+
+<?php $this->extend('layout/layout') ?>
+
+<?php $this->start('title') ?>Дневники<?php $this->stop() ?>
+<?php $this->start('description') ?>Дневники свингеров. Рассыказы и реальные истории.<?php $this->stop() ?>
+
+<?php $this->start('content') ?>
 <table width=100%>
     <tr>
         <td>
@@ -98,3 +108,4 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
     </tr>
     <?php endif; ?>
 </table>
+<?php $this->stop() ?>

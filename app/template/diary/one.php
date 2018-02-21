@@ -1,11 +1,14 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
 use Swing\Exceptions\NotFoundException;
 
-$diary_id = abs((int)$this->request->get('id'));
+$dbh = db();
+$myrow = user();
+
+$diary_id = abs((int)request()->get('id'));
 
 $sql = 'select d.title_di,d.text_di, d.data_di,d.likes,d.dislikes,d.v_count,
   u.id id_user,u.login,u.gender,u.pic1,u.photo_visibility
@@ -65,148 +68,44 @@ $hide_mobile = $myrow->isMobile() ? 'style="display:none;"': '';
 $parse = new $parse_class();
 
 ?>
+<?php $this->extend('layout/layout') ?>
+
+<?php $this->start('title') ?><?= html($diary['title_di']); ?><?php $this->stop() ?>
+<?php $this->start('description') ?><?= html($diary['title_di']); ?><?php $this->stop() ?>
+
+<?php $this->start('style') ?>
 <style>
-    .d-breadcrumbs, .d-body, .t-comment {
-        margin-bottom: 10px
-    }
-
-    .d-breadcrumbs {
-        font-size: 1.2em;
-        font-style: italic
-    }
-
-    .d-user-info > div, .t-avatar, .t-user-info {
-        display: table-cell;
-        padding-right: 5px;
-        vertical-align: top
-    }
-
-    .d-form button, .d-form {
-        margin-top: 10px
-    }
-
-    hr {
-        margin: 10px 0;
-        border-style: solid;
-        color: #ccc;
-    }
-
-    span.ww {
-        display: block;
-        margin: 10px 0 10px 40px;
-    }
-
-    .msg-avatar > img, .t-avatar > img, .t-uc-info > img {
-        border-radius: 4px;
-        padding: 0;
-        vertical-align: middle;
-    }
-
-    .t-date {
-        color: #A99898;
-        font-size: 0.9em;
-    }
-
-    #load-mes {
-        text-align: center
-    }
-
-    .del-comm, .red-comm {
-        color: #CCC;
-        float: right;
-        cursor: pointer;
-        padding: 2px;
-    }
-
-    .del-comm:hover {
-        color: #D21B1B
-    }
-
-    .date {
-        display: block;
-        color: #777;
-    }
-
-    .del-mask {
-        background: url('/img/loader_button.gif');
-    }
-
-    .div-del {
-        background-color: #EBEBF3;
-    }
-
-    .div-del > span {
-        cursor: pointer;
-        color: green
-    }
-
-    .btn-likes, .btn-likes > span, .btn-likes:before {
-        vertical-align: middle;
-    }
-
-    .btn-likes {
-        padding: 0 10px;
-        background: none;
-        border: none;
-        box-shadow: none;
-        display: inline-block;
-        height: 22px;
-        outline: 0;
-        text-decoration: none;
-        white-space: nowrap;
-        word-wrap: normal;
-        line-height: normal;
-        cursor: pointer;
-    }
-
-    .btn-likes:before {
-        margin-right: 5px;
-        content: '';
-        display: inline-block;
-        background-size: auto;
-        width: 26px;
-        height: 22px;
-    }
-
-    .btn-likes.like:before {
-        background: no-repeat url('/img/likes.png') 0 0;
-    }
-
-    .btn-likes.dislike:before {
-        background: no-repeat url('/img/likes.png') -26px 0;
-    }
-
-    .golos {
-        font-weight: bold;
-        color: blue;
-    }
-
-    button[data-like^="-"] {
-        color: red;
-    }
-
-    button[data-like^="0"] {
-        color: #555;
-    }
-
-    .green {
-        color: green
-    }
-
-    .like-btn .btn, .btn.green {
-        line-height: 1;
-    }
-
-    span.u-bold {
-        font-weight: bold;
-        color: #747474;
-    }
-
-    .n-0 {
-        color: red !important
-    }
+    .d-breadcrumbs,.d-body,.t-comment{margin-bottom:10px}
+    .d-breadcrumbs{font-size:1.2em;font-style:italic}
+    .d-user-info > div,.t-avatar,.t-user-info{display:table-cell;padding-right:5px;vertical-align:top}
+    .d-form button,.d-form{margin-top:10px}
+    hr{color:#ccc;border-style:solid;margin:10px 0}
+    span.ww{display:block;margin:10px 0 10px 40px}
+    .msg-avatar > img,.t-avatar > img,.t-uc-info > img{border-radius:4px;vertical-align:middle;padding:0}
+    .t-date{color:#A99898;font-size:.9em}
+    #load-mes{text-align:center}
+    .del-comm,.red-comm{color:#CCC;float:right;cursor:pointer;padding:2px}
+    .del-comm:hover{color:#D21B1B}
+    .date{display:block;color:#777}
+    .del-mask{background:url(/img/loader_button.gif)}
+    .div-del{background-color:#EBEBF3}
+    .div-del > span{cursor:pointer;color:green}
+    .btn-likes,.btn-likes > span,.btn-likes:before{vertical-align:middle}
+    .btn-likes{background:none;border:none;box-shadow:none;display:inline-block;height:22px;outline:0;text-decoration:none;white-space:nowrap;word-wrap:normal;line-height:normal;cursor:pointer;padding:0 10px}
+    .btn-likes::before{margin-right:5px;content:'';display:inline-block;background-size:auto;width:26px;height:22px}
+    .btn-likes.like::before{background:no-repeat url(/img/likes.png) 0 0}
+    .btn-likes.dislike::before{background:no-repeat url(/img/likes.png) -26px 0}
+    .golos{font-weight:700;color: #0000ff}
+    button[data-like^="-"]{color:#f00}
+    button[data-like^="0"]{color:#555}
+    .green{color:green}
+    .like-btn .btn,.btn.green{line-height:1}
+    span.u-bold{font-weight:700;color:#747474}
+    .n-0{color:#f00!important}
 </style>
+<?php $this->stop() ?>
 
+<?php $this->start('content') ?>
 <div id="mass-content">
     <div class="d-breadcrumbs">
         <a href="/diary_1">Все дневники</a> &bull;
@@ -241,7 +140,7 @@ $parse = new $parse_class();
     </div>
 
     <div class="d-body">
-        <h1><?= $diary['title_di']; ?></h1>
+        <h1><?= html($diary['title_di']); ?></h1>
         <div>
             <?= nl2br(imgart(smile($parse->parse($diary['text_di'])))); ?>
         </div>
@@ -323,6 +222,9 @@ $parse = new $parse_class();
     </div>
 </div>
 <div id="load-mes" style="display: none"><img src="/img/load_green.gif" width="100" height="100" alt="loading"/></div>
+<?php $this->stop() ?>
+
+<?php $this->start('script') ?>
 <script>
   var resblock = $('#response'), loading = $('#load-mes'), com_status = <?= $com_status; ?>;
   var $com = {
@@ -402,7 +304,7 @@ $parse = new $parse_class();
   });
 
 
-  <?php if(!$vote && $myrow->id !== (int)$diary['id_user']) {?>
+  <?php if(!$vote && $myrow->id !== (int)$diary['id_user']) { ?>
 
   $('#likes').one('click', '.btn-likes', function () {
     var like = $(this);
@@ -418,3 +320,4 @@ $parse = new $parse_class();
   <?php }?>
   <?php }?>
 </script>
+<?php $this->stop() ?>

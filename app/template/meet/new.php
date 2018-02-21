@@ -4,7 +4,7 @@
  */
 
 $myrow = $myrow;
-$sort = (int)$this->request->get('sort');
+$sort = (int)$request->get('sort');
 $join = '';
 
 if ($sort !== 1 && $myrow->isUser()) {

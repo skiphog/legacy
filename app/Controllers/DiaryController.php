@@ -14,23 +14,20 @@ class DiaryController extends Controller
     /**
      * @return mixed
      */
-    public function getIndex()
+    public function getAll()
     {
-        //return $this->view('diary/index');
-
-        return $this->request->get('id');
+        return view('diary/all');
     }
 
     /**
      * @return mixed
      */
-    public function getShow()
+    public function getOne()
     {
-        //return $this->view('diary/show');
-        return $this->request->get('id');
+        return view('diary/one');
     }
 
-    public function postShow()
+    public function postOne()
     {
         var_dump($this->request->post(), $this->request->get());
         die;

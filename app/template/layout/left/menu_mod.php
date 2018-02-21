@@ -17,10 +17,10 @@
 <td style="padding-left: 30px;">
 <?php
 
-$result = $this->dbh->query('SELECT count(*) FROM users WHERE `status` = 3')->fetchColumn();
+$result = $dbh->query('SELECT count(*) FROM users WHERE `status` = 3')->fetchColumn();
 $total_new_moder = $result ?:'';
 
-$result = $this->dbh->query('SELECT count(*) FROM `events` WHERE `status` = 3')->fetchColumn();
+$result = $dbh->query('SELECT count(*) FROM `events` WHERE `status` = 3')->fetchColumn();
 $total_new_moder1 = $result ?:'' ;
 
 

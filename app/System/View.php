@@ -52,7 +52,7 @@ class View
             }
             throw $e;
         }
-        if (null !== $this->extends) {
+        if (null === $this->extends) {
             return $content;
         }
 

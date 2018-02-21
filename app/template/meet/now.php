@@ -7,17 +7,17 @@ $users = [];
 $page = (int)$this->request->get('page');
 
 
-$sgender = $this->myrow->getSgender();
+$sgender = $myrow->getSgender();
 
 $sql = 'select count(*) from users
 	where city = ?
-	and id <> ' . $this->myrow->id . '
+	and id <> ' . $myrow->id . '
 	and status = 1
 	and gender in (' . $sgender . ')
-and sgender like \'%' . $this->myrow->gender . '%\'';
+and sgender like \'%' . $myrow->gender . '%\'';
 
-$sth = $this->dbh->prepare($sql);
-$sth->execute([$this->myrow->city]);
+$sth = $dbh->prepare($sql);
+$sth->execute([$myrow->city]);
 
 if ($count = $sth->fetchColumn()) {
 
@@ -30,15 +30,15 @@ if ($count = $sth->fetchColumn()) {
 		ut.last_view
 		from users u join users_timestamps ut on ut.id = u.id
 		where u.city = ?
-		and u.id <> ' . $this->myrow->id . '
+		and u.id <> ' . $myrow->id . '
 		and u.status = 1
 		and u.gender in (' . $sgender . ')
-		and u.sgender like \'%' . $this->myrow->gender . '%\'
+		and u.sgender like \'%' . $myrow->gender . '%\'
 		order by ut.last_view
 	desc limit ' . $pagination->offset() . ',25';
 
-    $sth = $this->dbh->prepare($sql);
-    $sth->execute([$this->myrow->city]);
+    $sth = $dbh->prepare($sql);
+    $sth->execute([$myrow->city]);
 
     if (!$sth->rowCount()) {
         exit('Внутренняя ошибка сайта.Пожалуйста повторите попытку');
@@ -81,7 +81,7 @@ if ($count = $sth->fetchColumn()) {
         <tr>
             <td align="center" class="user-row">
                 <?php foreach ($users as $user) {
-                    anketa_usr_row($this->myrow, $user);
+                    anketa_usr_row($myrow, $user);
                 } ?>
             </td>
         </tr>

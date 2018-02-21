@@ -73,7 +73,7 @@
 						<select name="country">
                             <option value="0">Не важно</option>
 						<?php
-                        $country = $this->myrow->country;
+                        $country = $myrow->country;
                         foreach(\Swing\Arrays\Country::$array as $c=>$cs) {?>
 							<option value="<?php echo $c; ?>" <?php ($country !== $c)?:print 'selected="selected"'; ?>><?php echo $cs; ?></option>
 						<?php }?>
@@ -84,7 +84,7 @@
 				<tr class="td-padding">
 					<td><label for="find_city">Город</label></td>
 					<td>
-						<input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" value="<?php echo html($this->myrow->city); ?>">
+						<input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" value="<?php echo html($myrow->city); ?>">
 					</td>
 				</tr>
 				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
@@ -134,7 +134,7 @@
 </tr>
 <tr>
     <td align=center>
-        <?php if($this->myrow->isUser()) :?>
+        <?php if($myrow->isUser()) :?>
             <a href="/nowmeet_1"><img class="f-img" src="/img/meet/03.jpg" width="190" height="112" alt="travel"></a>
         <?php endif; ?>
     </td>
@@ -171,13 +171,13 @@ from
 where u.vip_time >= addtime(timestamp(date(NOW())),\'23:59:59\') AND u.status=1 
 order by rand() desc limit 5';
 
-$users = $this->dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
 
 if (!empty($users)) :?>
 <tr>
     <td colspan=6 align=center valign=center>
         <?php foreach($users as $user) : ?>
-            <?php anketa_usr_row($this->myrow, $user); ?>
+            <?php anketa_usr_row($myrow, $user); ?>
         <?php endforeach; ?>
     </td>
 </tr>
@@ -203,13 +203,13 @@ where
   u.status=1 
 order by u.rate desc limit 5';
 
-$users = $this->dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
 
 if (!empty($users)) :?>
     <tr>
         <td colspan=6 align=center valign=center>
             <?php foreach($users as $user) : ?>
-                <?php anketa_usr_row($this->myrow, $user); ?>
+                <?php anketa_usr_row($myrow, $user); ?>
             <?php endforeach; ?>
         </td>
     </tr>
@@ -229,13 +229,13 @@ from users u
 where u.status=1 
 order by u.regdate desc limit 10';
 
-$users = $this->dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
 
 if (!empty($users)) :?>
     <tr>
         <td colspan=6 align=center valign=center>
             <?php foreach($users as $user) : ?>
-                <?php anketa_usr_row($this->myrow, $user); ?>
+                <?php anketa_usr_row($myrow, $user); ?>
             <?php endforeach; ?>
         </td>
     </tr>

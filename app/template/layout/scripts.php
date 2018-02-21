@@ -60,7 +60,7 @@
 
 
 
-    <?php if($this->myrow->isUser()) : ?>
+    <?php if($myrow->isUser()) : ?>
     /*  head  */
     var pending = 0,
       idU = 0,
@@ -108,7 +108,7 @@
               $.ajax({
                 type: 'get',
                 url: 'popis.php',
-                data: {id: idU, g:<?php echo $this->myrow->real_status; ?>},
+                data: {id: idU, g:<?php echo $myrow->real_status; ?>},
                 dataType: 'json',
                 beforeSend: function () {
                   rpu.html('<img src="/img/loading.gif" width="32" height="32" alt="loadin" />');
@@ -128,7 +128,7 @@
           rpu.css('background', '#F0F0F0').parent().hide();
         }
       }, 'a.hover-tip');
-        <?php if(empty($_COOKIE['is_mobile'])) : ?>
+        <?php if(!$myrow->isMobile()) : ?>
       $('#mordalenta').on({
         mouseenter: function () {
           $(this).next().show();

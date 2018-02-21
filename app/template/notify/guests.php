@@ -31,10 +31,10 @@ $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility,
 	from whoisloock w
 	join users u on u.id = w.wholoock_kto
 	join users_timestamps ut on ut.id = u.id
-	where w.wholoock_kogo=' . $this->myrow->id . '
+	where w.wholoock_kogo=' . $myrow->id . '
 order by wholoock_time desc limit 50';
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 $date = date('d-m-Y');
 $data = [];
 while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
@@ -42,7 +42,7 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
     $data[] = $row;
 }
 
-$this->dbh->exec('update whoisloock set looking = 1 where wholoock_kogo = ' . $this->myrow->id);
+$dbh->exec('update whoisloock set looking = 1 where wholoock_kogo = ' . $myrow->id);
 ?>
 <style>
     .container .border-box {
@@ -81,7 +81,7 @@ $this->dbh->exec('update whoisloock set looking = 1 where wholoock_kogo = ' . $t
         <?php foreach ($data as $value) { ?>
             <div class="border-box look-<?php echo $value->looking; ?>">
                 <div class="w-time"><?php echo $value->wholoock_time; ?></div>
-                <div class="w-body"><?php anketa_usr_row($this->myrow, $value); ?></div>
+                <div class="w-body"><?php anketa_usr_row($myrow, $value); ?></div>
             </div>
         <?php } ?>
     </div>

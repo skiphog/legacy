@@ -137,28 +137,15 @@ function html($string)
 /**
  * @param $text
  *
- * @return null|string|string[]
+ * @return string
  */
-function hyperlinkAll($text)
+function hyperlink($text)
 {
+    /** @noinspection NotOptimalRegularExpressionsInspection */
     return preg_replace(
-        '#(?<!\])\bhttps?://[^\s\[<]+#i',
-        '<a href="$0" target="_blank">Ссылка</a>',
+        '/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'\".,<>?«»“”‘’]))/u',
+        '<a href="$0" target="_blank" rel="noopener noreferrer">Ссылка</a>',
         $text
-    );
-}
-
-/**
- * @param $txt
- *
- * @return null|string|string[]
- */
-function hyperlink($txt)
-{
-    return preg_replace(
-        "#(?<!\])\bhttps?://swing-kiska.ru[^\s\[<]+#i",
-        '<a href="$0" target="_blank">Ссылка</a>',
-        $txt
     );
 }
 
@@ -391,4 +378,14 @@ function strCompare($str1, $str2)
 function clearString($string)
 {
     return trim(strip_tags($string));
+}
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function compress($string)
+{
+    return preg_replace(['/>[^\S ]+/s', '/[^\S ]+</s', '/(\s)+/s'], ['>', '<', '\\1'], $string);
 }

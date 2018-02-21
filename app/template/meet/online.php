@@ -11,7 +11,7 @@ $sql = 'select count(*)
   join users_timestamps ut on ut.id = u.id 
 where u.status = 1 and ut.last_view > DATE_SUB(NOW(), interval ' . config('activity_time') . ' second)';
 
-if ($count = $this->dbh->query($sql)->fetchColumn()) {
+if ($count = $dbh->query($sql)->fetchColumn()) {
     $pagination = new Kilte\Pagination\Pagination($count, $page, 25, 2);
 
     $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility,
@@ -24,7 +24,7 @@ if ($count = $this->dbh->query($sql)->fetchColumn()) {
       where u.status=1 and ut.last_view > DATE_SUB(NOW(), interval ' . config('activity_time') . ' second) 
 	order by ut.last_view desc limit ' . $pagination->offset() . ', 25';
 
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     if (!$sth->rowCount()) {
         exit('Внутренняя ошибка сайта.Пожалуйста повторите попытку');
@@ -69,7 +69,7 @@ if ($count = $this->dbh->query($sql)->fetchColumn()) {
         <tr>
             <td align="center" class="user-row">
                 <?php foreach ($users as $user) {
-                    anketa_usr_row($this->myrow, $user);
+                    anketa_usr_row($myrow, $user);
                 } ?>
             </td>
         </tr>

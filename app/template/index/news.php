@@ -1,6 +1,6 @@
 <?php
-if(!$news_main = $this->cache->get('news_main')) {
-	$sth = $this->dbh->query('select sid,title,`time`, hometext, bodytext from stories order by sid desc limit 10');
+if(!$news_main = $cache->get('news_main')) {
+	$sth = $dbh->query('select sid,title,`time`, hometext, bodytext from stories order by sid desc limit 10');
 	if($sth->rowCount()) {
 	ob_start();
 	?>
@@ -43,8 +43,8 @@ if(!$news_main = $this->cache->get('news_main')) {
 		</tr>
 		</table>		
 	<?php 
-		$news_main = ob_get_clean();
-		$this->cache->set('news_main',$news_main);
+		$news_main = compress(ob_get_clean());
+		$cache->set('news_main',$news_main);
 	}else {
 		$news_main = '<>Записей нет.';
 	}

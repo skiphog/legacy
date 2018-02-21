@@ -3,10 +3,10 @@
  * @var \Swing\System\Controller $this
  */
 
-$tc = $this->myrow->isUser() ? $this->myrow->id : 'NULL';
-$this->dbh->exec('insert into travel_count (user_id) values ('. $tc .')');
+$tc = $myrow->isUser() ? $myrow->id : 'NULL';
+$dbh->exec('insert into travel_count (user_id) values ('. $tc .')');
 
-$select_date = $this->dbh->quote(date('Y-m-d'));
+$select_date = $dbh->quote(date('Y-m-d'));
 
 $sql = 'select tu.id,tu.user_id, tu.is_children, tu.payment, tu.description,tu.date_start,tu.date_end,tu.sgender,tu.transport,
   u.login,u.gender,u.pic1 avatar, u.fname,u.city user_city,u.birthday,u.real_status,u.photo_visibility,
@@ -19,7 +19,7 @@ from travel_users tu
 where tu.date_end >= ' . $select_date . '
 order by tu.id desc';
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 
 if ($sth->rowCount()) {
 
@@ -53,7 +53,7 @@ if ($sth->rowCount()) {
                 'user_id'        => $row['user_id'],
                 'destination'    => $row['country_title'] . ', ' . $row['city_title'],
                 'datetime'       => 'c <strong>' . date('d-m-Y', strtotime($row['date_start'])) . '</strong> по <strong>' . date('d-m-Y', strtotime($row['date_end'])) . '</strong>',
-                'avatar'         => avatar($this->myrow, $row['avatar'], $row['photo_visibility']),
+                'avatar'         => avatar($myrow, $row['avatar'], $row['photo_visibility']),
                 'real'           => empty($row['real_status']) ? '' : '<img src="/img/real.gif" width="14" height="14" alt="Real">',
                 'info'           => '<a class="hover-tip" href="/id' . $row['user_id'] . '" target="_blank"><img src="/img/info_small_' . $row['gender'] . '.png" width="15" height="14" alt="gender"> ' . $row['login'] . '</a>',
                 'name'           => html($row['fname']) . ', ' . (new \Swing\Components\SwingDate($row['birthday']))->getHumansShort(),
@@ -64,7 +64,7 @@ if ($sth->rowCount()) {
                 'sgender'        => ArrayTravel::$case['search'][$row['gender']] . ' ' . implode(', ', $sgender),
                 'description'    => nl2br(html($row['description'])),
                 'clusterCaption' => $row['login'],
-                'del'            => $this->myrow->isModerator() || ($this->myrow->id === $row['user_id']) ? '<span class="del-travel" title="Удалить" data-value="'.$row['id'].'">Удалить</span>':''
+                'del'            => $myrow->isModerator() || ($myrow->id === $row['user_id']) ? '<span class="del-travel" title="Удалить" data-value="'.$row['id'].'">Удалить</span>':''
             ]
         ];
 
@@ -86,7 +86,7 @@ if ($sth->rowCount()) {
         join users u on u.id = tu.user_id
       where tu.date_end >= ' . $select_date . '
     group by u.gender order by gender';
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     $travel['gender'] = [];
     while ($row = $sth->fetch()) {
@@ -100,7 +100,7 @@ if ($sth->rowCount()) {
         join travel_country c on c.id = tu.country_id
       where tu.date_end >= ' . $select_date . '
       group by c.id order by  cnt desc ';
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     $travel['country'] = [];
     while ($row = $sth->fetch()) {

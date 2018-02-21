@@ -9,7 +9,7 @@ $parse = new \Swing\Components\Parse\NoSession();
 
 $sql = 'select count(*) from diary where deleted = 0';
 
-if ($count = $this->dbh->query($sql)->fetchColumn()) {
+if ($count = $dbh->query($sql)->fetchColumn()) {
     $pagination = new Kilte\Pagination\Pagination($count, $page, 10, 2);
 
     $sql = 'select d.id_di, d.title_di, d.text_di, d.data_di,
@@ -19,7 +19,7 @@ if ($count = $this->dbh->query($sql)->fetchColumn()) {
       where d.deleted = 0 
     order by d.id_di desc limit ' . $pagination->offset() . ',10';
 
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     if (!$sth->rowCount()) {
         exit('Внутренняя ошибка сайта.Пожалуйста повторите попытку');
@@ -60,7 +60,7 @@ if ($count = $this->dbh->query($sql)->fetchColumn()) {
             <tr>
                 <td style="padding:5px;">
                     <h1><?php echo html($diary['title_di']); ?></h1>
-                    <div class="avatar" style="float:left;background-image: url(<?php echo avatar($this->myrow, $diary['pic1'], $diary['photo_visibility']); ?>)"></div>
+                    <div class="avatar" style="float:left;background-image: url(<?php echo avatar($myrow, $diary['pic1'], $diary['photo_visibility']); ?>)"></div>
                     <div>
                         <i><?php echo $diary['data_di']?></i>
                         <br>
@@ -77,7 +77,7 @@ if ($count = $this->dbh->query($sql)->fetchColumn()) {
                         <a href="/viewdiary_<?=$diary['id_di']?>">Читать запись</a>
                         <?php
 
-                        if($this->myrow->id === (int)$diary['id'] || $this->myrow->isModerator()) :?>
+                        if($myrow->id === (int)$diary['id'] || $myrow->isModerator()) :?>
                             <a href="/reddiary_<?=$diary['id_di'];?>">// редактировать</a>
                         <?php endif;?>
                     </div>

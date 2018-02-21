@@ -3,12 +3,12 @@
  * @var \Swing\System\Controller $this
  */
 
-$myrow = $this->myrow;
+$myrow = $myrow;
 $sort = (int)$this->request->get('sort');
 $join = '';
 
 if ($sort !== 1 && $myrow->isUser()) {
-    $join = ' and u.city = ' . $this->dbh->quote($myrow->city);
+    $join = ' and u.city = ' . $dbh->quote($myrow->city);
     switch ($sort) {
         case 3 :
             $join .= ' and gender = 3';
@@ -36,7 +36,7 @@ $sql = /** @lang text */ 'select u.id, u.birthday, u.pic1, u.photo_visibility,
   where status = 1 ' . $join . ' order by u.regdate desc 
  limit 50';
 
-$users = $this->dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
 
 ?>
 <table border=0 width=100%>

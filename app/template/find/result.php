@@ -11,7 +11,7 @@ $line_link = [];
 $where = '';
 $distinct = '';
 $now = date('Y-m-d');
-$bann_user = $this->myrow->isModerator() ? ' and u.status <> 2' : '';
+$bann_user = $myrow->isModerator() ? ' and u.status <> 2' : '';
 $join_count = '';
 $join = 'join users_timestamps ut on ut.id = u.id';
 $orderby = 'ut.last_view';
@@ -81,7 +81,7 @@ if (!empty($_REQUEST['find_nik'])) {
 
 $sql = 'select count(' . $distinct . ' u.id) from users u ' . $join_count . ' where 1=1 ' . $where . $bann_user;
 
-$sth = $this->dbh->prepare($sql);
+$sth = $dbh->prepare($sql);
 $sth->execute($params);
 
 if ($count = $sth->fetchColumn()) {
@@ -94,7 +94,7 @@ if ($count = $sth->fetchColumn()) {
 		where 1=1 ' . $where . ' ' . $bann_user . '
 		order by ' . $orderby . '
 	desc limit ' . $pagination->offset() . ',30';
-    $sth = $this->dbh->prepare($sql);
+    $sth = $dbh->prepare($sql);
     $sth->execute($params);
     $users = $sth->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
     $paging = $pagination->build();
@@ -133,7 +133,7 @@ if ($count = $sth->fetchColumn()) {
         <tr>
             <td align="center" colspan="2" class="user-row">
                 <?php foreach($users as $user) : ?>
-                    <?php anketa_usr_row($this->myrow, $user); ?>
+                    <?php anketa_usr_row($myrow, $user); ?>
                 <?php endforeach; ?>
             </td>
         </tr>

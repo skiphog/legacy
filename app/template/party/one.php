@@ -13,7 +13,7 @@ $sql = 'select a.city, a.title, a.`text`, a.img, a.`status`, a.timer, a.maper,
       where a.id = ' . $id_event . ' and a.`status` <> 0 
     limit 1';
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 
 if (!$sth->rowCount()) {
     throw new \Swing\Exceptions\NotFoundException('Анонса не существует или удален');
@@ -22,11 +22,11 @@ if (!$sth->rowCount()) {
 $event = $sth->fetch();
 
 /** @noinspection NotOptimalIfConditionsInspection */
-if ((int)$event['status'] !== 1 && $this->myrow->id !== $event['u_id'] && !$this->myrow->isModerator()) {
+if ((int)$event['status'] !== 1 && $myrow->id !== $event['u_id'] && !$myrow->isModerator()) {
     throw new \Swing\Exceptions\ForbiddenException('Анонс еще не прошел модерацию');
 }
 
-$this->dbh->exec('update `events` set v_count = v_count + 1 where id = ' . $id_event);
+$dbh->exec('update `events` set v_count = v_count + 1 where id = ' . $id_event);
 
 $event['ts_b'] = strtotime($event['begin_date']);
 $event['ts_e'] = strtotime($event['end_date']);
@@ -50,7 +50,7 @@ if (!empty($event['maper'])) {
     $assets['script'][] = '//api-maps.yandex.ru/2.1/?lang=ru_RU';
 }
 
-$e_master = $this->myrow->id === (int)$event['u_id'];
+$e_master = $myrow->id === (int)$event['u_id'];
 
 $moderation = [
     1 => 'Активен',
@@ -119,7 +119,7 @@ if(!empty($assets['style'])) {?>
 </div>
 
 <div id="event">
-    <?php if($e_master || $this->myrow->isAdmin()) {?>
+    <?php if($e_master || $myrow->isAdmin()) {?>
         <?php if($_SERVER['REQUEST_TIME'] < $event['ts_e']) {?>
             <span class="e-mod e-mod-<?=$event['status']; ?>"><?= $moderation[$event['status']]; ?></span>
         <?php }else{?>

@@ -6,18 +6,25 @@
 $dbh = db();
 $cache = cache();
 $myrow = user();
+
+$global = $dbh->query('select site_title, site_keywords, site_description, background from site where site_id = 1')->fetch();
+
+$site_title = $myrow->isGuest() ? $global['site_title'] : 'Добро пожаловать!';
+$site_description = $global['site_description'];
+$sback = $global['background'];
+
 ?>
 <!doctype html>
 <html lang="ru">
 <head>
-<?php require __DIR__ . '/head.php'; ?>
+    <?php require __DIR__ . '/head.php'; ?>
 </head>
 <body>
-<?php if ($this->myrow->isHiddenImg()) :
+<?php if ($myrow->isHiddenImg()) :
     require __DIR__ . '/boss.php';
 endif; ?>
 
-<?php if ($this->myrow->isStels()) : ?>
+<?php if ($myrow->isStels()) : ?>
     <div style="text-align: center;">
         <p style="margin: 0;font-weight: bold;font-size: 16px;background-color:#ffe4c4;">Включен режим Инкогнито</p>
     </div>
@@ -28,46 +35,11 @@ endif; ?>
     <tr>
         <td class="bgsat" height="340" align="left" valign="top" width="437" style="background: url('/img/backgrounds/left_<?php echo $sback; ?>.jpg') no-repeat;">
             <div id="contentcht">
-                <marquee behavior="scroll" direction="up" height="130" width="157" scrollamount="2">
-                    <div id="contentch">
-                        <?php
-
-                        if (!$minchat = $this->cache->get('minchat')) {
-                            $result = $this->dbh->query('select ch_nik,ch_text,ch_uid from chat order by ch_timestamp desc limit 0,5');
-                            if ($result->rowCount()) {
-                                $minchat = [];
-                                while ($row = $result->fetch()) {
-                                    $row['ch_text'] = hyperlinkAll(smile($row['ch_text']));
-                                    $minchat[] = $row;
-                                }
-                                $this->cache->set('minchat', $minchat);
-                            }
-                        }
-
-                        if (!empty($minchat) && is_array($minchat)) {
-                            foreach ($minchat as $value) { ?>
-                                <a href="/id<?php echo $value['ch_uid']; ?>"><?php echo $value['ch_nik']; ?></a>:
-                                <br>
-                                <?php
-                                $value['ch_text'] = preg_replace_callback('#{{(.+?)}}#', function ($item) {
-                                    if (empty($_SESSION['login'])) {
-                                        return '<b style="color:#747474">' . $item[1] . '</b>';
-                                    }
-                                    $color = ($_SESSION['login'] === $item[1]) ? '#F00' : '#747474';
-
-                                    return '<b style="color:' . $color . '">' . $item[1] . '</b>';
-                                }, $value['ch_text']);
-                                echo nl2br($value['ch_text']);
-                                ?>
-                                <br/>
-                            <?php }
-                        } ?>
-                    </div>
-                </marquee>
+                <?php require __DIR__ . '/chat.php'; ?>
             </div>
             <br>
             <br>
-            <?php if ($this->myrow->isGuest()) { ?>
+            <?php if ($myrow->isGuest()) : ?>
                 <a href="#showimagemsg">
                     <div style="padding-left: 85px;">Войти в чат</div>
                 </a>
@@ -88,44 +60,23 @@ endif; ?>
                     </p>
                 </div>
 
-            <?php } else { ?>
+            <?php else : ?>
                 <div style="margin-left: 85px;"><a href="/chat">Войти в чат</a></div>
-            <?php } ?>
+            <?php endif; ?>
         </td>
         <td class="bgsat" height="340" align="center" valign="top" style="background: url('/img/backgrounds/center_<?php echo $sback; ?>.jpg') repeat-x;">
-
             <div id="topmenu">
                 <table border=0>
                     <tr>
-                        <td>
-                            <a href="/">
-                                <div id="topmain"></div>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="/findlist">
-                                <div id="topmeet"></div>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="/diary_1">
-                                <div id="topdiary"></div>
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="/newugthreads_1">
-                                <div id="topforum"></div>
-                            </a>
-                        </td>
+                        <td><a href="/"><div id="topmain"></div></a></td>
+                        <td><a href="/findlist"><div id="topmeet"></div></a></td>
+                        <td><a href="/diary_1"><div id="topdiary"></div></a></td>
+                        <td><a href="/newugthreads_1"><div id="topforum"></div></a></td>
                     </tr>
                 </table>
             </div>
             <div id="logo"></div>
-
-            <?php if ($this->myrow->isUser()) {
+            <?php if ($myrow->isUser()) {
                 require __DIR__ . '/viplenta.php';
             } ?>
         </td>
@@ -141,38 +92,32 @@ endif; ?>
         <td valign="top" width="235" align="left" style="background: url('/img/left.jpg') repeat-y;">
             <?php require __DIR__ . '/left/menu_user.php'; ?>
             <br>
-            <?php if($this->myrow->isAdmin()) :
-                require __DIR__ .'/left/menu_admin.php';
+            <?php if ($myrow->isAdmin()) :
+                require __DIR__ . '/left/menu_admin.php';
             endif; ?>
 
-            <?php if($this->myrow->isModerator()) :
+            <?php if ($myrow->isModerator()) :
                 require __DIR__ . '/left/menu_mod.php';
             endif; ?>
 
             <?php require __DIR__ . '/left/story.php'; ?>
             <br>
-            <?php require __DIR__ . '/left/hot.php';?>
+            <?php require __DIR__ . '/left/hot.php'; ?>
             <br>
-            <?php require __DIR__ . '/left/stat.php';?>
+            <?php require __DIR__ . '/left/stat.php'; ?>
             <br>
-            <?php require __DIR__ . '/left/partner.php';?>
+            <?php require __DIR__ . '/left/partner.php'; ?>
             <br>
         </td>
         <!-- //left -->
 
         <!-- center -->
         <td valign="top" align="left" style="padding: 10px;">
-
-            <?php if($this->myrow->id === 3) :?>
-                <?php print_r($_GET); ?>
-                <br>
-            <?php endif; ?>
-
-            <div id="content" style="min-width:800px;margin-left: -210px">
-                <!-- echo content -->
-                <?php echo $this->content; ?>
-                <!-- //content -->
-            </div>
+        <div id="content" style="min-width:800px;margin-left: -210px">
+        <!-- echo content -->
+        <?php echo $this->renderBlock('content') ?>
+        <!-- //content -->
+        </div>
         </td>
         <!-- //center -->
 
@@ -185,15 +130,15 @@ endif; ?>
 
     <!-- footer line -->
     <tr>
-        <td colspan="3" height="2" bgcolor="#999999"></td>
+    <td colspan="3" height="2" bgcolor="#999999"></td>
     </tr>
     <!-- //footer line -->
 
     <!-- footer -->
     <tr>
-        <td colspan="3">
-            <?php require __DIR__ . '/footer.php'; ?>
-        </td>
+    <td colspan="3">
+    <?php require __DIR__ . '/footer.php'; ?>
+    </td>
     </tr>
     <!-- //footer -->
 </table>
@@ -208,5 +153,6 @@ endif; ?>
 <!-- scripts -->
 <?php require __DIR__ . '/scripts.php' ?>
 <!-- //scripts -->
+<?php echo $this->renderBlock('script') ?>
 </body>
 </html>

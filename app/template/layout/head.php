@@ -1,23 +1,18 @@
 <?php
-$global = $this->dbh->query('select site_title, site_keywords, site_description, background from site where site_id = 1')->fetch();
-
-$site_title = $this->myrow->isGuest() ? $global['site_title'] : 'Добро пожаловать!';
-$site_description = $global['site_description'];
-$sback = $global['background'];
-
-if (isset($_GET['storyid'])) {
-
-    $global = $this->dbh->query('select meta_title as site_title,keywords as site_keywords,description as site_description,topic,title,time,hometext,bodytext from stories where sid = ' . (int)$_GET['storyid'])->fetch();
-    $site_title = !empty($global['site_title']) ? $global['site_title'] : $site_title;
-    $site_description = !empty($global['site_description']) ? $global['site_description'] : $site_description;
-}
+/**
+ * @var string $site_title
+ * @var string $site_description
+ * @var \Swing\System\View $this
+ */
 ?>
+<?php if ($this->ensure('title')) : ?><?php echo html($site_title); ?><?php $this->stop(); endif; ?>
+<?php if ($this->ensure('description')) : ?><?php echo html($site_description); ?><?php $this->stop(); endif; ?>
 <meta charset="utf-8">
-<title><?php echo $site_title; ?></title>
-<meta name="description" content="<?php echo html($site_description); ?>">
+<title><?php echo $this->renderBlock('title'); ?></title>
+<meta name="description" content="<?php echo $this->renderBlock('description'); ?>">
 <link rel="stylesheet" href="/css/main-1475653197766.css">
-<!--<link rel="stylesheet" href="/css/app.css">-->
 <link rel="stylesheet" href="/css/new.css">
+<?php echo $this->renderBlock('style') ?>
 <link rel="apple-touch-icon" sizes="57x57" href="/img/favicon/apple-touch-icon-57x57.png"/>
 <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon-60x60.png"/>
 <link rel="apple-touch-icon" sizes="72x72" href="/img/favicon/apple-touch-icon-72x72.png"/>

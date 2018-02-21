@@ -13,12 +13,12 @@ $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility, u.real_status, u.vi
   where u.hot_time> NOW() and u.status = 1
 order by u.hot_time desc limit 50';
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 
 $city_meets = $meets = [];
 /** @var \Swing\Models\RowUser $row */
 while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
-    if (strtoupper($row->city) === strtoupper($this->myrow->city)) {
+    if (strtoupper($row->city) === strtoupper($myrow->city)) {
         $city_meets[] = $row;
         continue;
     }
@@ -62,7 +62,7 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
                         <tr>
                             <td colspan="6" align="center" valign="center">
                                 <?php foreach ($city_meets as $user) : ?>
-                                    <?php anketa_usr_row($this->myrow, $user) ?>
+                                    <?php anketa_usr_row($myrow, $user) ?>
                                 <?php endforeach; ?>
                             </td>
                         </tr>
@@ -78,7 +78,7 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
                         <tr>
                             <td colspan="6" align="center" valign="center">
                                 <?php foreach ($meets as $user) : ?>
-                                    <?php anketa_usr_row($this->myrow, $user) ?>
+                                    <?php anketa_usr_row($myrow, $user) ?>
                                 <?php endforeach; ?>
                             </td>
                         </tr>
@@ -91,10 +91,10 @@ while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
         </tr>
     </table>
 
-<?php if ($this->myrow->rate > 100) : ?>
+<?php if ($myrow->rate > 100) : ?>
     <div>
         <h1>Подать заявку</h1>
-        У вас <b><?php echo $this->myrow->rate; ?></b> баллов. Хотите подать объявление?
+        У вас <b><?php echo $myrow->rate; ?></b> баллов. Хотите подать объявление?
         <br>
         Стоимость заявки <b>100</b> баллов на 7 дней
         <br>

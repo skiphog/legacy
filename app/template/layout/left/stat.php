@@ -10,18 +10,18 @@
 <?php
 /** @var  $myrow array|null */
 
-if (!$a_count = $this->cache->get('a_count')) {
-    $a_count = $this->dbh->query('select count(*) from users')->fetchColumn();
-    $this->cache->set('a_count', $a_count);
+if (!$a_count = $cache->get('a_count')) {
+    $a_count = $dbh->query('select count(*) from users')->fetchColumn();
+    $cache->set('a_count', $a_count);
 }
 echo '<strong>Всего анкет:</strong> ', $a_count, '<br>';
 
-if (!$g_online = $this->cache->get('visiters')) {
+if (!$g_online = $cache->get('visiters')) {
     $g_online = random_int(50, 100);
-    $this->cache->set('visiters', $g_online);
+    $cache->set('visiters', $g_online);
 }
 
-if (!$ondata = $this->cache->get('online_users')) {
+if (!$ondata = $cache->get('online_users')) {
     $sql = 'select ut.id,ut.last_view,u.login,u.admin,u.vip_time,
         u.vipsmile,u.moderator,u.pic1,u.gender,u.city,u.birthday
         from users_timestamps ut
@@ -29,8 +29,8 @@ if (!$ondata = $this->cache->get('online_users')) {
         where ut.last_view > DATE_SUB(NOW(), interval ' . config('activity_time') . ' second)
     order by u.city, u.login';
 
-    $ondata = $this->dbh->query($sql)->fetchAll();
-    $this->cache->set('online_users', $ondata, 300);
+    $ondata = $dbh->query($sql)->fetchAll();
+    $cache->set('online_users', $ondata, 300);
 }
 $u_online = count($ondata);
 $t_online = (int)$g_online + $u_online;
@@ -40,7 +40,7 @@ echo 'Пользователей - ', $u_online, '<br /><br />';
 
 if (!empty($ondata)) {
     $dateB = date('m-d');
-    $city_stat = $this->myrow->city;
+    $city_stat = $myrow->city;
     $susers = [];
     $spusers = [];
     $ssity = mb_strtolower($city_stat);
@@ -66,7 +66,7 @@ if (!empty($ondata)) {
         <a class="hover-tip" href="/id<?= $o_u['id'] ?>"><img src="/img/info_small_<?php echo $o_u['gender']; ?>.png" width="13" height="12" alt="gender"/></a>
         <?php
         /** @noinspection NotOptimalIfConditionsInspection */
-        if ($this->myrow->isUser() && (int)$o_u['id'] !== $this->myrow->id) {
+        if ($myrow->isUser() && (int)$o_u['id'] !== $myrow->id) {
             if (empty($_COOKIE['is_mobile'])) :?>
                 <a href="privat_<?= $o_u['id'] ?>" onclick="return openPrivate(this.href,<?= $o_u['id'] ?>);">
             <?php else: ?>

@@ -1,6 +1,6 @@
 <div style="float: left;margin-right: 5px;">
     <?php
-    $baner = $this->dbh->query('select img,link,target from banners where activity = \'1\' order by RAND() limit 1')->fetch();
+    $baner = $dbh->query('select img,link,target from banners where activity = \'1\' order by RAND() limit 1')->fetch();
 
     if(!empty($baner)) {
         if (empty($baner['link'])) { ?>

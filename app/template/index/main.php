@@ -1,35 +1,18 @@
 <?php
 /**
- * @var \PDO                $dbh
  * @var \Swing\System\View  $this
- * @var \Swing\System\Cache $cache
- * @var \Swing\Models\Myrow $myrow
  */
+
+$myrow = user();
+$dbh = db();
+$cache = cache();
+
 $parse = new \Swing\Components\Parse\Clear();
 ?>
 
 <?php $this->extend('layout/layout'); ?>
 
-<?php $this->start('style'); ?>
-<style>
-    .active-theme {
-        padding: 5px;
-        margin-bottom: 10px;
-        display: block;
-        color: inherit
-    }
-
-    .active-theme:hover {
-        color: #6b676a;
-    }
-</style>
-<?php $this->stop(); ?>
-
 <?php $this->start('content'); ?>
-fuck
-<?php $this->stop(); ?>
-
-
 <table border="0" width="100%">
     <tr>
         <td valign="top">
@@ -39,7 +22,7 @@ fuck
 
                         <h1>Свинг знакомства на Свинг-киске. 10 лет объединяем свингеров!</h1>
 
-                        <?php if ($this->myrow->isGuest()) : ?>
+                        <?php if ($myrow->isGuest()) : ?>
                             <p>
                                 <img src="/img/18++.jpg" align="right" alt="свинг +18" hspace="10" vspace="10"/>
                                 Внимание, сайт содержит материалы для взрослых. 
@@ -85,7 +68,7 @@ fuck
                             <?php
                             require __DIR__ . '/baner.php';
 
-                            $global = $this->dbh->query('select site_main, theme from site where site_id = 1')->fetch();
+                            $global = $dbh->query('select site_main, theme from site where site_id = 1')->fetch();
                             echo nl2br($global['site_main']), '<br>';
                             $theme = unserialize($global['theme'], []);
                             ?>
@@ -98,7 +81,7 @@ fuck
                         <?php endif; ?>
                     </td>
                 </tr>
-                <?php if ($this->myrow->isUser()) : ?>
+                <?php if ($myrow->isUser()) : ?>
                     <!-- Новые альбомы -->
                     <tr>
                         <td>
@@ -120,9 +103,9 @@ fuck
                             <tr>
                                 <td style="padding: 10px 5px;">
                                     <?php
-                                    if (!$main_diary = $this->cache->get('new_diary')) {
+                                    if (!$main_diary = $cache->get('new_diary')) {
 
-                                        $sth = $this->dbh->query('select u.id,u.login,u.gender,d.id_di,d.title_di,d.text_di from diary d join users u on u.id=d.user_di where d.main = 1 and d.deleted = 0 order by d.data_di desc limit 4');
+                                        $sth = $dbh->query('select u.id,u.login,u.gender,d.id_di,d.title_di,d.text_di from diary d join users u on u.id=d.user_di where d.main = 1 and d.deleted = 0 order by d.data_di desc limit 4');
                                         ob_start();
                                         while ($myrow_diary_m = $sth->fetch()) { ?>
                                             <div class="border-box" style="padding:5px;margin-top:3px;">
@@ -138,9 +121,9 @@ fuck
                                                 <a href="viewdiary_<?= $myrow_diary_m['id_di'] ?>">В дневник &raquo;</a>
                                             </div>
                                         <?php }
-                                        $main_diary = ob_get_clean();
+                                        $main_diary = compress(ob_get_clean());
 
-                                        $this->cache->set('new_diary', $main_diary);
+                                        $cache->set('new_diary', $main_diary);
                                     }
                                     echo $main_diary;
                                     ?>
@@ -171,9 +154,9 @@ fuck
                             <tr>
                                 <td style="padding: 10px 5px;">
                                     <?php
-                                    if (!$main_tome = $this->cache->get('main_tome')) {
+                                    if (!$main_tome = $cache->get('main_tome')) {
 
-                                        $result = $this->dbh->query('select c.ugthread_id id, count(*) cnt, t.ugt_title t_title,t.ugt_descr, g.ug_title g_title 
+                                        $result = $dbh->query('select c.ugthread_id id, count(*) cnt, t.ugt_title t_title,t.ugt_descr, g.ug_title g_title 
             from ugcomments c 
             join ugthread t on t.ugthread_id = c.ugthread_id 
             join ugroup g on g.ugroup_id = t.ugroup_id 
@@ -199,8 +182,8 @@ fuck
                                                 <em style="font-size: 1.1em"><?php echo $row['g_title']; ?></em>
                                             </a>
                                         <?php }
-                                        $main_tome = ob_get_clean();
-                                        $this->cache->set('main_tome', $main_tome, 1800);
+                                        $main_tome = compress(ob_get_clean());
+                                        $cache->set('main_tome', $main_tome, 1800);
                                     }
                                     echo $main_tome;
                                     ?>
@@ -226,3 +209,4 @@ fuck
         </td>
     </tr>
 </table>
+<?php $this->stop(); ?>

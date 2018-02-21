@@ -1,5 +1,5 @@
 <?php
-$result = $this->dbh->query('SELECT count(*) FROM complaints WHERE status = 0')->fetchColumn();
+$result = $dbh->query('SELECT count(*) FROM complaints WHERE status = 0')->fetchColumn();
 $total_new_moder2 = $result ?:'' ;
 ?>
 <style>

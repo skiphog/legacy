@@ -3,7 +3,7 @@
  * @var \Swing\System\Controller $this
  */
 ?>
-<?php if($this->myrow->isUser()) :?>
+<?php if($myrow->isUser()) :?>
 <style>
     .cnt{font-weight:900;text-shadow:none;}
     .count-mes{color:#961313;}
@@ -27,15 +27,15 @@
             <br />
             <a href="/myalbum_page_1">Мои фотографии</a>
             <br />
-            <a href="/myfriends_1_1">Мои друзья</a> <?php echo $this->myrow->getCountFriends(); ?>
+            <a href="/myfriends_1_1">Мои друзья</a> <?php echo $myrow->getCountFriends(); ?>
             <br />
             <a href="/mydiary_1">Мои дневники</a>
             <br />
-            <a href="/newmydialog?getNewMessage">Мои сообщения <span class="cnt count-mes"><?php echo $this->myrow->getCountMessage(); ?></span></a>
+            <a href="/newmydialog?getNewMessage">Мои сообщения <span class="cnt count-mes"><?php echo $myrow->getCountMessage(); ?></span></a>
             <br />
-            <a href="/newmydialog?getNewNotification">Мои уведомления <span class="cnt count-nof"><?php echo $this->myrow->getCountNotify();?></span></a>
+            <a href="/newmydialog?getNewNotification">Мои уведомления <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a>
             <br />
-            <a href="/whoisloock">Мои гости <span class="cnt count-guest"><?php echo $this->myrow->getCountGuest();?></span></a>
+            <a href="/whoisloock">Мои гости <span class="cnt count-guest"><?php echo $myrow->getCountGuest();?></span></a>
             <br />
             <a href="/myugroups_1">Мои группы</a>
             <br />
@@ -46,13 +46,13 @@
             <br>
             <br>
             <a href="/donate">Поддержать сайт</a>
-            <?php if(!empty($myrow['admin'])) : ?>
+            <?php if($myrow->isAdmin()) : ?>
                 <br>
                 <br>
                 <a href="/services">Магазин / Сервисы</a>
             <?php endif; ?>
-            <?php if(($adverts_3 = $this->cache->get('advert_3')) === false) {
-                $sth = $this->dbh->query('select url, target, img from advert_baner where status = 1 and position = 3 order by date_start desc');
+            <?php if(($adverts_3 = $cache->get('advert_3')) === false) {
+                $sth = $dbh->query('select url, target, img from advert_baner where status = 1 and position = 3 order by date_start desc');
                 if($sth->rowCount()) {
                     ob_start();
                     while ($row = $sth->fetch()) {?>
@@ -62,18 +62,18 @@
                             <img class="border-box" style="padding: 0" src="/<?= $row['img']; ?>" width="170" alt="adi">
                         </a>
                     <?php }
-                    $adverts_3 = ob_get_clean();
+                    $adverts_3 = compress(ob_get_clean());
                 } else {
                     $adverts_3 = '';
                 }
-                $this->cache->set('advert_3', $adverts_3);
+                $cache->set('advert_3', $adverts_3);
             }
             echo $adverts_3;
             ?>
             <br />
             <div id="vidget-o-global">
                 <?php
-                if($vigdet = $this->cache->get('vo')) {?>
+                if($vigdet = $cache->get('vo')) {?>
                     <?php foreach($vigdet as $value) {?>
                         <br />
                         <a  href="<?php echo $value['linko'];?>" class="border-box" style="display: block;text-align: center;color: blue;width: 170px;background-color: #fff;border-radius: 4px">
@@ -88,7 +88,7 @@
             <br />
             Вы вошли на сайт,
             <br />
-            как <b><?php echo html($this->myrow->login);?></b>
+            как <b><?php echo html($myrow->login);?></b>
             <br />
             <a href="/quit">Выход</a>
             <br />

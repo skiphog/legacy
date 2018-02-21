@@ -10,7 +10,7 @@ if (!$events = cache()->get('party_events')) {
       and `status` = 1 
     order by begin_date asc';
 
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     $events = [];
 
@@ -24,11 +24,11 @@ if (!$events = cache()->get('party_events')) {
 }
 
 
-if (!empty($events) && $this->myrow->isUser()) {
+if (!empty($events) && $myrow->isUser()) {
 
     $u_events = [];
 
-    $u_city = mb_strtolower($this->myrow->city);
+    $u_city = mb_strtolower($myrow->city);
 
     foreach ($events as $key => &$value) {
         if (strcmp($u_city, mb_strtolower($value['city'])) === 0) {

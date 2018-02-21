@@ -6,7 +6,7 @@ require __PATH__ . '/ajax/system/ArrayTravel.php';
 
 // Получаем страны
 
-$country = $this->dbh->query('select id, title from travel_country order by sort, title')->fetchAll();
+$country = $dbh->query('select id, title from travel_country order by sort, title')->fetchAll();
 
 ?>
 <link rel="stylesheet" href="/js/jtime/jquery.datetimepicker.min.css">
@@ -66,7 +66,7 @@ $country = $this->dbh->query('select id, title from travel_country order by sort
     </div>
 
     <div class="travel-select">
-        <label><?= ArrayTravel::$case['search'][$this->myrow->gender]; ?></label>
+        <label><?= ArrayTravel::$case['search'][$myrow->gender]; ?></label>
         <div class="travel-sgender">
             <?php foreach (\Swing\Arrays\Genders::$sgender as $key => $value) :?>
                 <label><input type="checkbox" name="sgender[]" value="<?= $key; ?>" checked> <?= $value; ?></label><br>
@@ -97,7 +97,7 @@ $country = $this->dbh->query('select id, title from travel_country order by sort
 
     <div class="travel-select">
         <div class="travel-sgender">
-            <label><input type="checkbox" name="is_children" value="1"> <?= ArrayTravel::$case['child'][$this->myrow->gender]; ?> с детьми</label>
+            <label><input type="checkbox" name="is_children" value="1"> <?= ArrayTravel::$case['child'][$myrow->gender]; ?> с детьми</label>
         </div>
     </div>
 

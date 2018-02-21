@@ -14,8 +14,8 @@
 		<table border=0 width=100%>
 <tr>
 <?php
-$im_moderator = $this->myrow->isModerator() ? '': 'AND pa.pass = 0';
-$my_realstatus = $this->myrow->isReal() ? '': 'AND pa.albvisibility <> 3';
+$im_moderator = $myrow->isModerator() ? '': 'AND pa.pass = 0';
+$my_realstatus = $myrow->isReal() ? '': 'AND pa.albvisibility <> 3';
 
 $sql = "select u.login, u.gender, pa.aid, pa.count, pa.pass,
   (select 
@@ -31,7 +31,7 @@ JOIN users u on u.id = pa.us_id_album and u.status <> 2
 WHERE pa.count !=0 $im_moderator $my_realstatus 
 ORDER BY pa.aid DESC LIMIT 0,7";
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 while ($row = $sth->fetch()) { $tmp = explode(':', $row['album_thumbnail']); ?>
 <td valign=top align=center>
 <a href="/albums_<?=$row['aid'];?>_<?= $tmp[0]?>">

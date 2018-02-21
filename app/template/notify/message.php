@@ -41,8 +41,8 @@
 <div class="head-nav-message">
     <div class="nav-message">
         <ul class="nav-tabs links">
-            <li><a href="/newmydialog?getNewMessage">СООБЩЕНИЯ <span class="cnt count-mes"><?php echo $this->myrow->getCountMessage();?></span></a></li>
-            <li><a href="/newmydialog?getNewNotification">УВЕДОМЛЕНИЯ <span class="cnt count-nof"><?php echo $this->myrow->getCountNotify();?></span></a></li>
+            <li><a href="/newmydialog?getNewMessage">СООБЩЕНИЯ <span class="cnt count-mes"><?php echo $myrow->getCountMessage();?></span></a></li>
+            <li><a href="/newmydialog?getNewNotification">УВЕДОМЛЕНИЯ <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a></li>
             <li><a href="/newmydialog?getContacts">КОНТАКТЫ</a></li>
             <li><a href="/newmydialog?getHotuns">ХОТЮНЫ</a></li>
         </ul>

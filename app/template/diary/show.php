@@ -14,7 +14,7 @@ $sql = 'select d.title_di,d.text_di, d.data_di,d.likes,d.dislikes,d.v_count,
   where d.id_di = ' . $diary_id . ' 
 and d.deleted = 0 limit 1';
 
-$sth = $this->dbh->query($sql);
+$sth = $dbh->query($sql);
 
 if (!$sth->rowCount()) {
     throw new NotFoundException('Дневник не найден');
@@ -26,11 +26,11 @@ $sql = 'select u.id,u.login,u.fname,u.gender,u.city,u.pic1,u.photo_visibility,
   dc.comment_id,dc.comment_text, dc.comment_date,dc.likes,dcl.vote
   from diary_comments dc 
   join users u on u.id = dc.user_id 
-  left join diary_com_likes dcl on dcl.id_post = dc.comment_id and dcl.id_user = ' . ($this->myrow->id ?:0) . '
+  left join diary_com_likes dcl on dcl.id_post = dc.comment_id and dcl.id_user = ' . ($myrow->id ?:0) . '
   where dc.diary_id = ' . $diary_id . ' and dc.deleted = 0
 order by dc.comment_id desc limit 0,31';
 
-$comments = $this->dbh->query($sql)->fetchAll();
+$comments = $dbh->query($sql)->fetchAll();
 
 $com_status = 0;
 
@@ -43,24 +43,24 @@ $access = false;
 $vote = false;
 $parse_class = \Swing\Components\Parse\NoSession::class;
 
-if ($this->myrow->isUser()) {
-    $access = $this->myrow->isModerator() || $this->myrow->id === (int)$diary['id_user'];
+if ($myrow->isUser()) {
+    $access = $myrow->isModerator() || $myrow->id === (int)$diary['id_user'];
     $parse_class = \Swing\Components\Parse\All::class;
 
-    $sql = 'select vote from diary_likes where id_post = ' . $diary_id . ' and id_user = ' . $this->myrow->id;
+    $sql = 'select vote from diary_likes where id_post = ' . $diary_id . ' and id_user = ' . $myrow->id;
 
-    $sth = $this->dbh->query($sql);
+    $sth = $dbh->query($sql);
 
     if ($sth->rowCount()) {
         $vote = $sth->fetchColumn();
     }
 
-    if ($this->myrow->id !== (int)$diary['id_user']) {
-        $this->dbh->exec('update diary set v_count = v_count + 1 where id_di = ' . $diary_id);
+    if ($myrow->id !== (int)$diary['id_user']) {
+        $dbh->exec('update diary set v_count = v_count + 1 where id_di = ' . $diary_id);
     }
 }
 
-$hide_mobile = $this->myrow->isMobile() ? 'style="display:none;"': '';
+$hide_mobile = $myrow->isMobile() ? 'style="display:none;"': '';
 /** @var \Swing\Components\Parse\GParse $parse */
 $parse = new $parse_class();
 
@@ -215,7 +215,7 @@ $parse = new $parse_class();
 
     <div class="d-user-info">
         <div class="msg-avatar">
-            <img class="border-box" src="<?php echo avatar($this->myrow, $diary['pic1'],
+            <img class="border-box" src="<?php echo avatar($myrow, $diary['pic1'],
                 $diary['photo_visibility']); ?>" width="70" height="70" alt="avatar" draggable="false">
         </div>
         <div>
@@ -230,7 +230,7 @@ $parse = new $parse_class();
                 <a href="/udiary_<?= $diary['id_user']; ?>_page_1">Весь дневник <?= $diary['login']; ?></a>
                 <?php if ($access) { ?>
                     &bull; <a href="/reddiary_<?= $diary_id; ?>">Редактировать</a> &bull;
-                    <?php if ($this->myrow->isModerator()) { ?>
+                    <?php if ($myrow->isModerator()) { ?>
                         <a href="/hidediary_<?= $diary_id; ?>" onclick="return window.confirm('Вы уверены что хотите скрыть этот дневник?')">Скрыть</a> &bull;
                     <?php } ?>
                     <a class="del-comm" href="/deldiary_<?= $diary_id; ?>" onclick="return window.confirm('Вы уверены что хотите удалить этот дневник?')">Удалить</a>
@@ -254,7 +254,7 @@ $parse = new $parse_class();
     </div>
 
 
-    <?php if ($this->myrow->isUser() && !$this->myrow->isInActive()) { ?>
+    <?php if ($myrow->isUser() && !$myrow->isInActive()) { ?>
         <?php if (empty($_SESSION['mobile'])) { ?>
     <link rel="stylesheet" href="/js/wysibb/wbbtheme.css" type="text/css"/>
         <script src="/js/wysibb/jquery.wysibb.js"></script>
@@ -277,18 +277,18 @@ $parse = new $parse_class();
         if (!empty($comments)) {
             foreach ($comments as $value) { ?>
                 <div class="t-comment border-box">
-                    <?php if ($access || (int)$value['id'] === $this->myrow->id) { ?>
+                    <?php if ($access || (int)$value['id'] === $myrow->id) { ?>
                         <span class="del-comm" title="Удалить комментарий" data-value="<?php echo $value['comment_id']; ?>">Удалить</span>
                     <?php } ?>
                     <div class="t-avatar">
-                        <img class="border-box" src="<?php echo avatar($this->myrow, $value['pic1'],
+                        <img class="border-box" src="<?php echo avatar($myrow, $value['pic1'],
                             $value['photo_visibility']); ?>" alt="avatar" width="70" height="70">
                     </div>
                     <div class="t-user-info">
                         <a class="hover-tip" href="/id<?php echo $value['id']; ?>" target="_blank">
                             <img src="/img/info_small_<?= $value['gender']; ?>.png" width="15" height="14"> <?php echo $value['login']; ?>&nbsp;
                         </a>
-                        <?php if ($this->myrow->isUser()) { ?>
+                        <?php if ($myrow->isUser()) { ?>
                             <a href="#" onclick="return insertName('||<?= $value['login'] ?>||, ');"><img src="/img/ssss.jpg" width="20" height="19" alt="kat" title="Вставить ник"/></a>
                             &nbsp;
                             <a href="#" <?php echo $hide_mobile; ?> onclick="return insertQuote(this,'||<?= $value['login'] ?>||');"><img src="/img/quotes.jpg" width="22" height="19" alt="quote" title="Цитировать"/></a>
@@ -296,7 +296,7 @@ $parse = new $parse_class();
                         <br/>
                         <?php echo $value['fname']; ?>
                         <br/>
-                        <span class="city-<?php echo getCityCompare($this->myrow->city,
+                        <span class="city-<?php echo getCityCompare($myrow->city,
                             $value['city']); ?>"><?php echo $value['city']; ?></span>
                         <br/>
                         <span class="t-date">
@@ -305,8 +305,8 @@ $parse = new $parse_class();
 			        </span>
                     </div>
                     <span class="ww"><?php echo nl2br(nickart(smile($parse->parse($value['comment_text'])))); ?></span>
-                    <?php if ($this->myrow->isUser()) { ?>
-                        <?php if (empty($value['vote']) && $this->myrow->id !== (int)$value['id']) { ?>
+                    <?php if ($myrow->isUser()) { ?>
+                        <?php if (empty($value['vote']) && $myrow->id !== (int)$value['id']) { ?>
                             <div class="like-btn btn-group" style="margin-top: 5px;" data-comment="<?php echo $value['comment_id']; ?>">
                                 <button class="btn btn-success like-com" data-laction="+1" value="likes">+</button>
                                 <button class="btn green btn-default like-center" disabled data-like="<?= $value['likes'] ?>"><?= $value['likes'] ?></button>
@@ -368,7 +368,7 @@ $parse = new $parse_class();
   }
 
 
-  <?php if($this->myrow->isUser()) {?>
+  <?php if($myrow->isUser()) {?>
 
   resblock.on('click', '.del-comm', function () {
     var comm = $(this);
@@ -402,7 +402,7 @@ $parse = new $parse_class();
   });
 
 
-  <?php if(!$vote && $this->myrow->id !== (int)$diary['id_user']) {?>
+  <?php if(!$vote && $myrow->id !== (int)$diary['id_user']) {?>
 
   $('#likes').one('click', '.btn-likes', function () {
     var like = $(this);

@@ -1,30 +1,10 @@
 <style>
-    #boss {
-        position: fixed;
-        width: 70px;
-        height: 22px;
-        margin: 0;
-        padding: 2px;
-        top: 5px;
-        left: 20px;
-        cursor: pointer;
-        opacity: 0.5;
-        transition-property: opacity;
-        transition-duration: 0.2s;
-    }
-
-    #boss:hover {
-        opacity: 1 !important;
-    }
-
-    .hideBackGround {
-        background-image: none !important;
-    }
-
-    .hideImg {
-        visibility: hidden !important;
-    }
+    #boss {position: fixed;width: 70px;height: 22px;margin: 0;padding: 2px;top: 5px;left: 20px;cursor: pointer;opacity: 0.5;transition-property: opacity;transition-duration: 0.2s;}
+    #boss:hover {opacity: 1 !important;}
+    .hideBackGround {background-image: none !important;}
+    .hideImg {visibility: hidden !important;}
 </style>
+
 <button id="boss" title="Скрыть изображения">скрыть</button>
 
 <script>

@@ -7,7 +7,7 @@ $sql = 'select hot_text, login, regdate, photo_visibility, id, pic1, gender, cit
   and `status` <> 2 
 order by rand() limit 1';
 
-$user_hot = $this->dbh->query($sql)->fetch();
+$user_hot = $dbh->query($sql)->fetch();
 
 if (!empty($user_hot))  :?>
     <table width="235" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: 0;">
@@ -23,8 +23,8 @@ if (!empty($user_hot))  :?>
                     <tr>
                         <td height="100" align="center" valign="center">
 
-                            <a href="<?php echo $this->myrow->isUser() ? '/id' . $user_hot['id'] : '#showimagemsg' ?>">
-                                <div class="avatar" style="background-image: url(<?php echo avatar($this->myrow, $user_hot['pic1'],
+                            <a href="<?php echo $myrow->isUser() ? '/id' . $user_hot['id'] : '#showimagemsg' ?>">
+                                <div class="avatar" style="background-image: url(<?php echo avatar($myrow, $user_hot['pic1'],
                                     $user_hot['photo_visibility']); ?>)"></div>
                             </a>
                             <b>дана79</b>

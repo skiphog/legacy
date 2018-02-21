@@ -1,14 +1,22 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
+
+$dbh = db();
+$myrow = user();
+
 require __PATH__ . '/ajax/system/ArrayTravel.php';
-
 // Получаем страны
-
 $country = $dbh->query('select id, title from travel_country order by sort, title')->fetchAll();
-
 ?>
+
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Добавить объявление<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Добавить объявление<?php $this->stop(); ?>
+
+<?php $this->start('style'); ?>
 <link rel="stylesheet" href="/js/jtime/jquery.datetimepicker.min.css">
 <style>
     .loading{position:relative;cursor:default;text-shadow:none !important;color:transparent !important;opacity:1;pointer-events:auto;-webkit-transition:all 0s linear,opacity .1s ease;transition:all 0s linear,opacity .1s ease}
@@ -27,7 +35,9 @@ $country = $dbh->query('select id, title from travel_country order by sort, titl
     select+span{visibility:hidden;}
     select[disabled]+span{display:inline-block;vertical-align:bottom;visibility:visible !important;width:25px;height:25px;background:url("/img/loading.gif") no-repeat center;background-size:25px 25px;}
 </style>
+<?php $this->stop(); ?>
 
+<?php $this->start('content'); ?>
 <h1>Добавить объявление в путешествиях</h1>
 <form id="travel" action="" method="post">
     <div class="travel-select">
@@ -113,89 +123,89 @@ $country = $dbh->query('select id, title from travel_country order by sort, titl
         <input id="button" type="submit" class="btn btn-primary" value="Добавить">
     </div>
 </form>
+<?php $this->stop(); ?>
 
-
+<?php $this->start('script'); ?>
 <script src="/js/jtime/jquery.datetimepicker.full.min.js"></script>
 <script>
-    var city=$('#city_id'),sel=$('.sel'),but=$('#button'),st=true,tmpl_c='<option value="0" selected>Не выбрано</option>';
+  var city=$('#city_id'),sel=$('.sel'),but=$('#button'),st=true,tmpl_c='<option value="0" selected>Не выбрано</option>';
 
-    $('.date').datetimepicker({
-        dayOfWeekStart:1,
-        minDate:0,
-        format:'d.m.Y',
-        closeOnWithoutClick:false,
-        startDate:new Date(),
-        timepicker:false,
-        <?php if(!empty($_SESSION['is_mobile'])) {echo 'inline:true,';} ?>
-    });
-    $.datetimepicker.setLocale('ru');
+  $('.date').datetimepicker({
+    dayOfWeekStart:1,
+    minDate:0,
+    format:'d.m.Y',
+    closeOnWithoutClick:false,
+    startDate:new Date(),
+    timepicker:false,
+      <?php if($myrow->isMobile()) {echo 'inline:true,';} ?>
+  });
+  $.datetimepicker.setLocale('ru');
 
-    $('#country_id').on('change', function () {
-        var id = parseInt($(this).val()) || 0;
+  $('#country_id').on('change', function () {
+    var id = parseInt($(this).val()) || 0;
 
-        if(id === 0) {
-            return city.html(tmpl_c);
+    if(id === 0) {
+      return city.html(tmpl_c);
+    }
+
+    sel.attr('disabled','disabled');
+
+    $.getJSON('/ajax?cntr=Travel&action=getCity&id=' + id, function (j) {
+      if(j.length === 0) {
+        return city.html(tmpl_c);
+      }
+      var c = [];
+
+      for (var a in j) {
+        if(j.hasOwnProperty(a)) {
+          c.push('<option value="' + j[a].id + '">'+ j[a].title +'</option>')
         }
+      }
+      city.html(tmpl_c + c.join(' '));
+      sel.removeAttr('disabled');
+    });
+  });
 
-        sel.attr('disabled','disabled');
-
-        $.getJSON('/ajax?cntr=Travel&action=getCity&id=' + id, function (j) {
-            if(j.length === 0) {
-                return city.html(tmpl_c);
-            }
-            var c = [];
-
-            for (var a in j) {
-                if(j.hasOwnProperty(a)) {
-                    c.push('<option value="' + j[a].id + '">'+ j[a].title +'</option>')
-                }
-            }
-            city.html(tmpl_c + c.join(' '));
-            sel.removeAttr('disabled');
-        });
+  $('#travel').on('submit', function (e) {
+    e.preventDefault();
+    var data=$(this).serialize();
+    if(!st) {return;}
+    $.ajax({
+      url:'/ajax/',
+      type:'post',
+      data: data + '&cntr=Travels&action=addTravel',
+      dataType:'json',
+      beforeSend:function () {
+        st=false;
+        but.addClass('loading')
+      },
+      success: function (j) {
+        if(!j['status']) {
+          var t = [];
+          $.each(j['html'],function (k,v) {
+            t.push('<li>' +  v + '</li>');
+          });
+          $('#t-errors').html('<ul>'+ t.join(' ') +'</ul>');
+          but.removeClass('loading');
+          return;
+        }
+        window.location.replace('/travel');
+      },
+      error:function () {
+        alert("Forbidden 403");
+      },
+      complete:function () {
+        st=true;
+        but.removeClass('loading');
+      }
     });
 
-    $('#travel').on('submit', function (e) {
-        e.preventDefault();
-        var data=$(this).serialize();
-        if(!st) {return;}
-        $.ajax({
-            url:'/ajax/',
-            type:'post',
-            data: data + '&cntr=Travels&action=addTravel',
-            dataType:'json',
-            beforeSend:function () {
-                st=false;
-                but.addClass('loading')
-            },
-            success: function (j) {
-                if(!j['status']) {
-                    var t = [];
-                    $.each(j['html'],function (k,v) {
-                        t.push('<li>' +  v + '</li>');
-                    });
-                    $('#t-errors').html('<ul>'+ t.join(' ') +'</ul>');
-                    but.removeClass('loading');
-                    return;
-                }
-                window.location.replace('/travel');
-            },
-            error:function () {
-                alert("Forbidden 403");
-            },
-            complete:function () {
-                st=true;
-                but.removeClass('loading');
-            }
-        });
-
-        // вадидация
+    // вадидация
 
 
 
-    });
+  });
 
 
 </script>
-
-
+<?php $this->stop(); ?>

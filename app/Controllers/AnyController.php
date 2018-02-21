@@ -22,7 +22,7 @@ class AnyController extends Controller
             throw new ForbiddenException('Только для зарегистрированных пользователей');
         }
 
-        return $this->view('albums/new');
+        return view('albums/new');
     }
 
     /**
@@ -30,6 +30,6 @@ class AnyController extends Controller
      */
     public function getNewComments()
     {
-        return $this->view('comments/new');
+        return view('comments/new');
     }
 }

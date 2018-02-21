@@ -67,7 +67,7 @@ if (!empty($ondata)) {
         <?php
         /** @noinspection NotOptimalIfConditionsInspection */
         if ($myrow->isUser() && (int)$o_u['id'] !== $myrow->id) {
-            if (empty($_COOKIE['is_mobile'])) :?>
+            if (!$myrow->isMobile()) :?>
                 <a href="privat_<?= $o_u['id'] ?>" onclick="return openPrivate(this.href,<?= $o_u['id'] ?>);">
             <?php else: ?>
                 <a href="privat_<?= $o_u['id'] ?>">

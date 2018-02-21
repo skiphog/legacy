@@ -16,9 +16,9 @@ class TravelController extends Controller
     /**
      * @return mixed
      */
-    public function getIndex()
+    public function getAll()
     {
-        return view('travel/index');
+        return view('travel/all');
     }
 
     /**

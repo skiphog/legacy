@@ -1,3 +1,15 @@
+<?php
+/**
+* @var \Swing\System\View $this
+*/
+?>
+
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Новые комментарии<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Новые комментарии<?php $this->stop(); ?>
+
+<?php $this->start('style'); ?>
 <style>
     .head-nav-message{position:relative;}
     .nav-tabs,.msg-div,.msg-body,.msg-avatar>img{border-radius:4px;}
@@ -24,6 +36,9 @@
     span.u-bold{font-weight: bold;color: #747474;}
     .n-0{color: red !important}
 </style>
+<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <h2>Последние комментарии</h2>
 <div class="head-nav-message">
     <div class="nav-message">
@@ -37,7 +52,9 @@
     <div style="clear:both"></div>
 </div>
 <div id="response"></div>
+<?php $this->stop(); ?>
 
+<?php $this->start('script'); ?>
 <script>
   var resblock = $('#response'),loading = $('#load-mes'),links = $('ul.links');
   function getContent() {
@@ -140,3 +157,4 @@
   });
   getContent();
 </script>
+<?php $this->stop(); ?>

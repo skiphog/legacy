@@ -1,7 +1,10 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
+
+$dbh = db();
+$myrow = user();
 
 $tc = $myrow->isUser() ? $myrow->id : 'NULL';
 $dbh->exec('insert into travel_count (user_id) values ('. $tc .')');
@@ -110,11 +113,12 @@ if ($sth->rowCount()) {
     $travel['all_users'] = array_sum(array_column($travel['country'], 'cnt'));
 }?>
 
-<?php
-/**
- * @var $travel array
- */
-?>
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Путешествия<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Свинг знакомства в отпуске, путешествии<?php $this->stop(); ?>
+
+<?php $this->start('style'); ?>
 <style>
     .loading{position:relative;cursor:default;text-shadow:none !important;color:transparent !important;opacity:1;pointer-events:auto;-webkit-transition:all 0s linear,opacity .1s ease;transition:all 0s linear,opacity .1s ease}
     .loading:before{position:absolute;content:'';top:40%;left:50%;margin:-.64285714em 0 0 -.64285714em;width:1.28571429em;height:1.28571429em;border-radius:500rem;border:.2em solid rgba(0,0,0,.15)}
@@ -153,7 +157,9 @@ if ($sth->rowCount()) {
     .del-travel:hover{color:#D21B1B;}
     .more-info{display:block;width:150px;}
 </style>
+<?php $this->stop(); ?>
 
+<?php $this->start('content'); ?>
 <div class="travel">
     <h1>Cвинг в путешествии</h1>
 
@@ -229,8 +235,9 @@ if ($sth->rowCount()) {
 
     <div id="response"></div>
 </div>
+<?php $this->stop(); ?>
 
-
+<?php $this->start('script'); ?>
     <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script>
       var travel = <?= json_encode($travel, JSON_UNESCAPED_UNICODE); ?>;
@@ -458,6 +465,7 @@ if ($sth->rowCount()) {
         sts = !sts;
       }
     </script>
+<?php $this->stop(); ?>
 <?php endif; ?>
 
 

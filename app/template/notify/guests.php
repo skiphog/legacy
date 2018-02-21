@@ -47,6 +47,9 @@ $dbh->exec('update whoisloock set looking = 1 where wholoock_kogo = ' . $myrow->
 
 <?php $this->extend('layout/layout'); ?>
 
+<?php $this->start('title'); ?>Мои гости<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Мои гости<?php $this->stop(); ?>
+
 <?php $this->start('style'); ?>
 <style>
     .container .border-box{margin:10px 0;}

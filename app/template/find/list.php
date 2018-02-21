@@ -1,150 +1,153 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
+$dbh = db();
+$myrow = user();
 ?>
-<style>
-	.td-padding > td {
-		padding: 5px 0 ;
-	}
-    .f-img{
-        opacity: 0.8;
-    }
-    .f-img:hover{
-        opacity: 1;
-    }
-</style>
 
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Поиск<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Поиск анкет<?php $this->stop(); ?>
+
+<?php $this->start('style'); ?>
+<style>
+    .td-padding>td{padding:5px 0}
+    .f-img{opacity:.8}
+    .f-img:hover{opacity:1}
+</style>
+<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
 <table  rules="none" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: 0 solid black;" width="100%">
 <tr><td height="40" align="center" bgcolor="#cad9ff"><b>Виртуальная служба знакомств</b></td></tr>
 <tr>
 <td>
 <form method="get" action="findresult">
 <table width="100%">
-	<tr>
-		<td width="50%" valign="top">
-			<table border="0">
-				<tr class="td-padding">
-					<td width="80"><label for="gender">Пол</label></td>
-					<td>
-						<select id="gender" name="gender">
-						<?php foreach(\Swing\Arrays\Genders::$gender as $uagen => $uagens){?>
-							<option value="<?php echo $uagen; ?>"><?php echo $uagens; ?></option>
-						<?php }?>
-						</select>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td><label for="agef">Возраст</td>
-					<td>
-						<label for="agef">от</label>&nbsp;
-						<select id="agef" name="agef">
-							<option  value="18" selected="selected">18</option>
-							<?php for($i = 19;$i < 61;$i++) {?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-							<?php }?>
-						</select>
-						&nbsp;<label for="aget">до</label>&nbsp;
-						<select id="aget" name="aget">
-						<option  value="60" selected="selected">60</option>
-							<?php for($i = 18;$i < 60;$i++) {?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-							<?php }?>
-						</select>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td>Цель</td>
-					<td>
-						<select name="purposes">
-							<option value="0">Не выбрано</option>
-							<?php foreach(\Swing\Arrays\Purposes::$array as $uapu => $uapus) {?>
-								<option value="<?php echo $uapu; ?>"><?php echo $uapus; ?></option>
-							<?php } ?>
-						</select>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td>Страна</td>
-					<td>
-						<select name="country">
-                            <option value="0">Не важно</option>
-						<?php
-                        $country = $myrow->country;
-                        foreach(\Swing\Arrays\Country::$array as $c=>$cs) {?>
-							<option value="<?php echo $c; ?>" <?php ($country !== $c)?:print 'selected="selected"'; ?>><?php echo $cs; ?></option>
-						<?php }?>
-						</select>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td><label for="find_city">Город</label></td>
-					<td>
-						<input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" value="<?php echo html($myrow->city); ?>">
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td>Ник</td>
-					<td>
-						<input type="text" class="text" style="width: 97%;padding: 5px" name="find_nik" />
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+<tr>
+    <td width="50%" valign="top">
+        <table border="0">
+            <tr class="td-padding">
+                <td width="80"><label for="gender">Пол</label></td>
+                <td>
+                    <select id="gender" name="gender">
+                    <?php foreach(\Swing\Arrays\Genders::$gender as $uagen => $uagens){?>
+                        <option value="<?php echo $uagen; ?>"><?php echo $uagens; ?></option>
+                    <?php }?>
+                    </select>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td><label for="agef">Возраст</td>
+                <td>
+                    <label for="agef">от</label>&nbsp;
+                    <select id="agef" name="agef">
+                        <option  value="18" selected="selected">18</option>
+                        <?php for($i = 19;$i < 61;$i++) {?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                        <?php }?>
+                    </select>
+                    &nbsp;<label for="aget">до</label>&nbsp;
+                    <select id="aget" name="aget">
+                    <option  value="60" selected="selected">60</option>
+                        <?php for($i = 18;$i < 60;$i++) {?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                        <?php }?>
+                    </select>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td>Цель</td>
+                <td>
+                    <select name="purposes">
+                        <option value="0">Не выбрано</option>
+                        <?php foreach(\Swing\Arrays\Purposes::$array as $uapu => $uapus) {?>
+                            <option value="<?php echo $uapu; ?>"><?php echo $uapus; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td>Страна</td>
+                <td>
+                    <select name="country">
+                        <option value="0">Не важно</option>
+                    <?php
+                    $country = $myrow->country;
+                    foreach(\Swing\Arrays\Country::$array as $c=>$cs) {?>
+                        <option value="<?php echo $c; ?>" <?php ($country !== $c)?:print 'selected="selected"'; ?>><?php echo $cs; ?></option>
+                    <?php }?>
+                    </select>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td><label for="find_city">Город</label></td>
+                <td>
+                    <input id="find_city" type="text" class="text" style="width: 97%;padding: 5px" name="find_city" value="<?php echo html($myrow->city); ?>">
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td>Ник</td>
+                <td>
+                    <input type="text" class="text" style="width: 97%;padding: 5px" name="find_nik">
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
 
-				<tr class="td-padding">
-					<td colspan="2">
-						<label><input type="checkbox" name="find_alb" /> Только с фото</label>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td colspan="2">
-						<label><input type="checkbox" name="find_real" /> Только реальные</label>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
-					<td colspan="2">
-						<label><input type="checkbox" name="find_new" /> Сначала новые</label>
-					</td>
-				</tr>
-				<tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
-				<tr class="td-padding">
+            <tr class="td-padding">
+                <td colspan="2">
+                    <label><input type="checkbox" name="find_alb"> Только с фото</label>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td colspan="2">
+                    <label><input type="checkbox" name="find_real"> Только реальные</label>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
+                <td colspan="2">
+                    <label><input type="checkbox" name="find_new"> Сначала новые</label>
+                </td>
+            </tr>
+            <tr><td height="1" colspan="2" bgcolor="#336699"></td></tr>
+            <tr class="td-padding">
 					<td colspan="2">
 						<input class="btn btn-primary" type="submit" value="Искать">
 					</td>
 				</tr>
-			</table>
-		</td>
-<td width=50% valign=center align=center>
-
-<table border=0 width=100%>
-<tr>
-    <td align=center>
-        <a href="/hotmeet"><img class="f-img" src="/img/meet/01.jpg" width="190" height="112" alt="travel"></a>
+        </table>
     </td>
-    <td align=center>
-        <a href="/onlinemeet_1"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
+    <td width=50% valign=center align=center>
+        <table border=0 width=100%>
+            <tr>
+                <td align=center>
+                    <a href="/hotmeet"><img class="f-img" src="/img/meet/01.jpg" width="190" height="112" alt="travel"></a>
+                </td>
+                <td align=center>
+                    <a href="/onlinemeet_1"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
+                </td>
+            </tr>
+            <tr>
+                <td align=center>
+                    <?php if($myrow->isUser()) :?>
+                        <a href="/nowmeet_1"><img class="f-img" src="/img/meet/03.jpg" width="190" height="112" alt="travel"></a>
+                    <?php endif; ?>
+                </td>
+                <td align=center>
+                    <a href="/travel"><img class="f-img" src="/img/meet/04.jpg" width="190" height="112" alt="travel"></a>
+                </td>
+            </tr>
+        </table>
     </td>
-</tr>
-<tr>
-    <td align=center>
-        <?php if($myrow->isUser()) :?>
-            <a href="/nowmeet_1"><img class="f-img" src="/img/meet/03.jpg" width="190" height="112" alt="travel"></a>
-        <?php endif; ?>
-    </td>
-    <td align=center>
-        <a href="/travel"><img class="f-img" src="/img/meet/04.jpg" width="190" height="112" alt="travel"></a>
-    </td>
-</tr>
-</table>
-
-</td>
 </tr>
 </table>
 </form>
@@ -232,15 +235,16 @@ order by u.regdate desc limit 10';
 $users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
 
 if (!empty($users)) :?>
-    <tr>
-        <td colspan=6 align=center valign=center>
-            <?php foreach($users as $user) : ?>
-                <?php anketa_usr_row($myrow, $user); ?>
-            <?php endforeach; ?>
-        </td>
-    </tr>
+<tr>
+    <td colspan=6 align=center valign=center>
+    <?php foreach($users as $user) : ?>
+        <?php anketa_usr_row($myrow, $user); ?>
+    <?php endforeach; ?>
+    </td>
+</tr>
 <?php endif;?>
 </table>
 </td>
 </tr>
 </table>
+<?php $this->stop(); ?>

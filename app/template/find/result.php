@@ -1,10 +1,11 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
+$dbh = db();
+$myrow = user();
 
-
-$page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = (int)request()->get('page');
 
 $params = [];
 $line_link = [];
@@ -83,8 +84,16 @@ $sql = 'select count(' . $distinct . ' u.id) from users u ' . $join_count . ' wh
 
 $sth = $dbh->prepare($sql);
 $sth->execute($params);
+?>
 
-if ($count = $sth->fetchColumn()) {
+<?php $this->extend('layout/layout'); ?>
+
+<?php $this->start('title'); ?>Результат поиска<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Результат поиска анкет<?php $this->stop(); ?>
+
+<?php $this->start('content'); ?>
+
+<?php if ($count = $sth->fetchColumn()) {
     $pagination = new \Kilte\Pagination\Pagination($count, $page, 30);
 
     $sql = 'select ' . $distinct . ' u.id, u.birthday, u.pic1, u.photo_visibility,u.real_status,
@@ -112,6 +121,7 @@ if ($count = $sth->fetchColumn()) {
         </ul>
         <?php $paging_page = ob_get_clean();
     } ?>
+
     <table border="0" width="100%">
         <tr>
             <td height="1" colspan="2" bgcolor="#336699"></td>
@@ -155,5 +165,5 @@ if ($count = $sth->fetchColumn()) {
             <a href="/findlist">Назад к поиску</a>
         </h3>
     </div>
-    <?php
-}
+<?php }?>
+<?php $this->stop(); ?>

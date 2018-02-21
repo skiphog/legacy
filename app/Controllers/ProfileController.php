@@ -26,6 +26,6 @@ class ProfileController extends Controller
      */
     public function getIndex()
     {
-        return $this->view('profile/index');
+        return view('profile/index');
     }
 }

@@ -18,7 +18,7 @@ class TravelController extends Controller
      */
     public function getIndex()
     {
-        return $this->view('travel/index');
+        return view('travel/index');
     }
 
     /**
@@ -31,6 +31,6 @@ class TravelController extends Controller
             throw new ForbiddenException('Только для зарегистрированных пользователей');
         }
 
-        return $this->view('travel/create');
+        return view('travel/create');
     }
 }

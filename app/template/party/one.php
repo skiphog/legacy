@@ -1,9 +1,12 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \Swing\System\View $this
  */
 
-$id_event = $request->get('id');
+$dbh = db();
+$myrow = user();
+
+$id_event = request()->get('id');
 
 $sql = 'select a.city, a.title, a.`text`, a.img, a.`status`, a.timer, a.maper, 
       a.address, a.begin_date, a.end_date, a.club, a.coords, a.v_count, a.price, a.site, a.email, a.vkontakte, a.tel,
@@ -56,13 +59,18 @@ $moderation = [
     1 => 'Активен',
     2 => 'Отклонен',
     3 => 'На модерации'
-];
+];?>
 
-/// view
+<?php $this->extend('layout/layout'); ?>
 
-if(!empty($assets['style'])) {?>
+<?php $this->start('title'); ?>Вечеринка: <?= html($event['title']); ?><?php $this->stop(); ?>
+<?php $this->start('description'); ?><?= html($event['title']); ?><?php $this->stop(); ?>
+
+
+<?php $this->start('style'); ?>
+<?php if(!empty($assets['style'])) {?>
     <?php foreach ((array)$assets['style'] as $value) {?>
-    <link rel="stylesheet" href="<?= $value; ?>">
+        <link rel="stylesheet" href="<?= $value; ?>">
     <?php }?>
 <?php }?>
 <?php if(!empty($assets['script'])) {?>
@@ -107,11 +115,14 @@ if(!empty($assets['style'])) {?>
     .e-mod-3{background: #ffff00;color:#444}
     .e-mod-4{background: #CCC;}
 </style>
+<?php $this->stop(); ?>
 
+
+<?php $this->start('content'); ?>
 <div class="t-breadcrumbs">
     <!--suppress HtmlUnknownTarget -->
     <?php if($e_master) {?>
-    <a href="/my_events">Мои встречи</a> &bull;
+        <a href="/my_events">Мои встречи</a> &bull;
     <?php }?>
     <a href="/all_events">Все анонсы</a>
     &bull;
@@ -135,7 +146,7 @@ if(!empty($assets['style'])) {?>
         </div>
         <div class="e-table events">
             <?php if($_SERVER['REQUEST_TIME'] > $event['ts_e']) {?>
-            <span class="e-mod e-mod-4">Встреча завершена</span>
+                <span class="e-mod e-mod-4">Встреча завершена</span>
             <?php }?>
             <h1><?= html($event['title']); ?></h1>
             <div class="e-date">
@@ -161,11 +172,11 @@ if(!empty($assets['style'])) {?>
                 </div>
             </div>
             <div class="e-link">
-            <?php if(!empty($event['site'])) {?>
-                <!--noindex-->
-                <a href="<?= $event['site'][0]?>" class="e-los" target="_blank" rel="nofollow"><?= $event['site'][1] ? html($event['site'][1]) : $event['site'][0]?></a>
-                <!--/noindex-->
-            <?php }?>
+                <?php if(!empty($event['site'])) {?>
+                    <!--noindex-->
+                    <a href="<?= $event['site'][0]?>" class="e-los" target="_blank" rel="nofollow"><?= $event['site'][1] ? html($event['site'][1]) : $event['site'][0]?></a>
+                    <!--/noindex-->
+                <?php }?>
             </div>
         </div>
     </div>
@@ -183,28 +194,28 @@ if(!empty($assets['style'])) {?>
     <hr>
     <?php if(!empty($event['price'][0]) || !empty($event['price'][1]) || !empty($event['price'][2])) {?>
 
-    <table class="e-price">
-        <caption>Дополнительная информация</caption>
-        <?php if(!empty($event['price'][0])) {?>
-        <tr>
-            <td>Для пар МЖ:</td>
-            <td><?= html($event['price'][0]); ?></td>
-        </tr>
-        <?php }?>
-        <?php if(!empty($event['price'][1])) {?>
-        <tr>
-            <td>Для девушек:</td>
-            <td><?= html($event['price'][1]); ?></td>
-        </tr>
-        <?php }?>
-        <?php if(!empty($event['price'][2])) {?>
-        <tr>
-            <td>Для мужчин:</td>
-            <td><?= html($event['price'][2]); ?></td>
-        </tr>
-        <?php }?>
-    </table>
-    <hr>
+        <table class="e-price">
+            <caption>Дополнительная информация</caption>
+            <?php if(!empty($event['price'][0])) {?>
+                <tr>
+                    <td>Для пар МЖ:</td>
+                    <td><?= html($event['price'][0]); ?></td>
+                </tr>
+            <?php }?>
+            <?php if(!empty($event['price'][1])) {?>
+                <tr>
+                    <td>Для девушек:</td>
+                    <td><?= html($event['price'][1]); ?></td>
+                </tr>
+            <?php }?>
+            <?php if(!empty($event['price'][2])) {?>
+                <tr>
+                    <td>Для мужчин:</td>
+                    <td><?= html($event['price'][2]); ?></td>
+                </tr>
+            <?php }?>
+        </table>
+        <hr>
     <?php }?>
 
     <div class="contacts">
@@ -224,35 +235,35 @@ if(!empty($assets['style'])) {?>
             </div>
             <hr>
             <div>
-            <?php if(!empty($event['site'])) {?>
-                <div>
-                    <!--noindex-->
-                    Сайт: <a href="<?= $event['site'][0]?>" class="e-los" target="_blank" rel="nofollow"><?= $event['site'][1] ? html($event['site'][1]) : $event['site'][0]?></a>
-                    <!--/noindex-->
-                </div>
-            <?php }?>
-            <?php if(!empty($event['email'])) {?>
-                <div>
-                    <!--noindex-->
-                    Email: <a href="mailto:<?= $event['email'] ;?>" class="e-los" rel="nofollow"><?= $event['email'] ;?></a>
-                    <!--/noindex-->
-                </div>
-            <?php }?>
-            <?php if(!empty($event['tel'])) {?>
-                <div class="e-tel">
-                    <div>Телефоны:</div>
-                    <?php foreach ($event['tel'] as $value) {?>
-                    <div class="eg-div">
-                        <div class="e-table-min-tel e-tel-tab">
-                            <!--noindex-->
-                            <a href="tel:<?= str_replace(['-','(',')',' '], '', $value[0]); ?>" rel="nofollow"><?= $value[0]; ?></a>
-                            <!--/noindex-->
-                        </div>
-                        <div class="e-table-min-tel"><?php if(!empty($value[1])) {echo '- ', html($value[1]);}?></div>
+                <?php if(!empty($event['site'])) {?>
+                    <div>
+                        <!--noindex-->
+                        Сайт: <a href="<?= $event['site'][0]?>" class="e-los" target="_blank" rel="nofollow"><?= $event['site'][1] ? html($event['site'][1]) : $event['site'][0]?></a>
+                        <!--/noindex-->
                     </div>
-                    <?php }?>
-                </div>
-            <?php }?>
+                <?php }?>
+                <?php if(!empty($event['email'])) {?>
+                    <div>
+                        <!--noindex-->
+                        Email: <a href="mailto:<?= $event['email'] ;?>" class="e-los" rel="nofollow"><?= $event['email'] ;?></a>
+                        <!--/noindex-->
+                    </div>
+                <?php }?>
+                <?php if(!empty($event['tel'])) {?>
+                    <div class="e-tel">
+                        <div>Телефоны:</div>
+                        <?php foreach ($event['tel'] as $value) {?>
+                            <div class="eg-div">
+                                <div class="e-table-min-tel e-tel-tab">
+                                    <!--noindex-->
+                                    <a href="tel:<?= str_replace(['-','(',')',' '], '', $value[0]); ?>" rel="nofollow"><?= $value[0]; ?></a>
+                                    <!--/noindex-->
+                                </div>
+                                <div class="e-table-min-tel"><?php if(!empty($value[1])) {echo '- ', html($value[1]);}?></div>
+                            </div>
+                        <?php }?>
+                    </div>
+                <?php }?>
             </div>
         </div>
         <!--noindex-->
@@ -268,54 +279,56 @@ if(!empty($assets['style'])) {?>
         <hr>
     </div>
 </div>
+<?php $this->stop(); ?>
 
-
+<?php $this->start('script'); ?>
 <script>
-<?php if($event['timer'] && $_SERVER['REQUEST_TIME'] < $event['ts_b']) {?>
-(function () {
-    var t = $('#timer');
-    var d = t.data('time').split(/[- :]/);
-    t.countdown({
+    <?php if($event['timer'] && $_SERVER['REQUEST_TIME'] < $event['ts_b']) {?>
+    (function () {
+      var t = $('#timer');
+      var d = t.data('time').split(/[- :]/);
+      t.countdown({
         timestamp : new Date(d[0],d[1]-1,d[2],d[3],d[4])
-    }).parent().show();
-})();
-<?php }?>
+      }).parent().show();
+    })();
+    <?php }?>
 
-<?php if(!empty($event['vkontakte'])) {?>
+    <?php if(!empty($event['vkontakte'])) {?>
     VK.Widgets.Group("vksgf", {mode: 0, width: "220"}, <?= $event['vkontakte']; ?>);
-<?php }?>
-<?php if(!empty($event['maper']) && !empty($event['address']) && !empty($event['coords'])) {?>
+    <?php }?>
+    <?php if(!empty($event['maper']) && !empty($event['address']) && !empty($event['coords'])) {?>
     ymaps.ready(function () {
-        $('#map').parent().show();
-        var map = new ymaps.Map('map', {
-            center: [<?= implode(',', $event['coords']); ?>],
-            zoom: 15
+      $('#map').parent().show();
+      var map = new ymaps.Map('map', {
+        center: [<?= implode(',', $event['coords']); ?>],
+        zoom: 15
+      });
+
+      addPlacemark([<?= implode(',', $event['coords']); ?>],'<?= html($event['club']); ?>','<?= html($event['address']); ?>');
+
+      function addPlacemark(c,i,b) {
+        var cl = decodeHtml(i);
+        var p = new ymaps.Placemark(c, {
+          iconCaption: cl,
+          balloonContent: decodeHtml(b),
+          balloonContentHeader: cl
+        }, {
+          preset: 'islands#blueDotIconWithCaption'
         });
+        map.geoObjects.add(p);
+      }
 
-        addPlacemark([<?= implode(',', $event['coords']); ?>],'<?= html($event['club']); ?>','<?= html($event['address']); ?>');
-
-        function addPlacemark(c,i,b) {
-            var cl = decodeHtml(i);
-            var p = new ymaps.Placemark(c, {
-                iconCaption: cl,
-                balloonContent: decodeHtml(b),
-                balloonContentHeader: cl
-            }, {
-                preset: 'islands#blueDotIconWithCaption'
-            });
-            map.geoObjects.add(p);
-        }
-
-        function decodeHtml(t) {
-            return t
-                .replace(/&amp;/g, "&")
-                .replace(/&lt;/g, "<")
-                .replace(/&gt;/g, ">")
-                .replace(/&quot;/g, '"')
-                .replace(/&#039;/g, "'");
-        }
+      function decodeHtml(t) {
+        return t
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
+      }
     });
-<?php }?>
+    <?php }?>
 </script>
+<?php $this->stop(); ?>
 
 

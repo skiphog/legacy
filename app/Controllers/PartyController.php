@@ -16,7 +16,7 @@ class PartyController extends Controller
      */
     public function getAll()
     {
-        return $this->view('party/all');
+        return view('party/all');
     }
 
     /**
@@ -24,7 +24,7 @@ class PartyController extends Controller
      */
     public function getOne()
     {
-        return $this->view('party/one');
+        return view('party/one');
     }
 
     /**
@@ -32,7 +32,7 @@ class PartyController extends Controller
      */
     public function getCreate()
     {
-        return $this->view('party/create');
+        return view('party/create');
     }
 
     /**
@@ -40,7 +40,7 @@ class PartyController extends Controller
      */
     public function getEdit()
     {
-        return $this->view('party/edit');
+        return view('party/edit');
     }
 
     /**
@@ -48,6 +48,6 @@ class PartyController extends Controller
      */
     public function getMy()
     {
-        return $this->view('party/my');
+        return view('party/my');
     }
 }

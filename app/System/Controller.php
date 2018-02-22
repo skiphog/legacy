@@ -93,6 +93,16 @@ abstract class Controller
     }
 
     /**
+     * @throws ForbiddenException
+     */
+    protected function accessAuthUser(): void
+    {
+        if ($this->myrow->isGuest()) {
+            throw new ForbiddenException('Только для зарегистрированных пользователей');
+        }
+    }
+
+    /**
      * Выыводит результат
      *
      * @param $result

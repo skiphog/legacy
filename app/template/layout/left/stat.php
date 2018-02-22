@@ -54,28 +54,7 @@ if (!empty($ondata)) {
         }
     }
     $onusers = array_merge($susers, $spusers);
-
-    foreach ($onusers as $o_u) {
-        if ($dateB === substr($o_u['birthday'], 5)) :?>
-            <img src="/img/dr.gif" width="19" height="23" alt="birthday"/>
-        <?php endif; ?>
-        <?php if (strtotime($o_u['vip_time']) - $_SERVER['REQUEST_TIME'] >= 0) :?>
-            <img src="<?php echo \Swing\Arrays\VipSmiles::$array[$o_u['vipsmile']]; ?>">
-        <?php endif; ?>
-        <a href="/id<?= $o_u['id'] ?>" class="m-<?php echo $o_u['moderator']; ?> a-<?php echo $o_u['admin']; ?>"><?php echo $o_u['login']; ?></a>
-        <a class="hover-tip" href="/id<?= $o_u['id'] ?>"><img src="/img/info_small_<?php echo $o_u['gender']; ?>.png" width="13" height="12" alt="gender"/></a>
-        <?php
-        /** @noinspection NotOptimalIfConditionsInspection */
-        if ($myrow->isUser() && (int)$o_u['id'] !== $myrow->id) {
-            if (!$myrow->isMobile()) :?>
-                <a href="privat_<?= $o_u['id'] ?>" onclick="return openPrivate(this.href,<?= $o_u['id'] ?>);">
-            <?php else: ?>
-                <a href="privat_<?= $o_u['id'] ?>">
-            <?php endif; ?>
-            <img src="/img/privat.gif" width="15" height="15" alt="отправить сообщение"/></a>
-        <?php } ?>
-        <br>
-    <?php }
+    foreach ($onusers as $o_u) {if ($dateB === substr($o_u['birthday'], 5)) :?><img src="/img/dr.gif" width="19" height="23" alt="birthday"><?php endif; ?><?php if (strtotime($o_u['vip_time']) - $_SERVER['REQUEST_TIME'] >= 0) :?><img src="<?php echo \Swing\Arrays\VipSmiles::$array[$o_u['vipsmile']]; ?>"><?php endif; ?><a href="/id<?= $o_u['id'] ?>" class="m-<?php echo $o_u['moderator']; ?> a-<?php echo $o_u['admin']; ?>"><?php echo $o_u['login']; ?></a> <a class="hover-tip" href="/id<?= $o_u['id'] ?>"><img src="/img/info_small_<?php echo $o_u['gender']; ?>.png" width="13" height="12" alt="gender"></a><?php if ($myrow->isUser() && (int)$o_u['id'] !== $myrow->id) {if (!$myrow->isMobile()) :?><a href="privat_<?= $o_u['id'] ?>" onclick="return openPrivate(this.href,<?= $o_u['id'] ?>);"><?php else: ?><a href="privat_<?= $o_u['id'] ?>"><?php endif; ?><img src="/img/privat.gif" width="15" height="15" alt="отправить сообщение"></a><?php } ?><br><?php }
 } ?>
 </div>
 </td>

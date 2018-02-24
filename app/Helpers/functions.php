@@ -297,6 +297,23 @@ function subText($text, $sub, $end = '')
 }
 
 /**
+ * @param int $number
+ * @param string $words [анкета|анкеты|анкет]
+ *
+ * @return string
+ */
+function plural($number, $words)
+{
+    $tmp = explode('|', $words);
+
+    if (count($tmp) < 3) {
+        return '';
+    }
+
+    return $tmp[(($number % 10 === 1) && ($number % 100 !== 11)) ? 0 : ((($number % 10 >= 2) && ($number % 10 <= 4) && (($number % 100 < 10) || ($number % 100 >= 20))) ? 1 : 2)];
+}
+
+/**
  * @param string $text
  *
  * @return string

@@ -32,4 +32,12 @@ class AnyController extends Controller
     {
         return view('comments/new');
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAllBirthday()
+    {
+        return view('birthday/all');
+    }
 }

@@ -5,7 +5,7 @@ namespace Swing\System;
 /**
  * Class Request
  *
- * @package App\System
+ * @package Swing\System
  */
 class Request
 {

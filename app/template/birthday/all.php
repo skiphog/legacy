@@ -24,7 +24,7 @@ $users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::cl
 <?php $this->start('description'); ?>Именинники на сайте<?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
-<h1>Именинники на <?php echo date('d-m-Y'); ?> - <?php echo $count = count($users) ?> <?php echo plural($count,'анкета|анкеты|анкет'); ?></h1>
+<h1>Именинники сегодня (<?php echo date('d-m-Y'); ?>) - <?php echo $count = count($users) ?> <?php echo plural($count,'анкета|анкеты|анкет'); ?></h1>
 <?php if (!empty($users)) : ?>
     <?php foreach ($users as $user) : ?>
         <?php anketa_usr_row($myrow, $user); ?>

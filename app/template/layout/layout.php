@@ -114,7 +114,7 @@ endif; ?>
         <!-- center -->
         <td valign="top" align="left" style="padding: 10px;">
         <div id="content" style="min-width:800px;margin-left: -210px">
-        <!-- echo content -->
+        <!-- content -->
         <?php echo $this->renderBlock('content') ?>
         <!-- //content -->
         </div>

@@ -7,10 +7,8 @@ use Swing\Exceptions\NotFoundException;
 
 $dbh = db();
 $myrow = user();
-$request = request();
 
-$id_album = (int)$request->get('album_id');
-$id_photo = (int)$request->get('photo_id');
+[$id_album, $id_photo] = request()->getValuesInteger(['album_id', 'photo_id']);
 
 $sql = 'select a.aid,a.pass,a.albvisibility,a.description,a.title,
   p.aid,u.id,u.login,u.gender,u.pic1,u.fname,u.city,u.photo_visibility,u.vip_time
@@ -35,7 +33,7 @@ if (strtotime($albom['vip_time']) - $_SERVER['REQUEST_TIME'] >= 0) {
 
     $sth = $dbh->query($sql);
 
-    $albom['background'] = $sth->rowCount() ? 'url(\'' . $sth->fetchColumn() . '\')' : 'url(\'/img/vip.jpg\')';
+    $albom['background'] = $sth->rowCount() ? 'url(' . $sth->fetchColumn() . ')' : 'url(/img/vip.jpg)';
 }
 
 // Доступ к самому альбому
@@ -392,7 +390,7 @@ $access_album = [
       },
       addPhoto : function (data) {
         var width = data['img'][this.wise]['width'],height = data['img'][this.wise]['height'];
-        var str = '<a href="/albums_'+ data['data'][1] +'_'+ this.next +'" id="load-photo" style="width:'+ width +'px;height:'+ height +'px;background:#FFF url(\''+ data['img']['src'] +'\') center no-repeat;background-size: '+ width +'px '+ height +'px">' +
+        var str = '<a href="/albums_'+ data['data'][1] +'_'+ this.next +'" id="load-photo" style="width:'+ width +'px;height:'+ height +'px;background:#FFF url('+ data['img']['src'] +') center no-repeat;background-size: '+ width +'px '+ height +'px">' +
           '<img class="border-box"  src="/img/user-photo.gif" style="width:'+ (width - 1) +'px; height:'+ (height - 1) +'px;">' +
           '<div class="f-flip f-right '+ this.wise +'" data-action="setWidth"></div>' +
           '<div class="f-flip f-left heart-'+ data['heart'] +'" data-action="setHeart" data-set="'+!data['heart'] *1+'" data-pid="'+ data['data'][0] +'" title="Лайк"></div>' + data['caption'] +

@@ -6,13 +6,12 @@
 use Swing\System\Request;
 
 $uri = Request::uri();
-$uri = substr($uri, 0, strrpos($uri, '_'));
 
 $links = [
     'newugthreads'   => 'Лента активности',
     'ugrouplist'     => 'Все группы',
     'ugrouplist_new' => 'Новые группы',
-    'group_result'   => 'Региональные клубы'
+    'ugrouplist_clubs'   => 'Региональные клубы'
 ];
 
 ?>
@@ -70,7 +69,7 @@ $links = [
 
     <ul class="group-list">
         <?php foreach ($links as $key => $value) : ?>
-            <li <?php if($key === $uri) : ?>class="active"<?php endif; ?>><a href="/<?php echo $key . '_1'; ?>"><?php echo html($value); ?></a></li>
+            <li <?php if($key === $uri) : ?>class="active"<?php endif; ?>><a href="/<?php echo $key; ?>"><?php echo html($value); ?></a></li>
         <?php endforeach; ?>
     </ul>
 </div>

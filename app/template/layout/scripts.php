@@ -196,7 +196,7 @@
       });
     });
     /* --- smile */
-
+  /*console.log('%c       ', 'font-size: 100px; background: url(http://cdn.nyanit.com/nyan2.gif) no-repeat;');*/
     <?php endif; ?>
 </script>
 

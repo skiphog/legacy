@@ -210,8 +210,8 @@ $comments = $dbh->query($sql)->fetchAll();
         </td>
 
         <td valign="top" width="40%">
-            <h1>Региональные клубы <a href="/group_result_1">(Все)</a></h1>
-            Хотите найти свинг клуб в своем городе? Тогда Вам <a href="/group_result_1">сюда</a>!!!
+            <h1>Региональные клубы <a href="/ugrouplist_clubs">(Все)</a></h1>
+            Хотите найти свинг клуб в своем городе? Тогда Вам <a href="/ugrouplist_clubs">сюда</a>!!!
             <h2>Интересные группы</h2>
             <p>
                 <a href="/viewugroup_286">

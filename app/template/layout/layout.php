@@ -71,7 +71,7 @@ endif; ?>
                         <td><a href="/"><div id="topmain"></div></a></td>
                         <td><a href="/findlist"><div id="topmeet"></div></a></td>
                         <td><a href="/diary_1"><div id="topdiary"></div></a></td>
-                        <td><a href="/newugthreads_1"><div id="topforum"></div></a></td>
+                        <td><a href="/newugthreads"><div id="topforum"></div></a></td>
                     </tr>
                 </table>
             </div>

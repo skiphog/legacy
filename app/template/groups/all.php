@@ -16,7 +16,6 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
           left join (select ugroup_id, count(ugthread_id) as tcnt
             from ugthread where ugt_dlt = 0
           group by ugroup_id) b on g.ugroup_id = b.ugroup_id
-        
           left join (select ugroup_id, count(user_id) as ucnt
             from ugusers where ugu_permission = 1
           group by ugroup_id) d on g.ugroup_id = d.ugroup_id

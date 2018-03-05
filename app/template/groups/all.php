@@ -34,7 +34,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
     $paging_page = 'Одна страница';
     if (!empty($paging)) {
-        $paging_page = view('partials/paginate', ['paginate' => $paging, 'link' => '/ugrouplist?page=']);
+        $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/ugrouplist?page=']);
     }
 }
 ?>
@@ -47,7 +47,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 <?php $this->start('content-group'); ?>
 <?php if(!empty($groups)) : ?>
     <?php echo $paging_page; ?>
-    <?php echo view('partials/groups', compact('groups')) ?>
+    <?php echo render('partials/groups', compact('groups')) ?>
     <?php echo $paging_page; ?>
 <?php else : ?>
     Нет груп

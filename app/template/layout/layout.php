@@ -7,6 +7,9 @@ $dbh = db();
 $cache = cache();
 $myrow = auth();
 
+// Утсановить время посещения
+$myrow->setTimeStamp();
+
 $global = $dbh->query('select site_title, site_keywords, site_description, background from site where site_id = 1')->fetch();
 
 $site_title = $myrow->isGuest() ? $global['site_title'] : 'Добро пожаловать!';

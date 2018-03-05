@@ -62,9 +62,22 @@ function auth()
  * @param string $name
  * @param array  $params
  *
- * @return string
+ * @return \Swing\System\Response
  */
 function view($name, array $params = [])
+{
+    /** @noinspection PhpUnhandledExceptionInspection */
+    return (new \Swing\System\Response())->html($name, $params);
+}
+
+/** @noinspection PhpDocMissingThrowsInspection */
+/**
+ * @param string $name
+ * @param array  $params
+ *
+ * @return string
+ */
+function render($name, array $params = [])
 {
     /** @noinspection PhpUnhandledExceptionInspection */
     return (new \Swing\System\View())->render($name, $params);
@@ -297,7 +310,7 @@ function subText($text, $sub, $end = '')
 }
 
 /**
- * @param int $number
+ * @param int    $number
  * @param string $words [анкета|анкеты|анкет]
  *
  * @return string

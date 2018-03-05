@@ -14,28 +14,21 @@ abstract class Controller
     /**
      * @param string $action
      *
-     * @return mixed
      * @throws ForbiddenException
      */
-    public function action($action)
+    public function action($action): void
     {
-        $this->before();
-
-        if (false === $this->access()) {
+        if (!$this->access()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 
-        if (($result = $this->$action()) instanceof Response) {
-            return $result();
-        }
+        $this->before();
 
-        $this->after();
-
-        return $this->page($result);
+        echo $this->$action();
     }
 
     /**
-     * Middleware
+     * Access
      *
      * @return bool
      */
@@ -44,20 +37,9 @@ abstract class Controller
         return true;
     }
 
-    /**
-     * Инициализация
-     */
     protected function before(): void
     {
 
-    }
-
-    /**
-     * Post middleware
-     */
-    protected function after(): void
-    {
-        auth()->setTimeStamp();
     }
 
     /**
@@ -68,19 +50,5 @@ abstract class Controller
         if (auth()->isGuest()) {
             throw new ForbiddenException('Только для зарегистрированных пользователей');
         }
-    }
-
-    /**
-     * Выыводит результат
-     *
-     * @param $result
-     *
-     * @return mixed
-     */
-    protected function page($result)
-    {
-        echo $result;
-
-        return true;
     }
 }

@@ -33,7 +33,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
     $paging_page = 'Одна страница';
     if (!empty($paging)) {
-        $paging_page = view('partials/paginate', ['paginate' => $paging, 'link' => '/diary_']);
+        $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/diary_']);
     }
 }?>
 

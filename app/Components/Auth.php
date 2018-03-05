@@ -52,7 +52,7 @@ class Auth
         return new Myrow();
     }
 
-    public static function quit()
+    public static function quit(): void
     {
         unset($_SESSION['id'], $_SESSION['login'], $_SESSION['password']);
 

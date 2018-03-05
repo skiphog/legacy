@@ -42,6 +42,20 @@ class Response
     }
 
     /**
+     * @param  string $name
+     * @param array   $params
+     *
+     * @return Response
+     * @throws \Throwable
+     */
+    public function html($name, array $params = []): Response
+    {
+        $this->data = (new View())->render($name, $params);
+
+        return $this;
+    }
+
+    /**
      * Записывает данные в сессию
      *
      * @param $name
@@ -111,7 +125,7 @@ class Response
      * @param string $json
      * @param int    $code
      *
-     * @return $this
+     * @return Response
      */
     protected function setJson($json, $code): Response
     {
@@ -122,15 +136,11 @@ class Response
     }
 
     /**
-     * @return bool
+     * @return mixed
      */
-    public function __invoke()
+    public function __toString()
     {
-        if (null !== $this->data) {
-            echo $this->data;
-        }
-
-        return true;
+        return $this->data;
     }
 
     /**
@@ -142,10 +152,7 @@ class Response
     public static function Abort(int $code, $data = null): void
     {
         http_response_code($code);
-
-        if (null !== $data) {
-            echo $data;
-        }
+        echo $data;
 
         die;
     }

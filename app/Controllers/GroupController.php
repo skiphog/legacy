@@ -50,6 +50,8 @@ class GroupController extends Controller
      */
     public function getClubs()
     {
-        return view('groups/clubs');
+        return json(['привет :)'])
+            ->withHeaders(['X-Powered-By' => 'jopa']);
+        //return view('groups/clubs');
     }
 }

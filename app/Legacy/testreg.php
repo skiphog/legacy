@@ -3,8 +3,7 @@
  * @var \Swing\System\Controller $this
  */
 
-$login = trim(strip_tags($this->request->post('login')));
-$password = trim(strip_tags($this->request->post('password')));
+[$login, $password] = request()->postValuesString(['login', 'password']);
 
 if (empty($login) || empty($password)) {
     exit('Вы ввели не всю информацию, вернитесь назад и заполните все поля!<br><br><a href="/xmail"> проблемы с доступом? Напишите нам. Мы поможем.</a>');

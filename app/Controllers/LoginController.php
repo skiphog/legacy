@@ -35,11 +35,9 @@ class LoginController extends Controller
      */
     public function getQuit(): Response
     {
-        if (auth()->isGuest()) {
-            return redirect('/');
+        if (auth()->isUser()) {
+            Auth::quit();
         }
-
-        Auth::quit();
 
         return redirect('/');
     }

@@ -27,9 +27,7 @@ class TravelController extends Controller
      */
     public function getCreate()
     {
-        if ($this->myrow->isGuest()) {
-            throw new ForbiddenException('Только для зарегистрированных пользователей');
-        }
+        $this->accessAuthUser();
 
         return view('travel/create');
     }

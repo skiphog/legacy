@@ -33,9 +33,7 @@ class MeetController extends Controller
      */
     public function getNowMeet()
     {
-        if ($this->myrow->isGuest()) {
-            throw new ForbiddenException('Только для зарегистрированных пользователей');
-        }
+        $this->accessAuthUser();
 
         return view('meet/now');
     }
@@ -67,15 +65,17 @@ class MeetController extends Controller
      */
     public function postHotMeet(): Response
     {
-        if ($this->myrow->rate < 100) {
+        $myrow = auth();
+
+        if ($myrow->rate < 100) {
             abort(422, 'Недостаточно баллов');
         }
 
-        if (!$this->myrow->isActive()) {
+        if (!$myrow->isActive()) {
             abort(422, 'Ваша анкета не прошла модерацию. Вы не можете разместить объявление.');
         }
 
-        $message = clearString($this->request->post('message'));
+        $message = request()->postString('message');
 
         if (empty($message)) {
             return redirect('/hotmeet');
@@ -88,9 +88,9 @@ class MeetController extends Controller
 
         $sql = 'update users 
           set hot_text = :message, hot_time = :date, rate = rate - 100 
-        where id = ' . $this->myrow->id;
+        where id = ' . $myrow->id;
 
-        $this->dbh->prepare($sql)->execute($params);
+        db()->prepare($sql)->execute($params);
 
         return redirect('/hotmeet')->with('hot', 1);
     }

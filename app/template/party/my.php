@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $sql = 'select id, title, img, `status`,begin_date, end_date, club, v_count,city,address 
   from `events` 

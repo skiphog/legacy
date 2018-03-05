@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $hash = ((int)date('m') * 31) + (int)date('j');
 

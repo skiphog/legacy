@@ -29,7 +29,6 @@ class DiaryController extends Controller
 
     public function postOne()
     {
-        var_dump($this->request->post(), $this->request->get());
-        die;
+        
     }
 }

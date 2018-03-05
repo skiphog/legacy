@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $users = [];
 $page = (int)request()->get('page');

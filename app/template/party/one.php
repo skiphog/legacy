@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $id_event = request()->get('id');
 

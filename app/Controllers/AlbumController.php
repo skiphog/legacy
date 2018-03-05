@@ -18,7 +18,7 @@ class AlbumController extends Controller
      */
     protected function access(): bool
     {
-        return $this->myrow->isUser();
+        return auth()->isUser();
     }
 
     /**

@@ -6,7 +6,7 @@
 use Swing\Exceptions\NotFoundException;
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $article_id = (int)request()->get('id');
 

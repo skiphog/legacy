@@ -20,7 +20,7 @@ class LoginController extends Controller
      */
     public function postAuth()
     {
-        if ($this->myrow->isUser()) {
+        if (auth()->isUser()) {
             return redirect('/profile');
         }
 
@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function getQuit(): Response
     {
-        if ($this->myrow->isGuest()) {
+        if (auth()->isGuest()) {
             return redirect('/');
         }
 

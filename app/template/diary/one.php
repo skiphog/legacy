@@ -6,7 +6,7 @@
 use Swing\Exceptions\NotFoundException;
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $diary_id = abs((int)request()->get('id'));
 

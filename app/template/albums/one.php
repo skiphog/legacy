@@ -6,7 +6,7 @@
 use Swing\Exceptions\NotFoundException;
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 [$id_album, $id_photo] = request()->getValuesInteger(['album_id', 'photo_id']);
 

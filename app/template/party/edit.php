@@ -7,7 +7,7 @@ use Swing\Exceptions\NotFoundException;
 use Swing\Exceptions\ForbiddenException;
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $id_event = (int)request()->get('id');
 

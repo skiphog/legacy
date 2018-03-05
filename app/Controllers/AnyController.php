@@ -18,9 +18,7 @@ class AnyController extends Controller
      */
     public function getNewAlbums()
     {
-        if ($this->myrow->isGuest()) {
-            throw new ForbiddenException('Только для зарегистрированных пользователей');
-        }
+        $this->accessAuthUser();
 
         return view('albums/new');
     }

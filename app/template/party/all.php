@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 $cache = cache();
 
 if (!$events = $cache->get('party_events')) {

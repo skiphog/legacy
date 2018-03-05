@@ -7,7 +7,7 @@ use Swing\Components\SwingDate;
 use Swing\Components\Parse\All as AllParse;
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $parse = new AllParse();
 

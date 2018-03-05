@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $sort = (int)request()->get('sort');
 $join = '';

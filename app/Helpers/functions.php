@@ -21,7 +21,7 @@ function app($name)
  */
 function config($key)
 {
-    return app('config')->get($key);
+    return app(\Swing\System\Setting::class)->get($key);
 }
 
 /**
@@ -29,7 +29,7 @@ function config($key)
  */
 function request()
 {
-    return app('request');
+    return app(\Swing\System\Request::class);
 }
 
 /**
@@ -37,7 +37,7 @@ function request()
  */
 function db()
 {
-    return app('db')->dbh();
+    return app(\Swing\System\DB::class)->dbh();
 }
 
 /**
@@ -45,14 +45,14 @@ function db()
  */
 function cache()
 {
-    return app('cache');
+    return app(\Swing\System\Cache::class);
 }
 
 
 /**
  * @return \Swing\Models\Myrow
  */
-function user()
+function auth()
 {
     return \Swing\Components\Auth::user();
 }

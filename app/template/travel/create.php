@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 require __PATH__ . '/ajax/system/ArrayTravel.php';
 // Получаем страны

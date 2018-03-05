@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 $page = request()->getInteger('page');
 
 $sql = 'select count(*) from ugroup where ug_dlt = 0';

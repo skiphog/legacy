@@ -5,7 +5,7 @@
 
 $dbh = db();
 $cache = cache();
-$myrow = user();
+$myrow = auth();
 
 $global = $dbh->query('select site_title, site_keywords, site_description, background from site where site_id = 1')->fetch();
 

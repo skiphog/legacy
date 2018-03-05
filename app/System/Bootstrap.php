@@ -46,9 +46,6 @@ class Bootstrap
 
     protected function setRegistry(): void
     {
-        App::set('config', new Setting());
-        App::set('request', new Request());
-        App::set('db', new DB());
-        App::set('cache', new Cache());
+
     }
 }

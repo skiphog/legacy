@@ -3,7 +3,7 @@
  * @var \Swing\System\View  $this
  */
 
-$myrow = user();
+$myrow = auth();
 $dbh = db();
 $cache = cache();
 

@@ -2,8 +2,6 @@
 
 namespace Swing\System;
 
-
-use Swing\Models\Myrow;
 use Swing\Exceptions\ForbiddenException;
 
 /**
@@ -13,36 +11,6 @@ use Swing\Exceptions\ForbiddenException;
  */
 abstract class Controller
 {
-    /**
-     * @var Request $request
-     */
-    public $request;
-
-    /**
-     * @var \PDO
-     */
-    public $dbh;
-
-    /**
-     * @var Cache $cache
-     */
-    public $cache;
-
-    /**
-     * Myrow - так повелось на старом сайте
-     *
-     * @var Myrow $myrow
-     */
-    public $myrow;
-
-    public function __construct()
-    {
-        $this->request = request();
-        $this->dbh = db();
-        $this->cache = cache();
-        $this->myrow = user();
-    }
-
     /**
      * @param string $action
      *
@@ -89,7 +57,7 @@ abstract class Controller
      */
     protected function after(): void
     {
-        $this->myrow->setTimeStamp();
+        auth()->setTimeStamp();
     }
 
     /**
@@ -97,7 +65,7 @@ abstract class Controller
      */
     protected function accessAuthUser(): void
     {
-        if ($this->myrow->isGuest()) {
+        if (auth()->isGuest()) {
             throw new ForbiddenException('Только для зарегистрированных пользователей');
         }
     }

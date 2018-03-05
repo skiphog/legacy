@@ -6,7 +6,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility, u.real_status, u.visibility, u.hot_time, u.regdate, 
   u.vip_time, u.now_status, u.hot_text, u.vipsmile,u.admin, u.moderator, u.city, u.login, u.fname, u.gender, u.about, 

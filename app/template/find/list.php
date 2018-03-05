@@ -3,7 +3,7 @@
  * @var \Swing\System\View $this
  */
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 ?>
 
 <?php $this->extend('layout/layout'); ?>

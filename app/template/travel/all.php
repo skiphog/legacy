@@ -4,7 +4,7 @@
  */
 
 $dbh = db();
-$myrow = user();
+$myrow = auth();
 
 $tc = $myrow->isUser() ? $myrow->id : 'NULL';
 $dbh->exec('insert into travel_count (user_id) values ('. $tc .')');

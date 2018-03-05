@@ -2,6 +2,7 @@
 
 namespace Swing\Controllers;
 
+use Swing\Components\Auth;
 use Swing\System\Response;
 use Swing\System\Controller;
 
@@ -38,14 +39,7 @@ class LoginController extends Controller
             return redirect('/');
         }
 
-        unset($_SESSION['id'], $_SESSION['login'], $_SESSION['password']);
-
-        $time = time() - 3600;
-        $domain = config('domain');
-
-        foreach (['id', 'login', 'password'] as $value) {
-            setcookie($value, '', $time, '/', $domain);
-        }
+        Auth::quit();
 
         return redirect('/');
     }

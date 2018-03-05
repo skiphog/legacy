@@ -51,4 +51,16 @@ class Auth
 
         return new Myrow();
     }
+
+    public static function quit()
+    {
+        unset($_SESSION['id'], $_SESSION['login'], $_SESSION['password']);
+
+        $time = time() - 3600;
+        $domain = config('domain');
+
+        foreach (['id', 'login', 'password'] as $value) {
+            setcookie($value, '', $time, '/', $domain);
+        }
+    }
 }

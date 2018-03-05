@@ -62,7 +62,7 @@ function user()
  * @param string $name
  * @param array  $params
  *
- * @return mixed
+ * @return string
  */
 function view($name, array $params = [])
 {

@@ -10,6 +10,13 @@ namespace Swing\System;
 class App
 {
     /**
+     * Определения
+     *
+     * @var array $definitions
+     */
+    protected static $definitions = [];
+
+    /**
      * Хранилище
      *
      * @var array $registry
@@ -17,7 +24,7 @@ class App
     protected static $registry = [];
 
     /**
-     * Получить экземпляр зарегистрированного класса для использования как Singleton
+     * Получить объект из контейнера
      *
      * @param string $name
      *
@@ -29,7 +36,17 @@ class App
             return self::$registry[$name];
         }
 
-        throw new \InvalidArgumentException('Not exists <b>' . $name . '</b> in App container');
+        if (array_key_exists($name, self::$definitions)) {
+            $item = self::$definitions[$name];
+
+            return self::$registry[$name] = $item instanceof \Closure ? $item() : $item;
+        }
+
+        if (class_exists($name)) {
+            return self::$registry[$name] = new $name();
+        }
+
+        throw new \InvalidArgumentException('Не известный сервис [ ' . $name . ' ]');
     }
 
     /**
@@ -38,6 +55,10 @@ class App
      */
     public static function set($name, $value): void
     {
-        self::$registry[$name] = $value;
+        if (array_key_exists($name, self::$registry)) {
+            unset(self::$registry[$name]);
+        }
+
+        self::$definitions[$name] = $value;
     }
 }

@@ -80,6 +80,22 @@ class Response
     }
 
     /**
+     * @param array $header
+     * @param int   $code
+     * @param bool  $replace
+     *
+     * @return Response
+     */
+    public function withHeaders(array $header, $code = 200, $replace = true): Response
+    {
+        foreach ($header as $key => $value) {
+            $this->setHeader($key . ': ' . $value, $code, $replace);
+        }
+
+        return $this;
+    }
+
+    /**
      * Устанавливает заголовок
      *
      * @param string $header

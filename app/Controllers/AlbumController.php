@@ -12,7 +12,7 @@ use Swing\System\Controller;
 class AlbumController extends Controller
 {
     /**
-     * Middleware
+     * Access
      *
      * @return bool
      */

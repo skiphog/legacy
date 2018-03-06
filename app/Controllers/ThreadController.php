@@ -5,11 +5,11 @@ namespace Swing\Controllers;
 use Swing\System\Controller;
 
 /**
- * Class NotificationController
+ * Class ThreadController
  *
  * @package Swing\Controllers
  */
-class NotificationController extends Controller
+class ThreadController extends Controller
 {
     /**
      * Access
@@ -20,20 +20,11 @@ class NotificationController extends Controller
     {
         return auth()->isUser();
     }
-
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getOne()
     {
-        return view('notify/message');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGuests()
-    {
-        return view('notify/guests');
+        return view('threads/one');
     }
 }

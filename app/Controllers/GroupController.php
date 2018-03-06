@@ -12,7 +12,7 @@ use Swing\System\Controller;
 class GroupController extends Controller
 {
     /**
-     * Middleware
+     * Access
      *
      * @return bool
      */

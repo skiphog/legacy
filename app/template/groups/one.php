@@ -8,7 +8,7 @@ use Swing\Exceptions\NotFoundException;
 $dbh = db();
 $myrow = auth();
 
-$g_id = request()->getInteger('id');
+[$g_id, $page] = request()->getValuesInteger(['id','page']);
 
 $sql = 'select g.ug_title g_title,g.ug_descr g_content, g.ug_avatar g_avatar,g.ug_club g_club,g.ug_hidden g_hidden,
   u.id g_master_id,u.login g_master_login,u.gender g_master_gender,a.ugu_permission g_access,
@@ -46,31 +46,40 @@ if ($g_access['master']) {
 }
 
 if ($g_access['access'] || $myrow->isModerator()) {
-    $sql = 'select
-      a.ugthread_id t_id,a.ugt_title t_title,a.ug_comments_count t_cnt,a.ugt_date t_date,a.polls_exist t_poll,a.v_count t_v_cnt,a.party t_party,a.sticky t_sticky,
-      c.id t_master_id,
-      d.ugc_date c_date,
-      e.id c_master_id, e.login c_master_login,e.gender c_master_gender,
-      if(d.ugcomments_id is null, a.ugt_date, d.ugc_date) sort_date
-    from
-      ugthread a
-      join users c on a.user_id = c.id
-      left join (
-          select
-            c1.ugthread_id,
-            MAX( c1.ugcomments_id) max_id
-          from
-            ugcomments c1
-            join ugthread t1 on t1.ugthread_id = c1.ugthread_id and t1.ugroup_id = ' . $g_id . '
-          where c1.ugc_dlt = 0
-          group by  t1.ugthread_id) b on  a.ugthread_id = b.ugthread_id
-      left join ugcomments d on  a.ugthread_id = d.ugthread_id and d.ugcomments_id = b.max_id
-      left join users e on d.user_id = e.id   
-    where
-      a.ugroup_id = ' . $g_id . ' and a.ugt_dlt = 0
-    order by a.sticky desc ,sort_date desc';
 
-    $threads = $dbh->query($sql)->fetchAll();
+    $sql = 'select count(*) from ugthread where ugroup_id = ' . $g_id . ' and ugt_dlt = 0';
+    if ($count = $dbh->query($sql)->fetchColumn()) {
+        $pagination = new Kilte\Pagination\Pagination($count, $page, 20, 2);
+
+        $sql = 'select
+          a.ugthread_id t_id,a.ugt_title t_title,a.ug_comments_count t_cnt,a.ugt_date t_date,a.polls_exist t_poll,
+          a.v_count t_v_cnt,a.party t_party,a.sticky t_sticky,
+          c.id t_master_id, d.ugc_date c_date, e.id c_master_id, e.login c_master_login,e.gender c_master_gender,
+          if(d.ugcomments_id is null, a.ugt_date, d.ugc_date) sort_date
+        from ugthread a
+          join users c on a.user_id = c.id
+          left join (
+            select c1.ugthread_id, MAX( c1.ugcomments_id) max_id
+            from ugcomments c1
+              join ugthread t1 on t1.ugthread_id = c1.ugthread_id and t1.ugroup_id = ' . $g_id . '
+            where c1.ugc_dlt = 0
+            group by  t1.ugthread_id) b on  a.ugthread_id = b.ugthread_id
+          left join ugcomments d on  a.ugthread_id = d.ugthread_id and d.ugcomments_id = b.max_id
+          left join users e on d.user_id = e.id   
+          where a.ugroup_id = ' . $g_id . ' and a.ugt_dlt = 0
+        order by a.sticky desc , sort_date desc limit ' .$pagination->offset() . ', 20';
+
+        $threads = $dbh->query($sql)->fetchAll();
+        $paging = $pagination->build();
+
+        $paging_page = '';
+        if (!empty($paging)) {
+            $paging_page = render('partials/paginate', [
+                'paginate' => $paging,
+                'link' => '/viewugroup_' . $g_id . '?page='
+            ]);
+        }
+    }
 }
 ?>
 
@@ -113,7 +122,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
 <?php $this->start('content'); ?>
 <div class="g-sheme">
     <div class="g-breadcrumbs">
-        <a href="/ugrouplist_1" title="все группы">Все группы</a> &bull; <a href="/myugroups_1">Мои группы</a>
+        <a href="/ugrouplist" title="все группы">Все группы</a> &bull; <a href="/myugroups">Мои группы</a>
     </div>
 
     <div class="g-group">
@@ -189,6 +198,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
                                     </div>
                                 <?php }?>
                             </div>
+                            <?php echo $paging_page; ?>
                         <?php }else{?>
                             <p>В группе нет тем</p>
                         <?php }?>

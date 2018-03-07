@@ -20,11 +20,17 @@ class ThreadController extends Controller
     {
         return auth()->isUser();
     }
+
+    protected function before(): void
+    {
+
+    }
+
     /**
      * @return mixed
      */
-    public function getOne()
+    public function show()
     {
-        return view('threads/one');
+        return view('threads/show');
     }
 }

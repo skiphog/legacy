@@ -12,8 +12,11 @@ use System\Controller;
 class ChatController extends Controller
 {
 
-    public function getIndex()
+    /**
+     * @return \System\Response
+     */
+    public function index(): \System\Response
     {
-
+        return json(['akuna' => 'matata']);
     }
 }

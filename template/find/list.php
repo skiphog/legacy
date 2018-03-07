@@ -133,13 +133,13 @@ $myrow = auth();
                     <a href="/hotmeet"><img class="f-img" src="/img/meet/01.jpg" width="190" height="112" alt="travel"></a>
                 </td>
                 <td align=center>
-                    <a href="/onlinemeet_1"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
+                    <a href="/onlinemeet"><img class="f-img" src="/img/meet/02.jpg" width="190" height="112" alt="travel"></a>
                 </td>
             </tr>
             <tr>
                 <td align=center>
                     <?php if($myrow->isUser()) :?>
-                        <a href="/nowmeet_1"><img class="f-img" src="/img/meet/03.jpg" width="190" height="112" alt="travel"></a>
+                        <a href="/nowmeet"><img class="f-img" src="/img/meet/03.jpg" width="190" height="112" alt="travel"></a>
                     <?php endif; ?>
                 </td>
                 <td align=center>

@@ -164,7 +164,7 @@ if ($sth->rowCount()) {
     <h1>Cвинг в путешествии</h1>
 
     <?php if(empty($travel)) :?>
-        <a href="/add_travel" class="btn btn-success" rel="nofollow">Добавить объявление</a>
+        <a href="/travel/create" class="btn btn-success" rel="nofollow">Добавить объявление</a>
     <?php else :?>
 
     <?php if(!empty($_SESSION['travel'])) :?>
@@ -229,7 +229,7 @@ if ($sth->rowCount()) {
 
     <div class="clearfix">
         <div class="add-travel">
-            <a href="/add_travel" class="btn btn-success" rel="nofollow">Добавить объявление</a>
+            <a href="/travel/create" class="btn btn-success" rel="nofollow">Добавить объявление</a>
         </div>
     </div>
 
@@ -339,7 +339,7 @@ if ($sth->rowCount()) {
         function selectData(action, data, callback) {
           if(!sts){return;}
           $.ajax({
-            url: '/ajax?cntr=Travel&action=' + action,
+            url: '/ajax/?cntr=Travel&action=' + action,
             data : data,
             beforeSend: function () {
               changeSend();

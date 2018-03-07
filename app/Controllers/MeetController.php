@@ -19,7 +19,7 @@ class MeetController extends Controller
      *
      * @return mixed
      */
-    public function getHotMeet()
+    public function hot()
     {
         return view('meet/hot');
     }
@@ -31,7 +31,7 @@ class MeetController extends Controller
      *
      * @throws ForbiddenException
      */
-    public function getNowMeet()
+    public function now()
     {
         $this->accessAuthUser();
 
@@ -43,7 +43,7 @@ class MeetController extends Controller
      *
      * @return mixed
      */
-    public function getOnlineMeet()
+    public function online()
     {
         return view('meet/online');
     }
@@ -53,7 +53,7 @@ class MeetController extends Controller
      *
      * @return mixed
      */
-    public function getNewMeet()
+    public function new()
     {
         return view('meet/new');
     }
@@ -63,7 +63,7 @@ class MeetController extends Controller
      *
      * @return Response
      */
-    public function postHotMeet(): Response
+    public function hotStore(): Response
     {
         $myrow = auth();
 
@@ -92,6 +92,6 @@ class MeetController extends Controller
 
         db()->prepare($sql)->execute($params);
 
-        return redirect('/hotmeet')->with('hot', 1);
+        return redirect('/hotmeet')->withSession('hot', 1);
     }
 }

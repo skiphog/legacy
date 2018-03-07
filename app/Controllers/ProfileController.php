@@ -24,7 +24,7 @@ class ProfileController extends Controller
     /**
      * @return mixed
      */
-    public function getIndex()
+    public function index()
     {
         return view('profile/index');
     }

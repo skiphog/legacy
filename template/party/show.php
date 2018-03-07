@@ -6,7 +6,7 @@
 $dbh = db();
 $myrow = auth();
 
-$id_event = request()->get('id');
+$id_event = request()->getInteger('id');
 
 $sql = 'select a.city, a.title, a.`text`, a.img, a.`status`, a.timer, a.maper, 
       a.address, a.begin_date, a.end_date, a.club, a.coords, a.v_count, a.price, a.site, a.email, a.vkontakte, a.tel,
@@ -73,12 +73,6 @@ $moderation = [
         <link rel="stylesheet" href="<?= $value; ?>">
     <?php }?>
 <?php }?>
-<?php if(!empty($assets['script'])) {?>
-    <?php foreach ((array)$assets['script'] as $value) {?>
-        <script src="<?= $value; ?>"></script>
-    <?php }?>
-<?php }?>
-
 <style>
     #event{margin:10px}
     #event hr{border-style:groove;margin:20px 0}
@@ -137,7 +131,7 @@ $moderation = [
             <span class="e-mod e-mod-4">Неактивен</span>
         <?php }?>
         &mdash;
-        <a href="/edit_event_<?= $id_event ;?>">Редактировать</a>
+        <a href="/event/<?= $id_event ;?>/edit">Редактировать</a>
         <br>
     <?php }?>
     <div class="e-head">
@@ -282,6 +276,13 @@ $moderation = [
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
+
+<?php if(!empty($assets['script'])) {?>
+    <?php foreach ((array)$assets['script'] as $value) {?>
+        <script src="<?= $value; ?>"></script>
+    <?php }?>
+<?php }?>
+
 <script>
     <?php if($event['timer'] && $_SERVER['REQUEST_TIME'] < $event['ts_b']) {?>
     (function () {

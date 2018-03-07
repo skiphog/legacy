@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use System\Controller;
-use App\Exceptions\ForbiddenException;
 
 /**
  * Class AnyController
@@ -14,28 +13,17 @@ class AnyController extends Controller
 {
     /**
      * @return mixed
-     * @throws ForbiddenException
      */
-    public function getNewAlbums()
+    public function comments()
     {
-        $this->accessAuthUser();
-
-        return view('albums/new');
+        return view('comments/index');
     }
 
     /**
      * @return mixed
      */
-    public function getNewComments()
+    public function birthday()
     {
-        return view('comments/new');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAllBirthday()
-    {
-        return view('birthday/all');
+        return view('birthday/index');
     }
 }

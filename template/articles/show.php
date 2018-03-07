@@ -8,7 +8,7 @@ use App\Exceptions\NotFoundException;
 $dbh = db();
 $myrow = auth();
 
-$article_id = (int)request()->get('id');
+$article_id = request()->getInteger('id');
 
 $sql = 'select s.sid, s.topic, s.meta_title, s.description, s.title, s.hometext, s.bodytext, s.`time`, sc.topicname
 from stories s

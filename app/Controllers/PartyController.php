@@ -15,24 +15,24 @@ class PartyController extends Controller
     /**
      * @return mixed
      */
-    public function getAll()
+    public function index()
     {
-        return view('party/all');
+        return view('party/index');
     }
 
     /**
      * @return mixed
      */
-    public function getOne()
+    public function show()
     {
-        return view('party/one');
+        return view('party/show');
     }
 
     /**
      * @return mixed
      * @throws ForbiddenException
      */
-    public function getCreate()
+    public function create()
     {
         $this->accessAuthUser();
 
@@ -43,7 +43,7 @@ class PartyController extends Controller
      * @return mixed
      * @throws ForbiddenException
      */
-    public function getEdit()
+    public function edit()
     {
         $this->accessAuthUser();
 
@@ -54,7 +54,7 @@ class PartyController extends Controller
      * @return mixed
      * @throws ForbiddenException
      */
-    public function getMy()
+    public function my()
     {
         $this->accessAuthUser();
 

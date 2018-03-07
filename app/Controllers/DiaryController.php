@@ -14,21 +14,16 @@ class DiaryController extends Controller
     /**
      * @return mixed
      */
-    public function getAll()
+    public function index()
     {
-        return view('diary/all');
+        return view('diary/index');
     }
 
     /**
      * @return mixed
      */
-    public function getOne()
+    public function show()
     {
-        return view('diary/one');
-    }
-
-    public function postOne()
-    {
-        
+        return view('diary/show');
     }
 }

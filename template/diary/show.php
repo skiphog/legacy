@@ -108,7 +108,7 @@ $parse = new $parse_class();
 <?php $this->start('content') ?>
 <div id="mass-content">
     <div class="d-breadcrumbs">
-        <a href="/diary_1">Все дневники</a> &bull;
+        <a href="/diary">Все дневники</a> &bull;
         <a href="/udiary_<?= $diary['id_user']; ?>_page_1">дневник <?= $diary['login']; ?></a>
     </div>
 

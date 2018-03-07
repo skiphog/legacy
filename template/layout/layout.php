@@ -73,7 +73,7 @@ endif; ?>
                     <tr>
                         <td><a href="/"><div id="topmain"></div></a></td>
                         <td><a href="/findlist"><div id="topmeet"></div></a></td>
-                        <td><a href="/diary_1"><div id="topdiary"></div></a></td>
+                        <td><a href="/diary"><div id="topdiary"></div></a></td>
                         <td><a href="/newugthreads"><div id="topforum"></div></a></td>
                     </tr>
                 </table>
@@ -126,7 +126,7 @@ endif; ?>
 
 
         <!-- right -->
-        <td valign="top" width="38" align="left" style="background: url('img/right.jpg') repeat-y;"></td>
+        <td valign="top" width="38" align="left" style="background: url('/img/right.jpg') repeat-y;"></td>
         <!-- //right -->
     </tr>
     <!-- //content -->

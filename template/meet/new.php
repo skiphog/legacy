@@ -6,7 +6,7 @@
 $dbh = db();
 $myrow = auth();
 
-$sort = (int)request()->get('sort');
+$sort = request()->getInteger('sort');
 $join = '';
 
 if ($sort !== 1 && $myrow->isUser()) {
@@ -53,13 +53,12 @@ $users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::clas
     </tr>
     <tr>
         <td align=left>
-            <h1>Новые анкеты
-                | <a href=newmeet_1>Все</a>
+            <h1><a href="/newmeet">Новые анкеты</a>
                 <?php if ($myrow->isUser()) : ?>
-                    | <a href="/newmeet_2">Все г. <?php echo html($myrow->city); ?></a>
-                    | <a href="/newmeet_3">Пары г. <?php echo html($myrow->city); ?></a>
-                    | <a href="/newmeet_4">М. г. <?php echo html($myrow->city); ?></a>
-                    | <a href="/newmeet_5">Ж. г. <?php echo html($myrow->city); ?></a>
+                    | <a href="/newmeet?sort=2">Все г. <?php echo html($myrow->city); ?></a>
+                    | <a href="/newmeet?sort=3">Пары г. <?php echo html($myrow->city); ?></a>
+                    | <a href="/newmeet?sort=4">М. г. <?php echo html($myrow->city); ?></a>
+                    | <a href="/newmeet?sort=5">Ж. г. <?php echo html($myrow->city); ?></a>
                 <?php endif; ?>
             </h1>
         </td>

@@ -16,7 +16,7 @@ class TravelController extends Controller
     /**
      * @return mixed
      */
-    public function getAll()
+    public function index()
     {
         return view('travel/all');
     }
@@ -25,7 +25,7 @@ class TravelController extends Controller
      * @return mixed
      * @throws ForbiddenException
      */
-    public function getCreate()
+    public function create()
     {
         $this->accessAuthUser();
 

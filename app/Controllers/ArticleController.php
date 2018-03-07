@@ -14,16 +14,16 @@ class ArticleController extends Controller
     /**
      * @return mixed
      */
-    public function getAll()
+    public function index()
     {
-        return view('articles/all');
+        return view('articles/index');
     }
 
     /**
      * @return mixed
      */
-    public function getOne()
+    public function show()
     {
-        return view('articles/one');
+        return view('articles/show');
     }
 }

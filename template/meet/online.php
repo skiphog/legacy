@@ -38,14 +38,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
     $paging_page = 'Одна страница';
     if (!empty($paging)) {
-        ob_start(); ?>
-        <ul class="pagination">
-            <?php foreach ($paging as $link => $name) { ?>
-                <li class="<?php echo $name; ?>"><a href="/onlinemeet_<?php echo $link; ?>"><?php echo $link; ?></a>
-                </li>
-            <?php } ?>
-        </ul>
-        <?php $paging_page = ob_get_clean();
+        $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/online']);
     }} ?>
 
 <?php $this->extend('layout/layout'); ?>

@@ -24,7 +24,7 @@ class NotificationController extends Controller
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function messages()
     {
         return view('notify/message');
     }
@@ -32,7 +32,7 @@ class NotificationController extends Controller
     /**
      * @return mixed
      */
-    public function getGuests()
+    public function guests()
     {
         return view('notify/guests');
     }

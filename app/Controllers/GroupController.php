@@ -24,7 +24,7 @@ class GroupController extends Controller
     /**
      * @return mixed
      */
-    public function getEventLine()
+    public function line()
     {
         return view('groups/line');
     }
@@ -32,15 +32,15 @@ class GroupController extends Controller
     /**
      * @return mixed
      */
-    public function getAll()
+    public function index()
     {
-        return view('groups/all');
+        return view('groups/index');
     }
 
     /**
      * @return mixed
      */
-    public function getNew()
+    public function new()
     {
         return view('groups/new');
     }
@@ -48,7 +48,7 @@ class GroupController extends Controller
     /**
      * @return mixed
      */
-    public function getClubs()
+    public function clubs()
     {
         return view('groups/clubs');
     }
@@ -56,8 +56,8 @@ class GroupController extends Controller
     /**
      * @return mixed
      */
-    public function getOne()
+    public function show()
     {
-        return view('groups/one');
+        return view('groups/show');
     }
 }

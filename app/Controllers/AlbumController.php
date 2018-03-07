@@ -24,8 +24,16 @@ class AlbumController extends Controller
     /**
      * @return mixed
      */
-    public function getOne()
+    public function index()
     {
-        return view('albums/one');
+        return view('albums/index');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function show()
+    {
+        return view('albums/show');
     }
 }

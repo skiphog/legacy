@@ -8,7 +8,7 @@ use App\Exceptions\NotFoundException;
 $dbh = db();
 $myrow = auth();
 
-$category_id = (int)request()->get('id');
+$category_id = request()->getInteger('id');
 
 $sql = 'select topicname from stories_cat where topicid = ' . $category_id;
 
@@ -19,7 +19,7 @@ if (!$category_name = $dbh->query($sql)->fetchColumn()) {
 $sql = 'select count(*) from stories where topic = ' . $category_id;
 
 if ($count = $dbh->query($sql)->fetchColumn()) {
-    $pagination = new Kilte\Pagination\Pagination($count, (int)request()->get('page'), 10, 2);
+    $pagination = new Kilte\Pagination\Pagination($count, request()->getInteger('page'), 10, 2);
 
     $sql = 'select sid, title, hometext, `time`
       from stories

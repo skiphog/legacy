@@ -121,7 +121,7 @@ $moderation = [
                 <span class="del-comm" title="Удалить встречу" data-value="<?=$event['id']; ?>">Удалить встречу</span>
                 <div class="e-table e-table-first">
                     <img class="e-ava" src="/<?= $event['img']; ?>" alt="eava">
-                    <a href="/edit_event_<?=$event['id']; ?>">Редактировать встречу</a>
+                    <a href="/event/<?=$event['id']; ?>/edit">Редактировать встречу</a>
                 </div>
                 <div class="e-table">
                     <div class="e-mod-head">
@@ -157,7 +157,7 @@ $moderation = [
         <?php }?>
     </div>
 <?php }?>
-    <a href="/add_event" class="btn btn-default">Добавить анонс встречи</a>
+    <a href="/event/create" class="btn btn-default">Добавить анонс встречи</a>
     <br>
     <br>
     <a href="https://swing-kiska.ru/viewdiary_260">Реклама на сайте</a>

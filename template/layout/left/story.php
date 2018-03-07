@@ -1,6 +1,6 @@
 <table width=235 cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: 0 solid black;">
 <tr>
-<td align=center height=33 style="background: url('img/tablehead.jpg') no-repeat;">
+<td align=center height=33 style="background: url('/img/tablehead.jpg') no-repeat;">
 <b>ИНФОРМАЦИЯ</b>
 </td>
 </tr>

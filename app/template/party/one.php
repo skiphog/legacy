@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -19,14 +19,14 @@ $sql = 'select a.city, a.title, a.`text`, a.img, a.`status`, a.timer, a.maper,
 $sth = $dbh->query($sql);
 
 if (!$sth->rowCount()) {
-    throw new \Swing\Exceptions\NotFoundException('Анонса не существует или удален');
+    throw new \App\Exceptions\NotFoundException('Анонса не существует или удален');
 }
 
 $event = $sth->fetch();
 
 /** @noinspection NotOptimalIfConditionsInspection */
 if ((int)$event['status'] !== 1 && $myrow->id !== $event['u_id'] && !$myrow->isModerator()) {
-    throw new \Swing\Exceptions\ForbiddenException('Анонс еще не прошел модерацию');
+    throw new \App\Exceptions\ForbiddenException('Анонс еще не прошел модерацию');
 }
 
 $dbh->exec('update `events` set v_count = v_count + 1 where id = ' . $id_event);
@@ -153,10 +153,10 @@ $moderation = [
                 <span class="e-date-head"><?= date('d.m.Y',$event['ts_b']); ?> в <?= date('H:i',$event['ts_b']); ?></span>
                 <i class="e-date-time">
                     <?php if($_SERVER['REQUEST_TIME'] < $event['ts_b']) {?>
-                        начнется через <?php echo (new \Swing\Components\SwingDate($event['begin_date']))->getHumansShort(); ?>
-                        (продолжительность &mdash; <?php echo (new \Swing\Components\SwingDate(date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME'] + ($event['ts_e'] - $event['ts_b']))))->getHumansShort(); ?>)
+                        начнется через <?php echo (new \App\Components\SwingDate($event['begin_date']))->getHumansShort(); ?>
+                        (продолжительность &mdash; <?php echo (new \App\Components\SwingDate(date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME'] + ($event['ts_e'] - $event['ts_b']))))->getHumansShort(); ?>)
                     <?php }elseif($_SERVER['REQUEST_TIME'] > $event['ts_e']) {?>
-                        закончилась <?php echo (new \Swing\Components\SwingDate($event['end_date']))->getHumans(); ?>
+                        закончилась <?php echo (new \App\Components\SwingDate($event['end_date']))->getHumans(); ?>
                     <?php }else{?>
                         началась
                     <?php }?>

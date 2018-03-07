@@ -1,20 +1,23 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\System\Controller;
+use App\System\Response;
+use App\System\Controller;
 
 /**
  * Class IndexController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class IndexController extends Controller
 {
     /**
-     * @return mixed
+     * Главная страница сайта
+     *
+     * @return Response
      */
-    public function getIndex()
+    public function index(): Response
     {
         return view('index/main');
     }

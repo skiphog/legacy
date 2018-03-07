@@ -2,7 +2,7 @@
 /**
  * @var string $site_title
  * @var string $site_description
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 ?>
 <?php if ($this->ensure('title')) : ?><?php echo html($site_title); ?><?php $this->stop(); endif; ?>

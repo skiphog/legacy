@@ -1,30 +1,37 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
-use Swing\Exceptions\ForbiddenException;
+use App\Exceptions\ForbiddenException;
 
 /**
  * Class Controller
  *
- * @package Swing\System
+ * @package App\System
  */
 abstract class Controller
 {
     /**
-     * @param string $action
+     * @param string  $action
      *
+     * @param Request $request
+     *
+     * @return Response
      * @throws ForbiddenException
      */
-    public function action($action): void
+    public function callAction($action, Request $request): Response
     {
+        if (!method_exists($this, $action)) {
+            throw new \BadMethodCallException('Метод ' . $action . ' в контроллере ' . static::class . ' не найден');
+        }
+
         if (!$this->access()) {
             throw new ForbiddenException('Доступ запрещен');
         }
 
         $this->before();
 
-        echo $this->$action();
+        return $this->$action($request);
     }
 
     /**

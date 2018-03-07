@@ -1,10 +1,10 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Exceptions\NotFoundException;
-use Swing\Exceptions\ForbiddenException;
+use App\Exceptions\NotFoundException;
+use App\Exceptions\ForbiddenException;
 
 $dbh = db();
 $myrow = auth();

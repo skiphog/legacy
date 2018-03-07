@@ -1,13 +1,13 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\System\Controller;
+use App\System\Controller;
 
 /**
  * Class DiaryController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class DiaryController extends Controller
 {

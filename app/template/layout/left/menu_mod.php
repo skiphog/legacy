@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \App\System\Controller $this
  */
 ?>
 <style xmlns="http://www.w3.org/1999/html">

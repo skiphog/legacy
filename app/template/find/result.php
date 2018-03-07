@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 $dbh = db();
 $myrow = auth();
@@ -105,7 +105,7 @@ $sth->execute($params);
 	desc limit ' . $pagination->offset() . ',30';
     $sth = $dbh->prepare($sql);
     $sth->execute($params);
-    $users = $sth->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+    $users = $sth->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
     $paging = $pagination->build();
     $paging_page = 'Одна страница';
     $line_link = http_build_query($line_link);

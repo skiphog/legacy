@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\Components;
+namespace App\Components;
 
 /**
  * Class SwingDate
  *
- * @package Swing\Components
+ * @package App\Components
  */
 class SwingDate extends \DateTimeImmutable
 {

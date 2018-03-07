@@ -1,9 +1,9 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\System\Request;
+use App\System\Request;
 
 $uri = Request::uri();
 

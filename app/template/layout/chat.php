@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \Swing\Models\Myrow $myrow
- * @var \Swing\System\Cache $cache
+ * @var \App\Models\Myrow $myrow
+ * @var \App\System\Cache $cache
  * @var PDO $dbh
  */
 ?>

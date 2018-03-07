@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -47,7 +47,7 @@ if ($count = $sth->fetchColumn()) {
         exit('Внутренняя ошибка сайта.Пожалуйста повторите попытку');
     }
 
-    $users = $sth->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+    $users = $sth->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
     $paging = $pagination->build();
 
     $paging_page = 'Одна страница';

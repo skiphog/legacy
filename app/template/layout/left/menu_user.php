@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \App\System\Controller $this
  */
 ?>
 <?php if($myrow->isUser()) :?>

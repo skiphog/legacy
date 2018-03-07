@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class Redirector
  *
- * @package Swing\System
+ * @package App\System
  */
 class Response
 {
@@ -149,7 +149,7 @@ class Response
      * @param int         $code
      * @param string|null $data
      */
-    public static function Abort(int $code, $data = null): void
+    public static function abort(int $code, $data = null): void
     {
         http_response_code($code);
         echo $data;

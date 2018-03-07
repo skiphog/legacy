@@ -1,13 +1,13 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\System\Controller;
+use App\System\Controller;
 
 /**
  * Class ThreadController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class ThreadController extends Controller
 {

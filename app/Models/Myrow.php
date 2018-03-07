@@ -1,6 +1,6 @@
 <?php
 
-namespace Swing\Models;
+namespace App\Models;
 
 use Detection\MobileDetect;
 
@@ -12,7 +12,7 @@ use Detection\MobileDetect;
  * @property bool   $hidden_img
  * @property int    $stels
  *
- * @package Swing\Models
+ * @package App\Models
  */
 class Myrow extends User
 {

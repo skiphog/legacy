@@ -1,45 +1,39 @@
 <?php
 
-namespace Swing\System;
-
-use Swing\Exceptions\NotFoundException;
-use Swing\Exceptions\ForbiddenException;
+namespace App\System;
 
 /**
  * Class Bootstrap
  *
- * @package Swing\System
+ * @package App\System
  */
 class Bootstrap
 {
     public function run()
     {
-        $controller = 'Swing\\Controllers\\' . ucfirst($_GET['c'] ?? 'Index') . 'Controller';
-        $action = Request::type() . ucfirst($_GET['a'] ?? 'Index');
-
         try {
+            /** @var Request $request */
+            $request = App::get(Request::class);
+            $result = Router::load()->match($request);
+
+            $request->setAttributes($result[1]);
+            [$controller, $action] = explode('@', $result[0]);
+
+            $controller = 'App\\Controllers\\' . $controller;
+
             if (!class_exists($controller)) {
                 throw new \BadMethodCallException('Контроллера ' . $controller . ' не существует');
             }
 
-            if (!method_exists($controller, $action)) {
-                throw new \BadMethodCallException('Метод ' . $action . ' в контроллере ' . $controller . ' не найден');
-            }
+            /** @var \App\System\Controller $controller */
+            $controller = new $controller;
+            $response = $controller->callAction($action, $request);
 
-            $this->setRegistry();
-
-            /** @var Controller $controller */
-            $controller = new $controller();
-
-            $controller->action($action);
-        } catch (NotFoundException | ForbiddenException | \BadMethodCallException | \InvalidArgumentException $e) {
+            echo $response;
+        } catch (\Exception $e) {
             http_response_code(404);
             var_dump(
-                $e->getMessage(),
-                $e->getCode(),
-                $e->getTrace(),
-                $e->getFile(),
-                $e->getLine()
+                $e
             );
         }
     }

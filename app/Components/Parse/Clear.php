@@ -1,6 +1,6 @@
 <?php
 
-namespace Swing\Components\Parse;
+namespace App\Components\Parse;
 
 /**
  * Class Clear

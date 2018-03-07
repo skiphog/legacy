@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class Model
  *
- * @package Swing\System
+ * @package App\System
  */
 abstract class Model
 {

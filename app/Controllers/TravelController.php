@@ -1,14 +1,14 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\System\Controller;
-use Swing\Exceptions\ForbiddenException;
+use App\System\Controller;
+use App\Exceptions\ForbiddenException;
 
 /**
  * Class TravelController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class TravelController extends Controller
 {

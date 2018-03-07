@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\Exceptions;
+namespace App\Exceptions;
 
 /**
  * Class NotFoundException
  *
- * @package Swing\Exceptions
+ * @package App\Exceptions
  */
 class NotFoundException extends \Exception
 {

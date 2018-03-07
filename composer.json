@@ -5,7 +5,7 @@
       "app/Helpers/users_row.php"
     ],
     "psr-4": {
-      "Swing\\": "app/"
+      "App\\": "app/"
     }
   },
   "require": {

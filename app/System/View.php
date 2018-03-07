@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class View
  *
- * @package Swing\System
+ * @package App\System
  */
 class View
 {

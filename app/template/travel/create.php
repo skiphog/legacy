@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -78,7 +78,7 @@ $country = $dbh->query('select id, title from travel_country order by sort, titl
     <div class="travel-select">
         <label><?= ArrayTravel::$case['search'][$myrow->gender]; ?></label>
         <div class="travel-sgender">
-            <?php foreach (\Swing\Arrays\Genders::$sgender as $key => $value) :?>
+            <?php foreach (\App\Arrays\Genders::$sgender as $key => $value) :?>
                 <label><input type="checkbox" name="sgender[]" value="<?= $key; ?>" checked> <?= $value; ?></label><br>
             <?php endforeach; ?>
         </div>

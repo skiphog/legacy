@@ -1,12 +1,12 @@
 <?php
 
-namespace Swing\Arrays;
+namespace App\Arrays;
 
 /**
  * Class VipSmiles
  * Вип смайлики
  *
- * @package Swing\Arrays
+ * @package App\Arrays
  */
 class VipSmiles
 {

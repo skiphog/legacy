@@ -1,13 +1,13 @@
 <?php
 
-namespace Swing\Models;
+namespace App\Models;
 
-use Swing\System\Model;
+use App\System\Model;
 
 /**
  * Class User
  *
- * @package Swing\Models
+ * @package App\Models
  *
  * @property int    $id
  * @property int    $admin

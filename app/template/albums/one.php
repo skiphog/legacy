@@ -1,9 +1,9 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Exceptions\NotFoundException;
+use App\Exceptions\NotFoundException;
 
 $dbh = db();
 $myrow = auth();

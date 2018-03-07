@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -8,7 +8,7 @@ $myrow = auth();
 
 $diaries = [];
 $page = (int)request()->get('page');
-$parse = new \Swing\Components\Parse\NoSession();
+$parse = new \App\Components\Parse\NoSession();
 
 $sql = 'select count(*) from diary where deleted = 0';
 

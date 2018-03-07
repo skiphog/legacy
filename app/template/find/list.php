@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 $dbh = db();
 $myrow = auth();
@@ -33,7 +33,7 @@ $myrow = auth();
                 <td width="80"><label for="gender">Пол</label></td>
                 <td>
                     <select id="gender" name="gender">
-                    <?php foreach(\Swing\Arrays\Genders::$gender as $uagen => $uagens){?>
+                    <?php foreach(\App\Arrays\Genders::$gender as $uagen => $uagens){?>
                         <option value="<?php echo $uagen; ?>"><?php echo $uagens; ?></option>
                     <?php }?>
                     </select>
@@ -65,7 +65,7 @@ $myrow = auth();
                 <td>
                     <select name="purposes">
                         <option value="0">Не выбрано</option>
-                        <?php foreach(\Swing\Arrays\Purposes::$array as $uapu => $uapus) {?>
+                        <?php foreach(\App\Arrays\Purposes::$array as $uapu => $uapus) {?>
                             <option value="<?php echo $uapu; ?>"><?php echo $uapus; ?></option>
                         <?php } ?>
                     </select>
@@ -79,7 +79,7 @@ $myrow = auth();
                         <option value="0">Не важно</option>
                     <?php
                     $country = $myrow->country;
-                    foreach(\Swing\Arrays\Country::$array as $c=>$cs) {?>
+                    foreach(\App\Arrays\Country::$array as $c=>$cs) {?>
                         <option value="<?php echo $c; ?>" <?php ($country !== $c)?:print 'selected="selected"'; ?>><?php echo $cs; ?></option>
                     <?php }?>
                     </select>
@@ -174,7 +174,7 @@ from
 where u.vip_time >= addtime(timestamp(date(NOW())),\'23:59:59\') AND u.status=1 
 order by rand() desc limit 5';
 
-$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
 
 if (!empty($users)) :?>
 <tr>
@@ -206,7 +206,7 @@ where
   u.status=1 
 order by u.rate desc limit 5';
 
-$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
 
 if (!empty($users)) :?>
     <tr>
@@ -232,7 +232,7 @@ from users u
 where u.status=1 
 order by u.regdate desc limit 10';
 
-$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
 
 if (!empty($users)) :?>
 <tr>

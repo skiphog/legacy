@@ -26,7 +26,7 @@ if(!empty($new_users)) {
             </a>
             <img src="/img/newred.gif" width="34" height="15" alt="new">
             <br>
-            <b><?php echo \Swing\Arrays\Genders::$gender[$user['gender']]; ?></b>
+            <b><?php echo \App\Arrays\Genders::$gender[$user['gender']]; ?></b>
             <br>
             <span class="u-city-<?php echo (int)(mb_strtolower($myrow->city) === mb_strtolower($user['city'])); ?>"><?php echo html($user['city']); ?></span>
         </td>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 trait Singleton
 {

@@ -178,7 +178,7 @@ $user_birthday = $dbh->query($sql)->fetch();
     </a>
     <b><?php echo html($user_birthday['login']); ?></b>
     <br>
-    <?php echo \Swing\Arrays\Genders::$gender[$user_birthday['gender']]; ?>
+    <?php echo \App\Arrays\Genders::$gender[$user_birthday['gender']]; ?>
     <br>
     <span class="u-city-<?php echo (int)(mb_strtolower($myrow->city) === mb_strtolower($user_birthday['city'])); ?>"><?php echo html($user_birthday['city']); ?></span>
 </div>

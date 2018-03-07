@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class Notificator
  *
- * @package Swing\System
+ * @package App\System
  */
 class Notificator
 {

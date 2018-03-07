@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -37,7 +37,7 @@ order by wholoock_time desc limit 50';
 $sth = $dbh->query($sql);
 $date = date('d-m-Y');
 $data = [];
-while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
+while ($row = $sth->fetchObject(\App\Models\RowUser::class)) {
     $row->wholoock_time = dateWis($date, $row->wholoock_time);
     $data[] = $row;
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class Cache
  *
- * @package Swing\System
+ * @package App\System
  */
 class Cache
 {

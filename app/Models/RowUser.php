@@ -1,8 +1,8 @@
 <?php
 
-namespace Swing\Models;
+namespace App\Models;
 
-use Swing\Components\SwingDate;
+use App\Components\SwingDate;
 
 /**
  * Class RowUser
@@ -20,7 +20,7 @@ use Swing\Components\SwingDate;
  * @property string    $about
  * @property SwingDate $last_view
  *
- * @package Swing\Models
+ * @package App\Models
  */
 class RowUser extends User
 {

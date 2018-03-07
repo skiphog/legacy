@@ -1,6 +1,6 @@
 <?php
 
-namespace Swing\Exceptions;
+namespace App\Exceptions;
 
 /**
  * Class ForbiddenException

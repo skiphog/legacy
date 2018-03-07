@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -42,7 +42,7 @@ if ($sth->rowCount()) {
         $sgender = explode(',', $row['sgender']);
 
         array_walk($sgender, function (&$v) {
-            $v = \Swing\Arrays\Genders::$sgender[$v];
+            $v = \App\Arrays\Genders::$sgender[$v];
         });
 
         $travel['map']['features'][] = [
@@ -59,7 +59,7 @@ if ($sth->rowCount()) {
                 'avatar'         => avatar($myrow, $row['avatar'], $row['photo_visibility']),
                 'real'           => empty($row['real_status']) ? '' : '<img src="/img/real.gif" width="14" height="14" alt="Real">',
                 'info'           => '<a class="hover-tip" href="/id' . $row['user_id'] . '" target="_blank"><img src="/img/info_small_' . $row['gender'] . '.png" width="15" height="14" alt="gender"> ' . $row['login'] . '</a>',
-                'name'           => html($row['fname']) . ', ' . (new \Swing\Components\SwingDate($row['birthday']))->getHumansShort(),
+                'name'           => html($row['fname']) . ', ' . (new \App\Components\SwingDate($row['birthday']))->getHumansShort(),
                 'city'           => html($row['user_city']),
                 'transport'      => '<img src="/img/travel/travel_' . $row['transport'] . '.png" width="32" height="32" title="' . ArrayTravel::$transport[$row['transport']] . '" alt="transport" >',
                 'children'       => ArrayTravel::$case['child'][$row['gender']] . ' ' . ArrayTravel::$is_children[$row['is_children']],
@@ -93,7 +93,7 @@ if ($sth->rowCount()) {
 
     $travel['gender'] = [];
     while ($row = $sth->fetch()) {
-        $row['title'] = \Swing\Arrays\Genders::$sgender[$row['gender']];
+        $row['title'] = \App\Arrays\Genders::$sgender[$row['gender']];
         $travel['gender'][] = $row;
     }
 

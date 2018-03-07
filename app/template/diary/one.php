@@ -1,9 +1,9 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Exceptions\NotFoundException;
+use App\Exceptions\NotFoundException;
 
 $dbh = db();
 $myrow = auth();
@@ -44,11 +44,11 @@ if (array_key_exists(30, $comments)) {
 
 $access = false;
 $vote = false;
-$parse_class = \Swing\Components\Parse\NoSession::class;
+$parse_class = \App\Components\Parse\NoSession::class;
 
 if ($myrow->isUser()) {
     $access = $myrow->isModerator() || $myrow->id === (int)$diary['id_user'];
-    $parse_class = \Swing\Components\Parse\All::class;
+    $parse_class = \App\Components\Parse\All::class;
 
     $sql = 'select vote from diary_likes where id_post = ' . $diary_id . ' and id_user = ' . $myrow->id;
 
@@ -64,7 +64,7 @@ if ($myrow->isUser()) {
 }
 
 $hide_mobile = $myrow->isMobile() ? 'style="display:none;"': '';
-/** @var \Swing\Components\Parse\GParse $parse */
+/** @var \App\Components\Parse\GParse $parse */
 $parse = new $parse_class();
 
 ?>
@@ -123,7 +123,7 @@ $parse = new $parse_class();
                 <strong><?= $diary['login']; ?></strong>
             </a>
             <div class="date"><?= date('d-m-Y H:i', strtotime($diary['data_di'])); ?> |
-                <strong><?= (new \Swing\Components\SwingDate($diary['data_di']))->getHumans(); ?></strong></div>
+                <strong><?= (new \App\Components\SwingDate($diary['data_di']))->getHumans(); ?></strong></div>
             <div>Посещений: <strong><?= $diary['v_count']; ?></strong></div>
             <div>
                 <a href="/udiary_<?= $diary['id_user']; ?>_page_1">Весь дневник <?= $diary['login']; ?></a>
@@ -200,7 +200,7 @@ $parse = new $parse_class();
                         <br/>
                         <span class="t-date">
 				        <?php echo date('d-m-Y H:i',
-                            strtotime($value['comment_date'])); ?> | <strong><?php echo (new \Swing\Components\SwingDate($value['comment_date']))->getHumans(); ?></strong>
+                            strtotime($value['comment_date'])); ?> | <strong><?php echo (new \App\Components\SwingDate($value['comment_date']))->getHumans(); ?></strong>
 			        </span>
                     </div>
                     <span class="ww"><?php echo nl2br(nickart(smile($parse->parse($value['comment_text'])))); ?></span>

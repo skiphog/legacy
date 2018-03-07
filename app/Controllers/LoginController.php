@@ -1,15 +1,15 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\Components\Auth;
-use Swing\System\Response;
-use Swing\System\Controller;
+use App\Components\Auth;
+use App\System\Response;
+use App\System\Controller;
 
 /**
  * Class LoginController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class LoginController extends Controller
 {

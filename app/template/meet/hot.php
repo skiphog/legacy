@@ -1,8 +1,8 @@
 <?php
 /**
- * @var \Swing\System\View $this
- * @var \Swing\Models\RowUser[]  $meets
- * @var \Swing\Models\RowUser[] city_meets
+ * @var \App\System\View $this
+ * @var \App\Models\RowUser[]  $meets
+ * @var \App\Models\RowUser[] city_meets
  */
 
 $dbh = db();
@@ -19,8 +19,8 @@ order by u.hot_time desc limit 50';
 $sth = $dbh->query($sql);
 
 $city_meets = $meets = [];
-/** @var \Swing\Models\RowUser $row */
-while ($row = $sth->fetchObject(\Swing\Models\RowUser::class)) {
+/** @var \App\Models\RowUser $row */
+while ($row = $sth->fetchObject(\App\Models\RowUser::class)) {
     if (strtoupper($row->city) === strtoupper($myrow->city)) {
         $city_meets[] = $row;
         continue;

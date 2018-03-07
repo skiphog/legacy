@@ -2,7 +2,7 @@
 /**
  * @var string $site_title
  * @var string $site_description
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 ?>
 <div id="topban">

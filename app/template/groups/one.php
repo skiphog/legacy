@@ -1,9 +1,9 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Exceptions\NotFoundException;
+use App\Exceptions\NotFoundException;
 
 $dbh = db();
 $myrow = auth();
@@ -152,7 +152,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
                             <div class="thread">
                                 <?php foreach ($threads as $thread) {?>
                                     <div class="msg-div">
-                                        <span class="msg-time">Тема создана: <?= date('d-m-Y H:i',strtotime($thread['t_date']));?> | <strong><?= (new \Swing\Components\SwingDate($thread['t_date']))->getHumans(); ?></strong></span>
+                                        <span class="msg-time">Тема создана: <?= date('d-m-Y H:i',strtotime($thread['t_date']));?> | <strong><?= (new \App\Components\SwingDate($thread['t_date']))->getHumans(); ?></strong></span>
                                         <div class="msg-content mcw-<?= $thread['t_sticky']?> mcp-<?= $thread['t_party']?>">
                                             <h2>
                                                 <?php if($thread['t_sticky']) {?>
@@ -180,7 +180,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
                                                         <img src="/img/info_small_<?= $thread['c_master_gender']; ?>.png" width="15" height="14" alt="gender"> <?= $thread['c_master_login']; ?>
                                                     </a>
                                                     <br>
-                                                    <span class="msg-m-time"><?= date('d-m-Y H:i',strtotime($thread['c_date']));?> | <?= (new \Swing\Components\SwingDate($thread['c_date']))->getHumans(); ?></span>
+                                                    <span class="msg-m-time"><?= date('d-m-Y H:i',strtotime($thread['c_date']));?> | <?= (new \App\Components\SwingDate($thread['c_date']))->getHumans(); ?></span>
                                                 <?php }else{?>
                                                     Сообщений нет
                                                 <?php }?>

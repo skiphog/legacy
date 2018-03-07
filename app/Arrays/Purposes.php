@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\Arrays;
+namespace App\Arrays;
 
 /**
  * Class Purposes
  *
- * @package Swing\Arrays
+ * @package App\Arrays
  */
 class Purposes
 {

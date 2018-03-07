@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -15,7 +15,7 @@ $sql = 'select u.id, u.birthday, u.pic1, u.photo_visibility, u.real_status, u.vi
   where u.birthday_hash = ' . $hash . ' and `status` = 1  
 order by ut.last_view desc';
 
-$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
 ?>
 
 <?php $this->extend('layout/layout'); ?>

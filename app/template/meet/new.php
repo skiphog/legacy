@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
 $dbh = db();
@@ -38,7 +38,7 @@ $sql = /** @lang text */ 'select u.id, u.birthday, u.pic1, u.photo_visibility,
   where status = 1 ' . $join . ' order by u.regdate desc 
  limit 50';
 
-$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \Swing\Models\RowUser::class);
+$users = $dbh->query($sql)->fetchAll(PDO::FETCH_CLASS, \App\Models\RowUser::class);
 ?>
 <?php $this->extend('layout/layout'); ?>
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace Swing\Controllers;
+namespace App\Controllers;
 
-use Swing\System\Response;
-use Swing\System\Controller;
-use Swing\Components\SwingDate;
-use Swing\Exceptions\ForbiddenException;
+use App\System\Response;
+use App\System\Controller;
+use App\Components\SwingDate;
+use App\Exceptions\ForbiddenException;
 
 /**
  * Class MeetController
  *
- * @package Swing\Controllers
+ * @package App\Controllers
  */
 class MeetController extends Controller
 {

@@ -31,7 +31,7 @@ return [
     /**
      * Драйвер для кеширования
      */
-    'cache_driver'  => \Swing\System\Cache::class,
+    'cache_driver'  => \App\System\Cache::class,
 
     /**
      * Время онлайна

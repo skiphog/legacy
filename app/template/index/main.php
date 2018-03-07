@@ -1,13 +1,13 @@
 <?php
 /**
- * @var \Swing\System\View  $this
+ * @var \App\System\View  $this
  */
 
 $myrow = auth();
 $dbh = db();
 $cache = cache();
 
-$parse = new \Swing\Components\Parse\Clear();
+$parse = new \App\Components\Parse\Clear();
 ?>
 
 <?php $this->extend('layout/layout'); ?>

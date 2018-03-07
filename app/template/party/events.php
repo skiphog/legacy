@@ -19,10 +19,10 @@
                 <span class="e-date-head"><?= date('d.m.Y',$event['ts_b']); ?> в <?= date('H:i',$event['ts_b']); ?></span>
                 <i class="e-date-time">
                     <?php if($_SERVER['REQUEST_TIME'] < $event['ts_b']) {?>
-                        начнется через <?php echo (new \Swing\Components\SwingDate($event['begin_date']))->getHumansShort(); ?>
-                        (продолжительность &mdash; <?php echo (new \Swing\Components\SwingDate(date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME'] + ($event['ts_e'] - $event['ts_b']))))->getHumansShort(); ?>)
+                        начнется через <?php echo (new \App\Components\SwingDate($event['begin_date']))->getHumansShort(); ?>
+                        (продолжительность &mdash; <?php echo (new \App\Components\SwingDate(date('Y-m-d H:i:s',$_SERVER['REQUEST_TIME'] + ($event['ts_e'] - $event['ts_b']))))->getHumansShort(); ?>)
                     <?php }elseif($_SERVER['REQUEST_TIME'] > $event['ts_e']) {?>
-                        закончилась <?php echo (new \Swing\Components\SwingDate($event['end_date']))->getHumans(); ?>
+                        закончилась <?php echo (new \App\Components\SwingDate($event['end_date']))->getHumans(); ?>
                     <?php }else{?>
                         началась
                     <?php }?>

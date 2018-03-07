@@ -1,10 +1,10 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Components\SwingDate;
-use Swing\Components\Parse\All as AllParse;
+use App\Components\SwingDate;
+use App\Components\Parse\All as AllParse;
 
 $dbh = db();
 $myrow = auth();

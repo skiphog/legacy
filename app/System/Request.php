@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class Request
  *
- * @package Swing\System
+ * @package App\System
  */
 class Request
 {
@@ -13,9 +13,20 @@ class Request
 
     public const STRING = 'sanitizeString';
 
+    /**
+     * @var array $get
+     */
+    protected $get;
+
+    /**
+     * @var array $post
+     */
+    protected $post;
+
     public function __construct()
     {
-        unset($_GET['c'], $_GET['a']);
+        $this->get = $_GET;
+        $this->post = $_POST;
     }
 
     /**
@@ -26,7 +37,7 @@ class Request
      */
     public function get($params = null, $options = null)
     {
-        return $this->getRequest($_GET, $params, $options);
+        return $this->getRequest($this->get, $params, $options);
     }
 
     /**
@@ -37,7 +48,7 @@ class Request
      */
     public function post($params = null, $options = null)
     {
-        return $this->getRequest($_POST, $params, $options);
+        return $this->getRequest($this->post, $params, $options);
     }
 
     /**
@@ -144,6 +155,17 @@ class Request
 
 
     /**
+     * @param array $params
+     */
+    public function setAttributes(array $params): void
+    {
+        foreach ($params as $key => $value) {
+            \is_string($key) && $this->get[$key] = $value;
+        }
+    }
+
+
+    /**
      * @param array $data
      * @param mixed $params
      * @param mixed $options
@@ -227,16 +249,24 @@ class Request
     /**
      * @return string
      */
-    public static function uri(): string
+    public function uri(): string
     {
-        return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        return ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     }
 
     /**
      * @return string
      */
-    public static function type(): string
+    public function type(): string
     {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAjax(): bool
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }
 }

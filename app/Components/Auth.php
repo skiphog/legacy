@@ -1,13 +1,13 @@
 <?php
 
-namespace Swing\Components;
+namespace App\Components;
 
-use Swing\Models\Myrow;
+use App\Models\Myrow;
 
 /**
  * Class Auth
  *
- * @package Swing\Components
+ * @package App\Components
  */
 class Auth
 {

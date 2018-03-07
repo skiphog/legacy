@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Swing\System\Controller $this
+ * @var \App\System\Controller $this
  */
 ?>
 <table width=100% style="border:1px solid #AAA;">

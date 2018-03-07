@@ -1,9 +1,9 @@
 <?php
 /**
- * @var \Swing\System\View $this
+ * @var \App\System\View $this
  */
 
-use Swing\Exceptions\NotFoundException;
+use App\Exceptions\NotFoundException;
 
 $dbh = db();
 $myrow = auth();
@@ -93,7 +93,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
                     <h2 class="article-title">
                         <a href="/viewstory_<?php echo $article['sid']; ?>"><?php echo html($article['title']); ?></a>
                     </h2>
-                    <p class="article-time"><?php echo (new \Swing\Components\SwingDate($article['time']))->format('d-m-Y'); ?></p>
+                    <p class="article-time"><?php echo (new \App\Components\SwingDate($article['time']))->format('d-m-Y'); ?></p>
                 </header>
                 <div><?php echo $article['hometext']; ?></div>
                 <p class="article-more"><a href="/viewstory_<?php echo $article['sid']; ?>">Подробнее ...</a></p>

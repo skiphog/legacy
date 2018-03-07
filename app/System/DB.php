@@ -1,11 +1,11 @@
 <?php
 
-namespace Swing\System;
+namespace App\System;
 
 /**
  * Class DB
  *
- * @package Swing\System
+ * @package App\System
  */
 class DB
 {

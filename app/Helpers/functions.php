@@ -9,7 +9,7 @@
  */
 function app($name)
 {
-    return \Swing\System\App::get($name);
+    return \App\System\App::get($name);
 }
 
 /**
@@ -21,15 +21,15 @@ function app($name)
  */
 function config($key)
 {
-    return app(\Swing\System\Setting::class)->get($key);
+    return app(\App\System\Setting::class)->get($key);
 }
 
 /**
- * @return \Swing\System\Request
+ * @return \App\System\Request
  */
 function request()
 {
-    return app(\Swing\System\Request::class);
+    return app(\App\System\Request::class);
 }
 
 /**
@@ -37,24 +37,24 @@ function request()
  */
 function db()
 {
-    return app(\Swing\System\DB::class)->dbh();
+    return app(\App\System\DB::class)->dbh();
 }
 
 /**
- * @return \Swing\System\Cache
+ * @return \App\System\Cache
  */
 function cache()
 {
-    return app(\Swing\System\Cache::class);
+    return app(\App\System\Cache::class);
 }
 
 
 /**
- * @return \Swing\Models\Myrow
+ * @return \App\Models\Myrow
  */
 function auth()
 {
-    return \Swing\Components\Auth::user();
+    return \App\Components\Auth::user();
 }
 
 /** @noinspection PhpDocMissingThrowsInspection */
@@ -62,12 +62,12 @@ function auth()
  * @param string $name
  * @param array  $params
  *
- * @return \Swing\System\Response
+ * @return \App\System\Response
  */
 function view($name, array $params = [])
 {
     /** @noinspection PhpUnhandledExceptionInspection */
-    return (new \Swing\System\Response())->html($name, $params);
+    return (new \App\System\Response())->html($name, $params);
 }
 
 /** @noinspection PhpDocMissingThrowsInspection */
@@ -80,28 +80,28 @@ function view($name, array $params = [])
 function render($name, array $params = [])
 {
     /** @noinspection PhpUnhandledExceptionInspection */
-    return (new \Swing\System\View())->render($name, $params);
+    return (new \App\System\View())->render($name, $params);
 }
 
 /**
  * @param string|null $url
  *
- * @return \Swing\System\Response
+ * @return \App\System\Response
  */
 function redirect($url = '/')
 {
-    return (new \Swing\System\Response())->redirect($url);
+    return (new \App\System\Response())->redirect($url);
 }
 
 /**
  * @param mixed $data
  * @param int   $code
  *
- * @return \Swing\System\Response
+ * @return \App\System\Response
  */
 function json($data, $code = 200)
 {
-    return (new \Swing\System\Response())->json($data, $code);
+    return (new \App\System\Response())->json($data, $code);
 }
 
 /**
@@ -110,19 +110,19 @@ function json($data, $code = 200)
  */
 function abort($code = 404, $data = null)
 {
-    \Swing\System\Response::Abort($code, $data);
+    \App\System\Response::abort($code, $data);
 }
 
 /**
  * Доступ к аватарке пользователя
  *
- * @param \Swing\Models\Myrow $myrow
+ * @param \App\Models\Myrow $myrow
  * @param string              $pic
  * @param int                 $uVis
  *
  * @return string
  */
-function avatar(\Swing\Models\Myrow $myrow, string $pic, int $uVis): string
+function avatar(\App\Models\Myrow $myrow, string $pic, int $uVis): string
 {
     if (0 === $uVis || (2 === $uVis && $myrow->isUser()) || (3 === $uVis && $myrow->isReal())) {
         return 'https://swing-kiska.ru/avatars/user_thumb/' . $pic;

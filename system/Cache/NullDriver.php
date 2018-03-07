@@ -7,7 +7,7 @@ namespace System\Cache;
  *
  * @package System\Cache
  */
-class NullDriver implements CacheInterface
+class NullDriver implements CacheDriverInterface
 {
     /**
      * @param string $key

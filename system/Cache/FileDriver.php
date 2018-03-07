@@ -7,7 +7,7 @@ namespace System\Cache;
  *
  * @package System\Cache
  */
-class FileDriver implements CacheInterface
+class FileDriver implements CacheDriverInterface
 {
     protected $path;
 

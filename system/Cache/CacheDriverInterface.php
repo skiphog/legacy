@@ -3,11 +3,11 @@
 namespace System\Cache;
 
 /**
- * Interface CacheInterface
+ * Interface CacheDriverInterface
  *
  * @package System\Cache
  */
-interface CacheInterface
+interface CacheDriverInterface
 {
     /**
      * @param string $key

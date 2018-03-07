@@ -14,9 +14,9 @@ class Cache
     /**
      * Cache constructor.
      *
-     * @param CacheInterface $cache
+     * @param CacheDriverInterface $cache
      */
-    public function __construct(CacheInterface $cache)
+    public function __construct(CacheDriverInterface $cache)
     {
         $this->driver = $cache;
     }
@@ -54,9 +54,9 @@ class Cache
     }
 
     /**
-     * @return CacheInterface
+     * @return CacheDriverInterface
      */
-    public function getDriver(): CacheInterface
+    public function getDriver(): CacheDriverInterface
     {
         return $this->driver;
     }

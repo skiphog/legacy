@@ -7,7 +7,7 @@ namespace System\Cache;
  *
  * @package System\Cache
  */
-class MemcachedDriver implements CacheInterface
+class MemcachedDriver implements CacheDriverInterface
 {
     protected $memcached;
 

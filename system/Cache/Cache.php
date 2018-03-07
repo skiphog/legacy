@@ -9,41 +9,55 @@ namespace System\Cache;
  */
 class Cache
 {
-    private $cache;
+    protected $driver;
 
-    public function __construct()
+    /**
+     * Cache constructor.
+     *
+     * @param CacheInterface $cache
+     */
+    public function __construct(CacheInterface $cache)
     {
-        //$this->cache = new \Memcached();
-        //$this->cache->addServer('localhost', 11211);
+        $this->driver = $cache;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
     public function get($key)
     {
-        //return $this->cache->get($key);
-        return false;
+        return $this->driver->get($key);
     }
 
-    public function set($key, $value, $time = 0)
+    /**
+     * @param string $key
+     * @param mixed  $value
+     * @param int    $time
+     *
+     * @return bool
+     */
+    public function set($key, $value, $time = 0): bool
     {
-        //return $this->cache->set($key, $value, $time);
-        return true;
+        return $this->driver->set($key, $value, $time);
     }
 
-    public function delete($key)
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function delete($key): bool
     {
-        //return $this->cache->delete($key);
-        return true;
+        return $this->driver->delete($key);
     }
 
-    public function getDelayed($keys, $with_cas = false)
+    /**
+     * @return CacheInterface
+     */
+    public function getDriver(): CacheInterface
     {
-        //return $this->cache->getDelayed($keys, $with_cas);
-        return true;
-    }
-
-    public function fetch()
-    {
-        //return $this->cache->fetch();
-        return false;
+        return $this->driver;
     }
 }

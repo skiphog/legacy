@@ -31,7 +31,7 @@ return [
     /**
      * Драйвер для кеширования
      */
-    'cache_driver'  => \App\System\Cache::class,
+    'cache_driver'  => \System\Cache\FileDriver::class,
 
     /**
      * Время онлайна

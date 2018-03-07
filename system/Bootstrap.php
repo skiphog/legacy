@@ -2,6 +2,8 @@
 
 namespace System;
 
+use System\Cache\Cache;
+
 /**
  * Class Bootstrap
  *
@@ -9,11 +11,11 @@ namespace System;
  */
 class Bootstrap
 {
-    public function run()
+    public function run(): void
     {
         try {
             /** @var Request $request */
-            $request = App::get(Request::class);
+            $request = request();
             $result = Router::load()->match($request);
 
             $request->setAttributes($result[1]);
@@ -27,6 +29,9 @@ class Bootstrap
 
             /** @var \System\Controller $controller */
             $controller = new $controller;
+
+            $this->setRegistry();
+
             $response = $controller->callAction($action, $request);
 
             echo $response;
@@ -40,6 +45,9 @@ class Bootstrap
 
     protected function setRegistry(): void
     {
-
+        Container::set('cache', function () {
+            $class = config('cache_driver');
+            return new Cache(new $class);
+        });
     }
 }

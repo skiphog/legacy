@@ -124,7 +124,7 @@
 		function coloseTipInfo(){infoPrivat.slideUp();}
 	</script>
 <?php else: ?>
-<form method="post" action="/authentification">
+<form method="post" action="/authentication">
 		<table border=0 width=235>
 			<tr>
 				<td align=center height=33 style="background: url('/img/tablehead.jpg') no-repeat;">

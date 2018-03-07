@@ -13,13 +13,12 @@ use App\System\Controller;
  */
 class LoginController extends Controller
 {
-
     /**
      * Вход
      *
      * @return mixed
      */
-    public function postAuth()
+    public function auth()
     {
         if (auth()->isUser()) {
             return redirect('/profile');
@@ -33,7 +32,7 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function getQuit(): Response
+    public function quit(): Response
     {
         if (auth()->isUser()) {
             Auth::quit();

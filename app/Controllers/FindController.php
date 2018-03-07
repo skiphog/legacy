@@ -14,7 +14,7 @@ class FindController extends Controller
     /**
      * @return mixed
      */
-    public function getIndex()
+    public function index()
     {
         return view('find/list');
     }
@@ -22,7 +22,7 @@ class FindController extends Controller
     /**
      * @return mixed
      */
-    public function getSearch()
+    public function search()
     {
         return view('find/result');
     }

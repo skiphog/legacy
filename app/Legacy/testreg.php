@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \App\System\Controller $this
+ * @var \System\Controller $this
  */
 
 [$login, $password] = request()->postValuesString(['login', 'password']);

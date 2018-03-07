@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\System\Model;
+use System\Model;
 
 /**
  * Class User

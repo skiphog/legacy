@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\System\Response;
-use App\System\Controller;
+use System\Response;
+use System\Controller;
 
 /**
  * Class IndexController

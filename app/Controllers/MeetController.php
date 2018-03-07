@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\System\Response;
-use App\System\Controller;
+use System\Response;
+use System\Controller;
 use App\Components\SwingDate;
 use App\Exceptions\ForbiddenException;
 

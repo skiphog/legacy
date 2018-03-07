@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Components\Auth;
-use App\System\Response;
-use App\System\Controller;
+use System\Response;
+use System\Controller;
 
 /**
  * Class LoginController

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\System\Controller;
+use System\Controller;
 
 /**
  * Class NotificationController

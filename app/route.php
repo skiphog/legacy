@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\System\Router $route
+ * @var System\Router $route
  */
 
 // Главная страница

@@ -58,7 +58,7 @@
 <script>
   var resblock = $('#response'),loading = $('#load-mes'),links = $('ul.links');
   function getContent() {
-    var action = window.location.href.replace('https://swing-kiska.ru/last_comments?','');
+    var action = window.location.search.substr(1) || window.location.href.replace('https://swing-kiska.ru/last_comments?','');
     if(action in motor) {
       loading.show();
       motor['c_di'] = motor['c_st'] = motor['c_ph'] = 0;

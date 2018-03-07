@@ -69,7 +69,7 @@
   var resblock = $('#response'),loading = $('#load-mes'),windowSt = $(window),links = $('ul.links'),num = 0,action;
 
   function getContent() {
-    action = window.location.href.replace(/https?:\/\/swing-kiska.ru\/newalbums\?/,'');
+    action = window.location.search.substr(1) || window.location.href.replace('https://swing-kiska.ru/newalbums?','');
     num = 0;
     resblock.html('');
     loading.show();

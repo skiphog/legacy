@@ -26,4 +26,12 @@ class AnyController extends Controller
     {
         return view('birthday/index');
     }
+
+    /**
+     * @return mixed
+     */
+    public function donate()
+    {
+        return view('unitpay/donate');
+    }
 }

@@ -66,6 +66,8 @@ $route->get('/story_{id}_{page}', 'ArticleController@index', ['id' => '\d+', 'pa
 $route->get('/viewstory_{id}', 'ArticleController@show', ['id' => '\d+']);
 
 // Any
-
 $route->get('/last_comments', 'AnyController@comments');
 $route->get('/birthday', 'AnyController@birthday');
+
+// Donate
+$route->get('/donate', 'AnyController@donate');

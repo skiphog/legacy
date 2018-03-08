@@ -81,7 +81,7 @@ if (!$lenta = $cache->get('mordalenta')) {
         }
         ?>
         <td>
-            <div onclick="getLenta(this);" ondblclick="dblClickLenta(<?php echo $row['id_user']; ?>);" class="border-box tiplen" style="background: url('/avatars/user_thumb/<?php echo $row['pic1']; ?>') no-repeat center;"></div>
+            <div onclick="getLenta(this);" ondblclick="dblClickLenta(<?php echo $row['id_user']; ?>);" class="border-box tiplen" style="background: url(https://swing-kiska.ru/avatars/user_thumb/<?php echo $row['pic1']; ?>) no-repeat center;"></div>
             <div class="lst" style="display: none">
                 <div class="lenta-tip">
                     <div class="tooltip-pointer-down" style="background: <?php echo $background; ?>">

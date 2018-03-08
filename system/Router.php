@@ -59,10 +59,7 @@ class Router
             $pattern = $this->getPattern($pattern, current($handler));
 
             if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
-                return [
-                    key($handler),
-                    $matches
-                ];
+                return array_merge(explode('@', key($handler)), [$matches]);
             }
         }
 

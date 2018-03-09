@@ -16,10 +16,10 @@ abstract class Controller
      *
      * @param Request $request
      *
-     * @return Response
+     * @return mixed
      * @throws ForbiddenException
      */
-    public function callAction($action, Request $request): Response
+    public function callAction($action, Request $request)
     {
         if (!method_exists($this, $action)) {
             throw new \BadMethodCallException('Метод ' . $action . ' в контроллере ' . static::class . ' не найден');

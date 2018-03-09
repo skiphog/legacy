@@ -50,7 +50,8 @@ $route->get('/ugrouplist_clubs', 'GroupController@clubs');
 $route->get('/viewugroup_{id}', 'GroupController@show', ['id' => '\d+']);
 
 // Threads
-$route->get('/viewugthread_{id}', 'ThreadController@show', ['id' => '\d+']);
+$route->get('/viewugthread_{id}_{page}', 'ThreadController@show', ['id' => '\d+', 'page' => '\d+']);
+$route->get('/viewugthread_{id}', 'ThreadController@redirect', ['id' => '\d+']);
 
 // Party
 $route->get('/all_events', 'PartyController@index');

@@ -7,7 +7,7 @@ $dbh = db();
 $myrow = auth();
 
 $diaries = [];
-$page = (int)request()->get('page');
+$page = request()->getInteger('page');
 $parse = new \App\Components\Parse\NoSession();
 
 $sql = 'select count(*) from diary where deleted = 0';

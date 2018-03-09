@@ -94,5 +94,5 @@ if ($ses_uuid !== $uuid) {
     $dbh->commit();
 }
 
-header('location: profile');
+header('location: /profile');
 exit;

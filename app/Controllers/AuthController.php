@@ -11,7 +11,7 @@ use System\Controller;
  *
  * @package App\Controllers
  */
-class LoginController extends Controller
+class AuthController extends Controller
 {
     /**
      * Вход
@@ -24,7 +24,7 @@ class LoginController extends Controller
             return redirect('/profile');
         }
 
-        return require __DIR__ . '/../Legacy/testreg.php';
+        return require __DIR__ . '/../legacy/testreg.php';
     }
 
     /**
@@ -39,5 +39,25 @@ class LoginController extends Controller
         }
 
         return redirect('/');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function register()
+    {
+        if (auth()->isUser()) {
+            return redirect('/profile');
+        }
+
+        return view('auth/register');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function store()
+    {
+        return require __DIR__ . '/../legacy/save_user.php';
     }
 }

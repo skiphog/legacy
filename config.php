@@ -5,7 +5,7 @@ return [
     /**
      * Имя приложения
      */
-    'domain'        => 'swing',
+    'domain'        => 'unix',
 
     /**
      * Использовать HTTPS

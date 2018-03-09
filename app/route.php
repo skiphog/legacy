@@ -19,8 +19,10 @@ $route->get('/findlist', 'FindController@index');
 $route->get('/findresult', 'FindController@search');
 
 // Login and exit
-$route->post('/authentication', 'LoginController@auth');
-$route->get('/quit', 'LoginController@quit');
+$route->get('/registration', 'AuthController@register');
+$route->get('/quit', 'AuthController@quit');
+$route->post('/authentication', 'AuthController@auth');
+$route->post('/regsave', 'AuthController@store');
 
 // Meeting
 $route->get('/hotmeet', 'MeetController@hot');

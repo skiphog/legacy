@@ -26,11 +26,11 @@ $total_new_moder1 = $result ?:'' ;
 
 
 ?> 
-<a href="/moder_log?action=moderations">Модерация</a> <span id="moder-count"><?= $total_new_moder; ?></span>
+<a href="/moderator/list?action=moderations">Модерация</a> <span id="moder-count"><?= $total_new_moder; ?></span>
 <br />
-<a href="/moder_log?action=photo">Фотографии</a>
+<a href="/moderator/list?action=photo">Фотографии</a>
 <br />
-<a href="/adminparty">Анонсы</a> <span class="moder-anons"><?= $total_new_moder1; ?></span>
+<a href="/moderator/party">Анонсы</a> <span class="moder-anons"><?= $total_new_moder1; ?></span>
 <br />
 <a href="/banlist">Управление</a>
 <br />

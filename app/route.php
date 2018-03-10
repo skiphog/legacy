@@ -78,3 +78,4 @@ $route->get('/donate', 'AnyController@donate');
 // Moderation
 $route->get('/moderator/list', 'Moderator\ModerController@index');
 $route->get('/moderator/party', 'Moderator\ModerController@party');
+$route->get('/moderator/statistic', 'Moderator\ModerController@statistic');

@@ -36,4 +36,12 @@ class ModerController extends Controller
     {
         return view('moderation/party');
     }
+
+    /**
+     * @return mixed
+     */
+    public function statistic()
+    {
+        return view('moderation/statistics');
+    }
 }

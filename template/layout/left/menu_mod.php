@@ -36,7 +36,7 @@ $total_new_moder1 = $result ?:'' ;
 <br />
 <a href="/modanket">Лог-лист</a>
 <br />
-<a href="/masters">Мастерская</a>
+<a href="/moderator/statistic">Статистика</a>
 </td>
 </tr>
 </table>

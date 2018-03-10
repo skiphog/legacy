@@ -34,4 +34,12 @@ class AnyController extends Controller
     {
         return view('unitpay/donate');
     }
+
+    /**
+     * @return mixed
+     */
+    public function personal()
+    {
+        return view('profile/personal');
+    }
 }

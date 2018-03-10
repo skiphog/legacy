@@ -76,7 +76,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
         if (!empty($paging)) {
             $paging_page = render('partials/paginate', [
                 'paginate' => $paging,
-                'link' => '/viewugroup_' . $g_id . '?page='
+                'link' => '/viewugroup_' . $g_id
             ]);
         }
     }

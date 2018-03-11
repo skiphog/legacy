@@ -149,7 +149,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 <div class="t-head">
     <div class="t-breadcrumbs">
         <?php if(!empty($thread['ugu_permission'])) {?>
-            <a href="/myugthreads">Мои новости</a> &bull; <a href="/myugroups">Мои группы</a> &bull;
+            <a href="/myugthreads">Мои новости</a> &bull; <a href="/my/groups">Мои группы</a> &bull;
         <?php }else{?>
             <a href="/newugthreads">Лента активности</a> &bull; <a href="/ugrouplist">Все группы</a> &bull;
         <?php }?>

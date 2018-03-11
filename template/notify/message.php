@@ -53,10 +53,10 @@ $myrow = auth();
 <div class="head-nav-message">
     <div class="nav-message">
         <ul class="nav-tabs links">
-            <li><a href="/newmydialog?getNewMessage">СООБЩЕНИЯ <span class="cnt count-mes"><?php echo $myrow->getCountMessage();?></span></a></li>
-            <li><a href="/newmydialog?getNewNotification">УВЕДОМЛЕНИЯ <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a></li>
-            <li><a href="/newmydialog?getContacts">КОНТАКТЫ</a></li>
-            <li><a href="/newmydialog?getHotuns">ХОТЮНЫ</a></li>
+            <li><a href="/my/dialogs?getNewMessage">СООБЩЕНИЯ <span class="cnt count-mes"><?php echo $myrow->getCountMessage();?></span></a></li>
+            <li><a href="/my/dialogs?getNewNotification">УВЕДОМЛЕНИЯ <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a></li>
+            <li><a href="/my/dialogs?getContacts">КОНТАКТЫ</a></li>
+            <li><a href="/my/dialogs?getHotuns">ХОТЮНЫ</a></li>
         </ul>
     </div>
     <div id="load-mes"><img src="/img/loading.gif" alt="loading" width="32" height="32" /></div>
@@ -299,7 +299,7 @@ $myrow = auth();
       }
 
       function getContent() {
-        var action = window.location.search.substr(1) || window.location.href.replace('http://swing/newmydialog?','');
+        var action = window.location.search.substr(1) || window.location.href.replace('http://swing/my/dialogs?','');
         if(action in motor) {
           setCurentLinkDown(action);
           loading.show();

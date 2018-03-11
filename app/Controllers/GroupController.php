@@ -2,25 +2,15 @@
 
 namespace App\Controllers;
 
-use System\Controller;
+use App\Controllers\User\UserController;
 
 /**
  * Class GroupController
  *
  * @package App\Controllers
  */
-class GroupController extends Controller
+class GroupController extends UserController
 {
-    /**
-     * Access
-     *
-     * @return bool
-     */
-    protected function access(): bool
-    {
-        return auth()->isUser();
-    }
-
     /**
      * @return mixed
      */

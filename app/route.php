@@ -8,11 +8,14 @@
 $route->get('/', 'IndexController@index');
 
 // Profile
-$route->get('/profile', 'ProfileController@index');
+$route->get('/profile', 'User\ProfileController@index');
+
+// User
+$route->get('/id{id}', 'User\IndexController@show', ['id' => '\d+']);
 
 // Dialogs
-$route->get('/newmydialog', 'NotificationController@messages');
-$route->get('/whoisloock', 'NotificationController@guests');
+$route->get('/my/dialogs', 'User\NotificationController@messages');
+$route->get('/my/guests', 'User\NotificationController@guests');
 
 //Search
 $route->get('/findlist', 'FindController@index');
@@ -43,6 +46,7 @@ $route->get('/viewdiary_{id}', 'DiaryController@show', ['id' => '\d+']);
 $route->get('/chat', 'ChatController@index');
 
 // Groups
+$route->get('/my/groups', 'User\GroupController@index');
 $route->get('/newugthreads', 'GroupController@line');
 $route->get('/ugrouplist', 'GroupController@index');
 $route->get('/ugrouplist_new', 'GroupController@new');
@@ -79,6 +83,6 @@ $route->get('/donate', 'AnyController@donate');
 $route->get('/personal', 'AnyController@personal');
 
 // Moderation
-$route->get('/moderator/list', 'Moderator\ModerController@index');
-$route->get('/moderator/party', 'Moderator\ModerController@party');
-$route->get('/moderator/statistic', 'Moderator\ModerController@statistic');
+$route->get('/moderator/list', 'Moderator\IndexController@index');
+$route->get('/moderator/party', 'Moderator\IndexController@party');
+$route->get('/moderator/statistic', 'Moderator\IndexController@statistic');

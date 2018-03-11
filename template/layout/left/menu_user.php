@@ -23,23 +23,23 @@
     </tr>
     <tr>
         <td style="padding-left: 30px;">
-            <a href="/profile">Моя страница</a> | <a href="/edit_profile"><span style="color:#961313">Редакт.</span></a>
-            <br />
-            <a href="/myalbum_page_1">Мои фотографии</a>
-            <br />
-            <a href="/myfriends_1_1">Мои друзья</a> <?php echo $myrow->getCountFriends(); ?>
-            <br />
-            <a href="/mydiary_1">Мои дневники</a>
-            <br />
-            <a href="/newmydialog?getNewMessage">Мои сообщения <span class="cnt count-mes"><?php echo $myrow->getCountMessage(); ?></span></a>
-            <br />
-            <a href="/newmydialog?getNewNotification">Мои уведомления <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a>
-            <br />
-            <a href="/whoisloock">Мои гости <span class="cnt count-guest"><?php echo $myrow->getCountGuest();?></span></a>
-            <br />
-            <a href="/myugroups_1">Мои группы</a>
-            <br />
-            <a href="/myugthreads_1">Мои новости</a>
+            <a href="/profile">Моя страница</a> | <a href="/profile/edit"><span style="color:#961313">Редакт.</span></a>
+            <br>
+            <a href="/my/albums">Мои фотографии</a>
+            <br>
+            <a href="/my/friends">Мои друзья</a> <?php echo $myrow->getCountFriends(); ?>
+            <br>
+            <a href="/my/diaries">Мои дневники</a>
+            <br>
+            <a href="/my/dialogs?getNewMessage">Мои сообщения <span class="cnt count-mes"><?php echo $myrow->getCountMessage(); ?></span></a>
+            <br>
+            <a href="/my/dialogs?getNewNotification">Мои уведомления <span class="cnt count-nof"><?php echo $myrow->getCountNotify();?></span></a>
+            <br>
+            <a href="/my/guests">Мои гости <span class="cnt count-guest"><?php echo $myrow->getCountGuest();?></span></a>
+            <br>
+            <a href="/my/groups">Мои группы</a>
+            <br>
+            <a href="/my/news">Мои новости</a>
             <br>
             <br>
             <a href="/travel">Cвинг в путешествии</a>
@@ -127,7 +127,7 @@
 <form method="post" action="/authentication">
 		<table border=0 width=235>
 			<tr>
-				<td align=center height=33 style="background: url('/img/tablehead.jpg') no-repeat;">
+				<td align=center height=33 style="background: url(/img/tablehead.jpg) no-repeat;">
 					<strong>АВТОРИЗАЦИЯ</strong>
 				</td>
 			</tr>
@@ -143,7 +143,7 @@
 			</tr>
 			<tr>
 				<td style="padding-left: 30px;">
-					<input id="check-1" name="save" type="checkbox" value="1"><label for="check-1">Запомнить меня</label>
+					<input id="check-1" name="save" type="checkbox" value="1" checked><label for="check-1">Запомнить меня</label>
 					<br />
 					<br />
 					<input class="btn btn-default" type="submit" value="Войти" />

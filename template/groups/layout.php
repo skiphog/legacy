@@ -3,9 +3,7 @@
  * @var \System\View $this
  */
 
-use System\Request;
-
-$uri = Request::uri();
+$uri = request()->uri();
 
 $links = [
     'newugthreads'   => 'Лента активности',

@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Controllers;
-
-use System\Controller;
+namespace App\Controllers\User;
 
 /**
  * Class NotificationController
  *
  * @package App\Controllers
  */
-class NotificationController extends Controller
+class NotificationController extends UserController
 {
-    /**
-     * Access
-     *
-     * @return bool
-     */
-    protected function access(): bool
-    {
-        return auth()->isUser();
-    }
-
     /**
      * @return mixed
      */

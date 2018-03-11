@@ -2,25 +2,13 @@
 
 namespace App\Controllers\Moderator;
 
-use System\Controller;
-
 /**
- * Class ModerController
+ * Class IndexController
  *
  * @package App\Controllers\Moderator
  */
-class ModerController extends Controller
+class IndexController extends ModeratorController
 {
-    /**
-     * Access
-     *
-     * @return bool
-     */
-    protected function access(): bool
-    {
-        return auth()->isModerator();
-    }
-
     /**
      * @return mixed
      */

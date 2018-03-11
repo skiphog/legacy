@@ -122,7 +122,7 @@ if ($g_access['access'] || $myrow->isModerator()) {
 <?php $this->start('content'); ?>
 <div class="g-sheme">
     <div class="g-breadcrumbs">
-        <a href="/ugrouplist" title="все группы">Все группы</a> &bull; <a href="/myugroups">Мои группы</a>
+        <a href="/ugrouplist" title="все группы">Все группы</a> &bull; <a href="/my/groups">Мои группы</a>
     </div>
 
     <div class="g-group">

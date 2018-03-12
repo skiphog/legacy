@@ -6,7 +6,7 @@
 $dbh = db();
 $myrow = auth();
 
-$sql = 'select g.ugroup_id, g.ug_title, g.ug_descr, g.ug_avatar, g.ug_hidden, tcnt, ucnt, u.city
+$sql = 'select g.ugroup_id, g.ug_title, g.ug_descr, g.ug_avatar, g.ug_hidden, g.user_id, tcnt, ucnt, u.city
 from ugroup g
   left join (select ugroup_id, count(ugthread_id) as tcnt
     from ugthread where ugt_dlt = 0

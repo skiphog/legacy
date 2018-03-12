@@ -2,25 +2,15 @@
 
 namespace App\Controllers;
 
-use System\Controller;
+use App\Controllers\User\UserController;
 
 /**
  * Class AlbumController
  *
  * @package App\Controllers
  */
-class AlbumController extends Controller
+class AlbumController extends UserController
 {
-    /**
-     * Access
-     *
-     * @return bool
-     */
-    protected function access(): bool
-    {
-        return auth()->isUser();
-    }
-
     /**
      * @return mixed
      */

@@ -62,7 +62,7 @@ $links = [
 <div class="group-nav">
 
     <div class="group-create">
-        <a class="btn btn-primary" href="/addugroup_on">Создать группу</a>
+        <a class="btn btn-primary" href="/groups/create">Создать группу</a>
     </div>
 
     <ul class="group-list">

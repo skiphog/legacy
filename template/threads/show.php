@@ -70,7 +70,7 @@ if($thread['polls_exist']) {
 }
 
 $page = request()->getInteger('page');
-
+$paging_page = '';
 $sql = 'select count(*) from ugcomments where ugthread_id = ' . (int)$thread['t_id'] . ' and ugc_dlt = 0';
 if ($count = $dbh->query($sql)->fetchColumn()) {
     $pagination = new Kilte\Pagination\Pagination($count, $page, 20, 2);
@@ -85,7 +85,6 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
     $comments = $dbh->query($sql)->fetchAll();
     $paging = $pagination->build();
 
-    $paging_page = '';
     if(!empty($paging)) {
         ob_start(); ?>
         <ul class="pagination">

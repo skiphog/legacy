@@ -11,7 +11,7 @@ $sql = 'select count(*) from ugroup where ug_dlt = 0';
 if ($count = $dbh->query($sql)->fetchColumn()) {
     $pagination = new Kilte\Pagination\Pagination($count, $page, 20, 2);
 
-    $sql = 'select g.ugroup_id, g.ug_title, g.ug_descr, g.ug_avatar, g.ug_hidden, tcnt, ucnt
+    $sql = 'select g.ugroup_id, g.ug_title, g.ug_descr, g.ug_avatar, g.ug_hidden, g.user_id, tcnt, ucnt
         from ugroup g
           left join (select ugroup_id, count(ugthread_id) as tcnt
             from ugthread where ugt_dlt = 0

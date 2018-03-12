@@ -142,7 +142,7 @@ function subText($text, $sub, $end = '')
 
 /**
  * @param int    $number
- * @param string $words [анкета|анкеты|анкет]
+ * @param string $words [1|2|0] - [анкета|анкеты|анкет]
  *
  * @return string
  */

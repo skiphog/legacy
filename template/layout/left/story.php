@@ -24,7 +24,7 @@
     <br>
     <a href="/group_result_1">Клубы свингеров</a>
     <br>
-    <a href="/all_events">Анонсы свинг вечеринок</a>
+    <a href="/parties">Анонсы свинг вечеринок</a>
     <br>
     <a href="/viewdiary_133">Правила сайта!</a>
     <br>

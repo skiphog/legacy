@@ -17,7 +17,7 @@ class PartyController extends Controller
      */
     public function index()
     {
-        return view('party/index');
+        return view('parties/index');
     }
 
     /**
@@ -25,7 +25,7 @@ class PartyController extends Controller
      */
     public function show()
     {
-        return view('party/show');
+        return view('parties/show');
     }
 
     /**
@@ -36,7 +36,7 @@ class PartyController extends Controller
     {
         $this->accessAuthUser();
 
-        return view('party/create');
+        return view('parties/create');
     }
 
     /**
@@ -47,7 +47,7 @@ class PartyController extends Controller
     {
         $this->accessAuthUser();
 
-        return view('party/edit');
+        return view('parties/edit');
     }
 
     /**
@@ -58,6 +58,6 @@ class PartyController extends Controller
     {
         $this->accessAuthUser();
 
-        return view('party/my');
+        return view('parties/my');
     }
 }

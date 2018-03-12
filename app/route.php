@@ -47,22 +47,23 @@ $route->get('/chat', 'ChatController@index');
 
 // Groups
 $route->get('/my/groups', 'User\GroupController@index');
-$route->get('/newugthreads', 'GroupController@line');
-$route->get('/ugrouplist', 'GroupController@index');
-$route->get('/ugrouplist_new', 'GroupController@new');
-$route->get('/ugrouplist_clubs', 'GroupController@clubs');
-$route->get('/viewugroup_{id}', 'GroupController@show', ['id' => '\d+']);
+
+$route->get('/groups', 'GroupController@index');
+$route->get('/groups/activity', 'GroupController@activity');
+$route->get('/groups/new', 'GroupController@new');
+$route->get('/groups/clubs', 'GroupController@clubs');
+$route->get('/groups/{id}', 'GroupController@show', ['id' => '\d+']);
 
 // Threads
 $route->get('/viewugthread_{id}_{page}', 'ThreadController@show', ['id' => '\d+', 'page' => '\d+']);
 $route->get('/viewugthread_{id}', 'ThreadController@redirect', ['id' => '\d+']);
 
 // Party
-$route->get('/all_events', 'PartyController@index');
-$route->get('/event_{id}', 'PartyController@show', ['id' => '\d+']);
-$route->get('/event/create', 'PartyController@create');
-$route->get('/event/{id}/edit', 'PartyController@edit', ['id' => '\d+']);
-$route->get('/my_events', 'PartyController@my');
+$route->get('/parties', 'PartyController@index');
+$route->get('/parties/{id}', 'PartyController@show', ['id' => '\d+']);
+$route->get('/parties/create', 'PartyController@create');
+$route->get('/parties/{id}/edit', 'PartyController@edit', ['id' => '\d+']);
+$route->get('/my/parties', 'PartyController@my');
 
 // Albums
 $route->get('/newalbums', 'AlbumController@index');
@@ -84,5 +85,5 @@ $route->get('/personal', 'AnyController@personal');
 
 // Moderation
 $route->get('/moderator/list', 'Moderator\IndexController@index');
-$route->get('/moderator/party', 'Moderator\IndexController@party');
-$route->get('/moderator/statistic', 'Moderator\IndexController@statistic');
+$route->get('/moderator/parties', 'Moderator\IndexController@parties');
+$route->get('/moderator/statistics', 'Moderator\IndexController@statistics');

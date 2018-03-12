@@ -89,12 +89,12 @@ $moderation = [
             <br>
             Ее можно закрепить на первых места следующих страниц:
         </p>
-        <h4>&mdash; в блоке "Группы"﻿ в разделе <a href="https://swing-kiska.ru/newugthreads_1" target="_blank">Интересные группы</a></h4>
+        <h4>&mdash; в блоке "Группы"﻿ в разделе <a href="https://swing-kiska.ru/groups/activity" target="_blank">Интересные группы</a></h4>
         <label>~ <strong>60 000</strong> просмотров в месяц</label>
         <div>
             <img src="/imgart/201705/f6fbc8052d0240a05bf01de9b178c4ff.jpg" width="640" height="403" alt="groups">
         </div>
-        <h4>&mdash; на первом месте в общем списке <a href="https://swing-kiska.ru/ugrouplist_1" target="_blank">всех Групп</a></h4>
+        <h4>&mdash; на первом месте в общем списке <a href="https://swing-kiska.ru/groups" target="_blank">всех Групп</a></h4>
         <label>~ <strong>3 000</strong> просмотров в месяц</label>
         <div>
             <img src="/imgart/201705/e5f7dd0b2bac368e00e036b30dd49220.jpg" width="640" height="349" alt="groups">
@@ -151,13 +151,13 @@ $moderation = [
                         <span>(<?= html($event['club']); ?>)</span>
                     </div>
                     <div><?= html($event['address']); ?></div>
-                    <a href="/event_<?=$event['id']; ?>">Посмотреть на сайте</a>
+                    <a href="/parties/<?=$event['id']; ?>">Посмотреть на сайте</a>
                 </div>
             </div>
         <?php }?>
     </div>
 <?php }?>
-    <a href="/event/create" class="btn btn-default">Добавить анонс встречи</a>
+    <a href="/parties/create" class="btn btn-default">Добавить анонс встречи</a>
     <br>
     <br>
     <a href="https://swing-kiska.ru/viewdiary_260">Реклама на сайте</a>

@@ -83,7 +83,7 @@ foreach (['price','site','tel','coords'] as $value) {
 
 <?php $this->start('content'); ?>
 <div class="t-breadcrumbs">
-    <a href="/my_events">Мои встречи</a> &bull; <?= html($event['title'])?>
+    <a href="/my/parties">Мои встречи</a> &bull; <?= html($event['title'])?>
 </div>
 <h2>Редактировать встречу</h2>
 <form id="event" action="" method="post">
@@ -313,7 +313,7 @@ foreach (['price','site','tel','coords'] as $value) {
   }
 
   function delEventImg(o) {
-    $(o).parent('div').find('img').attr('src','img/party-defolt.jpg').nextAll().eq(1).val('img/party-defolt.jpg');
+    $(o).parent('div').find('img').attr('src','/img/party-defolt.jpg').nextAll().eq(1).val('/img/party-defolt.jpg');
   }
 
 
@@ -393,7 +393,7 @@ foreach (['price','site','tel','coords'] as $value) {
           bb.removeClass('loading');
           return;
         }
-        window.location.replace('/my_events');
+        window.location.replace('/my/parties');
       },
       error:function () {
         alert("Forbidden 403");

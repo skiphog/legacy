@@ -30,13 +30,13 @@ $total_new_moder1 = $result ?:'' ;
 <br />
 <a href="/moderator/list?action=photo">Фотографии</a>
 <br />
-<a href="/moderator/party">Анонсы</a> <span class="moder-anons"><?= $total_new_moder1; ?></span>
+<a href="/moderator/parties">Вечеринки</a> <span class="moder-anons"><?= $total_new_moder1; ?></span>
 <br />
 <a href="/banlist">Управление</a>
 <br />
 <a href="/modanket">Лог-лист</a>
 <br />
-<a href="/moderator/statistic">Статистика</a>
+<a href="/moderator/statistics">Статистика</a>
 </td>
 </tr>
 </table>

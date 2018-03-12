@@ -27,7 +27,7 @@ if (!$thread = $dbh->query($sql)->fetch()) {
  * Если группа открытая или принят в группу или мастер группы или модератор то пускаем, инчае доступ закрыт
  */
 if(!(!$thread['g_hidden'] || $myrow->isModerator() || !empty($thread['ugu_permission']) || (int)$thread['g_master_id'] === $myrow->id)) {
-    header('/viewugroup_' . $thread['g_id']);
+    header('/groups/' . $thread['g_id']);
     die;
 }
 
@@ -148,11 +148,11 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 <div class="t-head">
     <div class="t-breadcrumbs">
         <?php if(!empty($thread['ugu_permission'])) {?>
-            <a href="/myugthreads">Мои новости</a> &bull; <a href="/my/groups">Мои группы</a> &bull;
+            <a href="/my/news">Мои новости</a> &bull; <a href="/my/groups">Мои группы</a> &bull;
         <?php }else{?>
-            <a href="/newugthreads">Лента активности</a> &bull; <a href="/ugrouplist">Все группы</a> &bull;
+            <a href="/groups/activity">Лента активности</a> &bull; <a href="/groups">Все группы</a> &bull;
         <?php }?>
-        Группа: <a href="/viewugroup_<?php echo $thread['g_id'] ;?>"><?php echo html($thread['g_title']) ;?></a>
+        Группа: <a href="/groups/<?php echo $thread['g_id'] ;?>"><?php echo html($thread['g_title']) ;?></a>
     </div>
 
     <div class="t-title border-box">

@@ -11,7 +11,7 @@ $myrow = auth();
         <img class="group-row-avatar" src="https://swing-kiska.ru/avatars/group_thumb/<?php echo $group['ug_avatar']; ?>">
         <div class="group-row-controls">
             <div>Участников: <strong><?php echo $group['ucnt'] ?: 1; ?></strong></div>
-            <div>
+            <div class="group-row-label">
                 <?php if((int)$group['ug_hidden'] === 1) : ?>
                     <span class="red">закрытая группа</span>
                 <?php else : ?>
@@ -34,7 +34,7 @@ $myrow = auth();
     </div>
 
     <div class="group-row-description">
-        <h2 class="noblock"><a href="/viewugroup_<?php echo $group['ugroup_id']; ?>"><?php echo html($group['ug_title']); ?></a></h2>
+        <h2 class="noblock"><a href="/groups/<?php echo $group['ugroup_id']; ?>"><?php echo html($group['ug_title']); ?></a></h2>
         <p><?php echo subText(nl2br(hyperlink($group['ug_descr'])), 700,'...')?></p>
     </div>
 </div>

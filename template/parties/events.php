@@ -14,7 +14,7 @@
                 <?php }?>
             <?php }?>
             </div>
-            <h3><a href="/event_<?= $event['id']; ?>"><?= html($event['title']); ?></a></h3>
+            <h3><a href="/parties/<?= $event['id']; ?>"><?= html($event['title']); ?></a></h3>
             <div class="e-date">
                 <span class="e-date-head"><?= date('d.m.Y',$event['ts_b']); ?> в <?= date('H:i',$event['ts_b']); ?></span>
                 <i class="e-date-time">

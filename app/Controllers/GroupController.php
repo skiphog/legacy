@@ -14,9 +14,9 @@ class GroupController extends UserController
     /**
      * @return mixed
      */
-    public function line()
+    public function activity()
     {
-        return view('groups/line');
+        return view('groups/activity');
     }
 
     /**

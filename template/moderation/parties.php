@@ -75,7 +75,7 @@ $moderation = [
 <?php $this->start('content'); ?>
 <div class="t-breadcrumbs">
     <!--suppress HtmlUnknownTarget -->
-    <a href="/all_events" target="_blank">Посмотреть анонсы на сайте</a>
+    <a href="/parties" target="_blank">Посмотреть анонсы на сайте</a>
 </div>
 <h1>Модерация свинг вечеринок</h1>
 <hr>

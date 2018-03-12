@@ -55,7 +55,7 @@ $myrow = auth();
 
 <?php $this->start('content'); ?>
 <div class="t-breadcrumbs">
-    <a href="/my_events">Мои встречи</a> &bull; Добавить анонс встречи
+    <a href="/my/parties">Мои встречи</a> &bull; Добавить анонс встречи
 </div>
 <h2>Добавить анонс встречи</h2>
 <img src="/img/add_event.jpg" width="639" height="290" alt="add event">
@@ -257,7 +257,7 @@ $myrow = auth();
   }
 
   function delEventImg(o) {
-    $(o).parent('div').find('img').attr('src','img/party-defolt.jpg').nextAll().eq(1).val('img/party-defolt.jpg');
+    $(o).parent('div').find('img').attr('src','/img/party-defolt.jpg').nextAll().eq(1).val('/img/party-defolt.jpg');
   }
 
 
@@ -339,7 +339,7 @@ $myrow = auth();
           bb.removeClass('loading');
           return;
         }
-        window.location.replace('/my_events');
+        window.location.replace('/my/parties');
       },
       error:function () {
         alert("Forbidden 403");

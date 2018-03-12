@@ -81,12 +81,12 @@ if (!empty($events) && $myrow->isUser()) {
     <hr>
 <?php if (!empty($u_events)) { ?>
     <h2>Вечеринки в вашем городе</h2>
-    <?= render('party/events', ['data' => $u_events]) ?>
+    <?= render('parties/events', ['data' => $u_events]) ?>
     <hr>
 <?php } ?>
 <?php if (!empty($events)) { ?>
     <h2>Все вечеринки</h2>
-    <?= render('party/events', ['data' => $events]) ?>
+    <?= render('parties/events', ['data' => $events]) ?>
     <hr>
 <?php } else { ?>
     <p>Пока нет анонсов</p>

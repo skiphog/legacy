@@ -210,13 +210,13 @@ $comments = $dbh->query($sql)->fetchAll();
         </td>
 
         <td valign="top" width="40%">
-            <h1>Региональные клубы <a href="/ugrouplist_clubs">(Все)</a></h1>
-            Хотите найти свинг клуб в своем городе? Тогда Вам <a href="/ugrouplist_clubs">сюда</a>!!!
+            <h1>Региональные клубы <a href="/groups/clubs">(Все)</a></h1>
+            Хотите найти свинг клуб в своем городе? Тогда Вам <a href="/groups/clubs">сюда</a>!!!
             <h2>Интересные группы</h2>
             <p>
-                <a href="/viewugroup_286">
+                <a href="/groups/286">
                     <img alt="Доктор" src="https://swing-kiska.ru/avatars/user_thumb/86397%2F06291301a2619834544fd94415e3a4f3.jpg" style="float:left; margin:5px;width: 60px"></a>
-                <a href="/viewugroup_286">Доктор свинг</a>
+                <a href="/groups/286">Доктор свинг</a>
                 <br>
                 группа для анонимных консультаций
                 <br>
@@ -224,17 +224,17 @@ $comments = $dbh->query($sql)->fetchAll();
             </p>
 
             <p>
-                <a href="/viewugroup_38">
+                <a href="/groups/38">
                     <img alt="Эротика" src="https://swing-kiska.ru/avatars/group_thumb/38avatar.jpg" style="float:left; margin:5px; width:60px;"></a>
-                <a href="/viewugroup_38">У меня есть что показать! Эротика</a>
+                <a href="/groups/38">У меня есть что показать! Эротика</a>
                 <br>
                 Если у вас есть что показать?
             </p>
 
             <p>
-                <a href="/viewugroup_97">
+                <a href="/groups/97">
                     <img alt="Играем" src="https://swing-kiska.ru/avatars/group_thumb/97avatar.jpg" style="float:left; margin:5px; width:60px;"></a>
-                <a href="/viewugroup_97">Играем на сайте!</a>
+                <a href="/groups/97">Играем на сайте!</a>
                 <br>
                 Группа с играми и конкурсами
             </p>
@@ -265,7 +265,7 @@ $comments = $dbh->query($sql)->fetchAll();
                         </td>
                     </tr>
                 </table>
-                <p>Групппа: <a href="viewugroup_<?= $row['ugroup_id']; ?>" target="_blank"><?= $row['ug_title']; ?></a>
+                <p>Групппа: <a href="/groups/<?= $row['ugroup_id']; ?>" target="_blank"><?= $row['ug_title']; ?></a>
                 </p>
                 <br/>
             </div>

@@ -20,15 +20,15 @@ class IndexController extends ModeratorController
     /**
      * @return mixed
      */
-    public function party()
+    public function parties()
     {
-        return view('moderation/party');
+        return view('moderation/parties');
     }
 
     /**
      * @return mixed
      */
-    public function statistic()
+    public function statistics()
     {
         return view('moderation/statistics');
     }

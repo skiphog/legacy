@@ -116,9 +116,9 @@ $moderation = [
 <div class="t-breadcrumbs">
     <!--suppress HtmlUnknownTarget -->
     <?php if($e_master) {?>
-        <a href="/my_events">Мои встречи</a> &bull;
+        <a href="/my/parties">Мои встречи</a> &bull;
     <?php }?>
-    <a href="/all_events">Все анонсы</a>
+    <a href="/parties">Все анонсы</a>
     &bull;
     <?= html($event['title'])?>
 </div>
@@ -131,7 +131,7 @@ $moderation = [
             <span class="e-mod e-mod-4">Неактивен</span>
         <?php }?>
         &mdash;
-        <a href="/event/<?= $id_event ;?>/edit">Редактировать</a>
+        <a href="/parties/<?= $id_event ;?>/edit">Редактировать</a>
         <br>
     <?php }?>
     <div class="e-head">

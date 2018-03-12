@@ -56,7 +56,7 @@ $my_groups = $dbh->query($sql)->fetchAll();
     <?php echo render('partials/groups', ['groups' => $my_groups]) ?>
 <?php else : ?>
     <h2>Вы не состоите ни в одной группе</h2>
-    <p><a href="/ugrouplist">Перейти к списку групп</a></p>
+    <p><a href="/groups">Перейти к списку групп</a></p>
 <?php endif; ?>
 <?php $this->stop(); ?>
 

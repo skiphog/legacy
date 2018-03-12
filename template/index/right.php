@@ -44,7 +44,7 @@ echo $adverts_1;
 
 <table width=100% style="border:1px solid #AAA;">
 <tr><td bgcolor=#e1eaff align=center style="border:1px solid #AAA; height: 20px; padding: 5px;">
-<b>Анонсы вечеринок (<a href="/all_events">все</a>)</b>
+<b>Анонсы вечеринок (<a href="/parties">все</a>)</b>
 </td></tr>
 <tr><td style="padding: 10px 5px;">
 <?php
@@ -92,7 +92,7 @@ unset($u_city,$u_events,$events);
 if(!empty($all_events)) {
     foreach ($all_events as $value) {?>
     <div class="maindiv border-box">
-        <a href="/event_<?=$value['id'];?>">
+        <a href="/parties/<?=$value['id'];?>">
             <span><?=date('d-m-Y',strtotime($value['begin_date']));?></span>
             <span><?= $value['city']; ?></span>
             <span><?php echo subText($value['title'],45,'&nbsp;...'); ?></span>
@@ -100,7 +100,7 @@ if(!empty($all_events)) {
     </div>
 <?php }}?>
 <br>
-<div style="text-align: center;"><a href="/my_events" style="font-weight: bold;">&gt;&gt; Добавить анонс &lt;&lt;</a></div>
+<div style="text-align: center;"><a href="/my/parties" style="font-weight: bold;">&gt;&gt; Добавить анонс &lt;&lt;</a></div>
 </td>
 </tr>
 </table>
@@ -232,7 +232,7 @@ $user_birthday = $dbh->query($sql)->fetch();
 
 <table width=100% style="border:1px solid #AAA;">
 <tr><td bgcolor=#e1eaff align=center style="border:1px solid #AAA; height: 20px; padding: 5px;">
-<b>Новые группы <a href="/ugrouplist_new_1">(все)</a></b>
+<b>Новые группы <a href="/groups/new">(все)</a></b>
 </td></tr>
 
 <tr><td style="padding: 10px 5px;">
@@ -245,7 +245,7 @@ if(!$group = $cache->get('new_group')) {
 	ob_start();
 	while ($myrow_diary_m = $sth->fetch()) {?>
         <div class="maindiv border-box">
-            <a href="/viewugroup_<?=$myrow_diary_m['ugroup_id'];?>"><?=nickartGlobal(smile($parse->parse(subText($myrow_diary_m['ug_title'],35,'&nbsp;...'))));?></a>
+            <a href="/groups/<?=$myrow_diary_m['ugroup_id'];?>"><?=nickartGlobal(smile($parse->parse(subText($myrow_diary_m['ug_title'],35,'&nbsp;...'))));?></a>
             <br>
             <a class="hover-tip" href="/id<?=$myrow_diary_m['id'];?>">
                 <img src="/img/info_small_<?php echo $myrow_diary_m['gender'];?>.png" width = "15" height="14">

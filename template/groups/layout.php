@@ -6,10 +6,10 @@
 $uri = request()->uri();
 
 $links = [
-    'newugthreads'   => 'Лента активности',
-    'ugrouplist'     => 'Все группы',
-    'ugrouplist_new' => 'Новые группы',
-    'ugrouplist_clubs'   => 'Региональные клубы'
+    'groups/activity'   => 'Лента активности',
+    'groups'     => 'Все группы',
+    'groups/new' => 'Новые группы',
+    'groups/clubs'   => 'Региональные клубы'
 ];
 
 ?>

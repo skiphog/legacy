@@ -97,32 +97,6 @@
     </tr>
 </table>
 <div id="info-privat" class="border-box"></div>
-<script>
-		var title = document.title;
-		function setTitleCount(c) {
-			document.title = (c == 0)? title: '('+ c + ') ' + title;
-		}
-		var infoPrivat = $("#info-privat");
-		function show_privat() {
-			$.getJSON('ajax.php').success(function(json){
-				if(json['count'] == 0) {
-					$(".count-mes").text("");
-				}else {
-					$(".count-mes").text(json['count']);
-					if(json['message'] != "") {
-						infoPrivat.html(json['message']).slideDown().delay(8000).slideUp();
-					}
-				}
-				setTitleCount(json['count']);
-				pr = setTimeout(show_privat,30000);
-			}).error(function(){
-				$(".count-mes").text("");
-			});
-		}
-		var pr = setTimeout(show_privat,30000);
-
-		function coloseTipInfo(){infoPrivat.slideUp();}
-	</script>
 <?php else: ?>
 <form method="post" action="/authentication">
 		<table border=0 width=235>

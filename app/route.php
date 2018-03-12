@@ -7,6 +7,9 @@
 // Main page
 $route->get('/', 'IndexController@index');
 
+// Private message
+$route->get('/private','User\NotificationController@private');
+
 // Profile
 $route->get('/profile', 'User\ProfileController@index');
 

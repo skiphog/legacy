@@ -196,6 +196,33 @@
       });
     });
     /* --- smile */
+
+    /* private */
+  var title = document.title;
+
+  function setTitleCount(c) {
+    document.title = (c === 0) ? title : '('+ c + ') ' + title;
+  }
+  var infoPrivat = $("#info-privat"), count_mess = $('.count-mes');
+
+  function show_privat() {
+    $.getJSON('/private').success(function(json) {
+      count_mess.text(json['count'] || '');
+
+      if(json['message'] !== '') {
+        infoPrivat.html(json['message']).slideDown();
+      }
+
+      setTitleCount(json['count']);
+      pr = setTimeout(show_privat,30000);
+    }).error(function() {
+      count_mess.text('');
+    });
+  }
+  var pr = setTimeout(show_privat,30000);
+
+  function closeTipInfo(){infoPrivat.slideUp();}
+    /* --- private*/
   /*console.log('%c       ', 'font-size: 100px; background: url(http://cdn.nyanit.com/nyan2.gif) no-repeat;');*/
     <?php endif; ?>
 </script>

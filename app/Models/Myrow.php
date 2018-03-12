@@ -166,6 +166,31 @@ class Myrow extends User
     }
 
     /**
+     * @return mixed
+     */
+    public function getPrivateMessage()
+    {
+        $dbh = db();
+        $sql = 'select count(*) from privat where pr_id_pol = ' . $this->id . ' and pr_pol_vis = 0';
+
+        if(!$count = $dbh->query($sql)->fetchColumn()) {
+            return null;
+        }
+
+        $sql = 'select p.pr_id_otp, u.login, pr_text, pr_time 
+          from privat p 
+          join users u on u.id = p.pr_id_otp 
+          where p.pr_id_pol = ' . $this->id . ' 
+          and p.pr_pol_vis = 0 
+        order by p.pr_id desc limit 1';
+
+        return [
+            'count' => $count,
+            'message' => $dbh->query($sql)->fetch()
+        ];
+    }
+
+    /**
      * @return string|null
      */
     public function getSgender(): ?string

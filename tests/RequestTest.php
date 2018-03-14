@@ -20,6 +20,7 @@ class RequestTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/index/page?g=1&test2';
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $_SERVER['REMOTE_ADDR'] = '192.30.253.113';
         $this->request = new Request();
     }
 
@@ -157,5 +158,19 @@ class RequestTest extends TestCase
     public function testIsAjax()
     {
         $this->assertTrue($this->request->isAjax());
+    }
+
+    public function testGetClientIp()
+    {
+        $this->assertEquals('192.30.253.113',$this->request->getClientIp());
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        $this->assertFalse($this->request->getClientIp());
+    }
+
+    public function testGetClientIp2long()
+    {
+        $this->assertEquals(3223256433, $this->request->getClientIp2long());
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        $this->assertEquals(0, $this->request->getClientIp2long());
     }
 }

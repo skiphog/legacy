@@ -33,7 +33,7 @@ class ContainerTest extends TestCase
      */
     public function testNotExistsClassInContainer()
     {
-        $class = Container::get('NotExists');
+        Container::get('NotExists');
     }
 
     public function testSetClosure()

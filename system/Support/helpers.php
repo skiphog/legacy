@@ -85,9 +85,17 @@ function view($name, array $params = [])
  *
  * @return \System\Response
  */
-function redirect($url = '/')
+function redirect($url)
 {
     return (new \System\Response())->redirect($url);
+}
+
+/**
+ * @return \System\Response
+ */
+function back()
+{
+    return (new \System\Response())->redirect(null);
 }
 
 /**

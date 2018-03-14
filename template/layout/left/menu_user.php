@@ -45,6 +45,9 @@
             <a href="/travel">Cвинг в путешествии</a>
             <br>
             <br>
+            <a href="/test">Тест</a>
+            <br>
+            <br>
             <a href="/donate">Поддержать сайт</a>
             <?php if($myrow->isAdmin()) : ?>
                 <br>

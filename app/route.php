@@ -90,3 +90,6 @@ $route->get('/personal', 'AnyController@personal');
 $route->get('/moderator/list', 'Moderator\IndexController@index');
 $route->get('/moderator/parties', 'Moderator\IndexController@parties');
 $route->get('/moderator/statistics', 'Moderator\IndexController@statistics');
+
+// Test
+$route->get('/test', 'TestController@index');

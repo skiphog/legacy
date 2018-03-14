@@ -105,7 +105,7 @@ class Myrow extends User
 
                 if (!$uonline || (int)$uonline < ((int)$_SERVER['REQUEST_TIME'] - 600)) {
                     db()->exec('update users_timestamps 
-                      set last_view = NOW(), ip = ' . ip2long($_SERVER['REMOTE_ADDR']) . ' 
+                      set last_view = NOW(), ip = ' . request()->getClientIp2long() . ' 
                     where id = ' . $this->id);
 
                     $cache->delete('online_users');

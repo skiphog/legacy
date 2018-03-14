@@ -99,7 +99,7 @@ class Request
      */
     public function getValues($params = null, $options = null): array
     {
-        return (null !==  $result = $this->get($params, $options)) ? array_values((array)$result) : [null];
+        return (null !== $result = $this->get($params, $options)) ? array_values((array)$result) : [null];
     }
 
     /**
@@ -110,7 +110,7 @@ class Request
      */
     public function postValues($params = null, $options = null): array
     {
-        return (null !==  $result = $this->post($params, $options)) ? array_values((array)$result) : [null];
+        return (null !== $result = $this->post($params, $options)) ? array_values((array)$result) : [null];
     }
 
     /**
@@ -153,7 +153,6 @@ class Request
         return $this->postValues($params, self::STRING);
     }
 
-
     /**
      * @param array $params
      */
@@ -164,6 +163,46 @@ class Request
         }
     }
 
+    /**
+     * @return string
+     */
+    public function uri(): string
+    {
+        return ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    }
+
+    /**
+     * @return string
+     */
+    public function type(): string
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAjax(): bool
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
+    }
+
+    /**
+     * @return mixed [ip address or false]
+     */
+    public function getClientIp()
+    {
+        return filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP,
+            FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+    }
+
+    /**
+     * @return int
+     */
+    public function getClientIp2long(): int
+    {
+        return (int)sprintf('%u', ip2long($this->getClientIp()));
+    }
 
     /**
      * @param array $data
@@ -244,29 +283,5 @@ class Request
         }
 
         return $callback($data);
-    }
-
-    /**
-     * @return string
-     */
-    public function uri(): string
-    {
-        return ltrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    }
-
-    /**
-     * @return string
-     */
-    public function type(): string
-    {
-        return $_SERVER['REQUEST_METHOD'];
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAjax(): bool
-    {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }
 }

@@ -99,7 +99,7 @@ class Request
      */
     public function getValues($params = null, $options = null): array
     {
-        return array_values((array)$this->get($params, $options));
+        return (null !==  $result = $this->get($params, $options)) ? array_values((array)$result) : [null];
     }
 
     /**
@@ -110,7 +110,7 @@ class Request
      */
     public function postValues($params = null, $options = null): array
     {
-        return array_values((array)$this->post($params, $options));
+        return (null !==  $result = $this->post($params, $options)) ? array_values((array)$result) : [null];
     }
 
     /**
@@ -224,7 +224,7 @@ class Request
     protected function sanitizeString($data)
     {
         return $this->sanitize($data, function ($value) {
-            return null !== $value ? trim(strip_tags($value)) : null;
+            return trim(strip_tags($value));
         });
     }
 

@@ -85,7 +85,7 @@ function view($name, array $params = [])
  *
  * @return \System\Response
  */
-function redirect($url)
+function redirect($url = null)
 {
     return (new \System\Response())->redirect($url);
 }
@@ -95,7 +95,7 @@ function redirect($url)
  */
 function back()
 {
-    return (new \System\Response())->redirect(null);
+    return redirect();
 }
 
 /**
@@ -139,7 +139,7 @@ function html($string)
  */
 function subText($text, $sub, $end = '')
 {
-    if (isset($text[$sub * 2 + 2])) {
+    if (mb_strlen($text) > $sub) {
         $text = mb_substr($text, 0, (int)$sub);
         $text = mb_substr($text, 0, mb_strrpos($text, ' '));
         $text .= $end;
@@ -196,6 +196,33 @@ function clearString($string)
  * @return string
  */
 function compress($string)
+{
+    $replace = [
+        '#>[^\S ]+#s'                                                     => '>',
+        '#[^\S ]+<#s'                                                     => '<',
+        '#([\t ])+#s'                                                     => ' ',
+        '#^([\t ])+#m'                                                    => '',
+        '#([\t ])+$#m'                                                    => '',
+        '#//[a-zA-Z0-9 ]+$#m'                                             => '',
+        '#[\r\n]+([\t ]?[\r\n]+)+#s'                                      => "\n",
+        '#>[\r\n\t ]+<#s'                                                 => '><',
+        '#}[\r\n\t ]+#s'                                                  => '}',
+        '#}[\r\n\t ]+,[\r\n\t ]+#s'                                       => '},',
+        '#\)[\r\n\t ]?{[\r\n\t ]+#s'                                      => '){',
+        '#,[\r\n\t ]?{[\r\n\t ]+#s'                                       => ',{',
+        '#\),[\r\n\t ]+#s'                                                => '),',
+        '#([\r\n\t ])?([a-zA-Z0-9]+)="([a-zA-Z0-9_/\\-]+)"([\r\n\t ])?#s' => '$1$2=$3$4'
+    ];
+
+    return preg_replace(array_keys($replace), array_values($replace), $string);
+}
+
+/**
+ * @param $string
+ *
+ * @return string
+ */
+function compressOld($string)
 {
     return preg_replace(['/>[^\S ]+/s', '/[^\S ]+</s', '/(\s)+/s'], ['>', '<', '\\1'], $string);
 }

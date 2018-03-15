@@ -80,6 +80,7 @@ class Response
     }
 
     /**
+     * @todo:: Отвязать от конфига!
      * Записывает данные в куки
      *
      * @param string|array $name
@@ -131,6 +132,8 @@ class Response
      *
      * @param int   $code
      * @param mixed $data
+     *
+     * @codeCoverageIgnore
      */
     public function abort(int $code, $data = null): void
     {

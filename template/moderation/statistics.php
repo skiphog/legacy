@@ -34,8 +34,7 @@ if (!$series = $cache->get('moderation_active')) {
               and log_date between ' . $dbh->quote($value->format('Y-m-d H:i:s')) . ' 
               and ' . $dbh->quote($value->modify('last day of 23:59:59')->format('Y-m-d H:i:s')) . ') cnt
             from users u
-            where u.id in
-        (89978, 3, 1, 6, 10022, 75378, 82534, 60146, 69467, 12796, 103745, 80445, 80445, 101453, 75943, 96249)';
+            where u.moderator <> 0 and u.id not in (73726, 935)';
 
         $sth = $dbh->query($sql);
         $i = 0;

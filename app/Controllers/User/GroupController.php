@@ -46,4 +46,12 @@ class GroupController extends UserController
     {
 
     }
+
+    /**
+     * @return \System\Response
+     */
+    public function activity()
+    {
+        return view('groups/my_activity');
+    }
 }

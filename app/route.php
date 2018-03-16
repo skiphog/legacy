@@ -50,6 +50,7 @@ $route->get('/chat', 'ChatController@index');
 
 // Groups
 $route->get('/my/groups', 'User\GroupController@index');
+$route->get('/my/groups/activity', 'User\GroupController@activity');
 
 $route->get('/groups', 'GroupController@index');
 $route->get('/groups/activity', 'GroupController@activity');

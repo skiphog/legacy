@@ -8,10 +8,19 @@ use PHPUnit\Framework\TestCase;
  */
 class ResponseTest extends TestCase
 {
+    /**
+     * @var Response $response
+     */
+    protected $response;
+
+    protected function setUp()/* The :void return type declaration that should be here would cause a BC issue */
+    {
+        $this->response = new Response();
+    }
+
     public function testSetData()
     {
-        $response =  new Response();
-        $this->assertInstanceOf(Response::class, $response->setData('test'));
+        $this->assertInstanceOf(Response::class, $this->response->setData('test'));
     }
 
     /**
@@ -19,12 +28,10 @@ class ResponseTest extends TestCase
      */
     public function testRedirect()
     {
-        $response =  new Response();
-
-        $this->assertInstanceOf(Response::class, $response->redirect());
+        $this->assertInstanceOf(Response::class, $this->response->redirect());
         $this->assertEquals(302, http_response_code());
         $this->assertArraySubset(['Location: /'], xdebug_get_headers());
-        $response->redirect('/test/test');
+        $this->response->redirect('/test/test');
         $this->assertArraySubset(['Location: /test/test'], xdebug_get_headers());
     }
 
@@ -33,9 +40,7 @@ class ResponseTest extends TestCase
      */
     public function testJson()
     {
-        $response =  new Response();
-
-        $this->assertInstanceOf(Response::class, $response->json(['test']));
+        $this->assertInstanceOf(Response::class, $this->response->json(['test']));
         $this->assertEquals(200, http_response_code());
         $this->assertArraySubset(['Content-Type: application/json;charset=utf-8'], xdebug_get_headers());
     }
@@ -45,9 +50,7 @@ class ResponseTest extends TestCase
      */
     public function testJsonError()
     {
-        $response = new Response();
-
-        $response->json("\xB1\x31");
+        $this->response->json("\xB1\x31");
     }
 
     /**
@@ -55,9 +58,7 @@ class ResponseTest extends TestCase
      */
     public function testWithSession()
     {
-        $response = new Response();
-
-        $response->redirect()
+        $this->response->redirect()
             ->withSession('foo', 'bar')
             ->withSession(['baz' => 'bla', 'b' => 'g']);
 
@@ -69,9 +70,7 @@ class ResponseTest extends TestCase
      */
     public function testWithCookie()
     {
-        $response = new Response();
-
-        $response->redirect()
+        $this->response->redirect()
             ->withSession('foo', 'bar')
             ->withCookie('foo', 'bar');
         $this->assertNotFalse(strpos(xdebug_get_headers()[1],'Set-Cookie: foo=bar;'));
@@ -82,9 +81,7 @@ class ResponseTest extends TestCase
      */
     public function testWithHeaders()
     {
-        $response = new Response();
-
-        $response->redirect()
+        $this->response->redirect()
             ->withSession('foo', 'bar')
             ->withCookie('foo', 'bar')
             ->withHeaders(['test' => 'headers']);
@@ -96,11 +93,9 @@ class ResponseTest extends TestCase
      */
     public function testToString()
     {
-        $response = new Response();
-
-        $response->setData('test string');
-        $this->assertEquals('test string', (string)$response);
-        $response->json(['foo' => 'bar']);
-        $this->assertEquals(['foo' => 'bar'], json_decode((string)$response, true));
+        $this->response->setData('test string');
+        $this->assertEquals('test string', (string)$this->response);
+        $this->response->json(['foo' => 'bar']);
+        $this->assertEquals(['foo' => 'bar'], json_decode((string)$this->response, true));
     }
 }

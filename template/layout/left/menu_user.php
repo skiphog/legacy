@@ -39,7 +39,7 @@
             <br>
             <a href="/my/groups">Мои группы</a>
             <br>
-            <a href="/my/news">Мои новости</a>
+            <a href="/my/groups/activity">Мои новости</a>
             <br>
             <br>
             <a href="/travel">Cвинг в путешествии</a>

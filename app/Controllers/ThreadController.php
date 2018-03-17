@@ -25,10 +25,10 @@ class ThreadController extends Controller
 
     /**
      * todo:: legacy
+     *
      * @param Request $request
      *
      * @return mixed
-     * @throws NotFoundException
      */
     public function redirect(Request $request)
     {
@@ -39,16 +39,16 @@ class ThreadController extends Controller
           where ugthread_id = ' . $thread_id . ' and ugc_dlt = 0 
         group by ugthread_id';
 
-        if (!$result = db()->query($sql)->fetch()) {
-            throw new NotFoundException('Такой темы не существует');
+        if ($result = db()->query($sql)->fetch()) {
+            return redirect(sprintf(
+                '/viewugthread_%d_%d#com%d',
+                $thread_id,
+                ceil((int)$result['cnt'] / 20),
+                $result['c_id']
+            ));
         }
 
-        return redirect(sprintf(
-            '/viewugthread_%d_%d#com%d',
-            $thread_id,
-            ceil((int)$result['cnt'] / 20),
-            $result['c_id']
-        ));
+        return redirect('/viewugthread_' . $thread_id . '_1');
     }
 
     /**

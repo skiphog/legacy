@@ -100,7 +100,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
 <?php $this->extend('layout/layout'); ?>
 
-<?php $this->start('title'); ?><?php $this->stop(); ?>
+<?php $this->start('title'); ?><?php echo html($thread['t_title']) ;?><?php $this->stop(); ?>
 <?php $this->start('description'); ?><?php $this->stop(); ?>
 
 <?php $this->start('style'); ?>
@@ -169,7 +169,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
             <span class="city-<?php echo getCityCompare($myrow->city, $thread['city']);?>"><?php echo $thread['city'];?></span>
         </div>
         <div class="t-titles">
-            <h1><?php echo $thread['t_title'] ;?></h1>
+            <h1><?php echo html($thread['t_title']) ;?></h1>
         </div>
         <div class="t-date">
             <?php echo date('d-m-Y H:i',strtotime($thread['t_date']));?> | <strong><?php echo (new \App\Components\SwingDate($thread['t_date']))->getHumans(); ?></strong>

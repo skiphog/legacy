@@ -17,7 +17,7 @@ return [
      */
     'db'            => [
         'host'     => 'localhost',
-        'dbname'   => 'skip',
+        'dbname'   => 'swingsite',
         'username' => 'root',
         'password' => '',
         'options'  => [

@@ -1,0 +1,1 @@
+<script>!function(){var o=$("<div/>").addClass("scroll-top").appendTo("body");o.click(function(){$("html:not(:animated),body:not(:animated)").stop().animate({scrollTop:0},500)});var l=$(window);l.scroll(function(){o.toggleClass("scroll-top-show",l.scrollTop()>1200)})}();</script>

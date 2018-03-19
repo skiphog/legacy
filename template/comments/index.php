@@ -20,7 +20,6 @@
     .nav-tabs li:first-child > a {border-left: none;border-radius: 4px 0 0 4px;margin-left: 0;}
     .nav-tabs li:last-child > a {border-right: none;border-radius: 0 4px 4px 0;}
     #load-mes{float: left;margin: 2px 0 0 2px;display: none;}
-    .scrollTop{position:fixed;width:100%;bottom:-50px;height:50px;text-align:center;background:url('/img/up.png') no-repeat center rgba(46, 140, 227, 0.29);z-index:9999;cursor:pointer;}
     .msg-div{color:#444;border:1px solid #DDDDE5;margin:10px auto;padding: 10px;}
     .msg-div-header,.msg-div-message,.msg-info{display: table-cell;vertical-align:top;}
     .msg-div-header,.msg-info{padding-right:10px;}
@@ -149,12 +148,7 @@
       getContent();
     });
   }
-  var scrollTop = $("<div/>").addClass('scrollTop').appendTo('body');
-  scrollTop.click(function(e){e.preventDefault();$('html:not(:animated),body:not(:animated)').animate({scrollTop: 400}, 500)});
-  var windowSt = $(window);
-  windowSt.scroll(function(){
-    (windowSt.scrollTop() > 1200 ) ? scrollTop.stop().animate({bottom:0}, 100) : scrollTop.stop().animate({bottom:-50}, 100);
-  });
   getContent();
 </script>
+<?php echo render('/partials/scroll-top'); ?>
 <?php $this->stop(); ?>

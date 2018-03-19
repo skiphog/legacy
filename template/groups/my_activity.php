@@ -46,7 +46,6 @@ if ($groups_list = $dbh->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0)) {
 
         $comments = $dbh->query($sql)->fetchAll();
     }
-
 }
 
 ?>
@@ -99,4 +98,6 @@ if ($groups_list = $dbh->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0)) {
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
+
+<?php echo render('/partials/scroll-top'); ?>
 <?php $this->stop(); ?>

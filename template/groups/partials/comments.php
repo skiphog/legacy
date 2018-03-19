@@ -8,8 +8,8 @@ $myrow = auth();
 $parse = new AllParse();
 ?>
 <?php foreach($comments as $row) : ?>
-    <div class="borderkis padkis <?php if((int)$row['ugt_hidden'] === 1 || (int)$row['ug_hidden'] === 1) : ?>red-border<?php endif; ?>">
-        <h2 class="noblock">Тема: <a href="/viewugthread_<?= $row['ugthread_id']; ?>"><?= $row['ugt_title']; ?></a></h2>
+    <div class="borderkis padkis">
+        <h2 class="noblock">Тема: <a href="/viewugthread_<?= $row['ugthread_id']; ?>"><?= html($row['ugt_title']); ?></a></h2>
         <span class="count"> сообщений:<?= $row['cnt']; ?></span>
         <br><br>
         <table>
@@ -29,7 +29,9 @@ $parse = new AllParse();
                 </td>
             </tr>
         </table>
-        <p>Групппа: <a href="/groups/<?= $row['ugroup_id']; ?>" target="_blank"><?= $row['ug_title']; ?></a></p>
+        <p><?php if((int)$row['ug_hidden'] === 1) : ?><span class="red">Закрытая группа:</span><?php else: ?>Групппа:<?php endif; ?>
+            <a href="/groups/<?= $row['ugroup_id']; ?>" target="_blank"><?= $row['ug_title']; ?></a>
+        </p>
         <br>
     </div>
 <?php endforeach; ?>

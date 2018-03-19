@@ -22,7 +22,7 @@ $links = [
 .group-nav{
     padding: 10px;
     background-color: #e1eaff;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, .09) 0 2px 0;
 }

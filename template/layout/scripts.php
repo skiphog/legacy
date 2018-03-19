@@ -209,7 +209,7 @@
     $.getJSON('/private').success(function(json) {
       count_mess.text(json['count'] || '');
 
-      if(json['message'] !== '') {
+      if(json['message'] !== undefined && json['message'] !== '') {
         infoPrivat.html(json['message']).slideDown();
       }
 

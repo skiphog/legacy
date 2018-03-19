@@ -152,4 +152,5 @@ $comments = $dbh->query($sql)->fetchAll();
     });
   });
 </script>
+<?php echo render('/partials/scroll-top'); ?>
 <?php $this->stop(); ?>

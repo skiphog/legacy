@@ -4,12 +4,9 @@
  */
 
 use App\Components\SwingDate;
-use App\Components\Parse\All as AllParse;
 
 $dbh = db();
 $myrow = auth();
-
-$parse = new AllParse();
 
 $sql = 'select t.ugt_title, t.ugt_date, t.ugthread_id, t.ugroup_id, g.ug_title 
   from ugthread t
@@ -52,140 +49,7 @@ $comments = $dbh->query($sql)->fetchAll();
 <?php $this->start('description'); ?>Лента активности<?php $this->stop(); ?>
 
 <?php $this->start('style-group'); ?>
-<style>
-    #response {
-        margin-top: 20px;
-    }
-
-    #loadsa {
-        text-align: center;
-        margin-bottom: -40px
-    }
-
-    .fixed {
-        position: fixed;
-        top: 2px;
-    }
-
-    .spinner {
-        background-color: #2E8CE3;
-        -webkit-animation: rotateplane 1.2s infinite ease-in-out;
-        animation: rotateplane 1.2s infinite ease-in-out;
-    }
-
-    @-webkit-keyframes rotateplane {
-        0% {
-            -webkit-transform: perspective(120px)
-        }
-        50% {
-            -webkit-transform: perspective(120px) rotateY(180deg)
-        }
-        100% {
-            -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
-        }
-    }
-
-    @keyframes rotateplane {
-        0% {
-            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-            -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-        }
-        50% {
-            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-            -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-        }
-        100% {
-            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-        }
-    }
-
-    section a, .scrollTop {
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s
-    }
-
-    section a {
-        text-decoration: none;
-        color: #11638C;
-    }
-
-    section a:hover {
-        color: #00F;
-    }
-
-    section label {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-
-    .scrollTop {
-        cursor: pointer;
-        opacity: 0.5;
-        background: #2E8CE3;
-        width: 60px;
-        text-align: center;
-        bottom: -30px;
-        height: 15px;
-        padding: 5px;
-        left: 50%;
-    }
-
-    .scrollTop:hover, .scrop {
-        opacity: 1;
-        background: #24b662;
-    }
-
-    .borderkis, .friend-foto {
-        border: 1px solid #CCC;
-        box-shadow: 0 1px 5px #CCC;
-        -moz-box-shadow: 0 1px 5px #CCC;
-        -webkit-border-shadow: 0 1px 5px #CCC;
-    }
-
-    .padkis, div.padkis table {
-        padding: 20px;
-        margin-bottom: 15px;
-    }
-
-    div.padkissmall {
-        padding: 10px;
-        margin-bottom: 5px;
-    }
-
-    div.padkissmall > a {
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    div.padkissmall span {
-        display: block;
-        margin-left: 15px;
-    }
-
-    div.padkis table {
-        background-color: rgb(244, 244, 244);
-        border: 1px solid rgb(209, 209, 209);
-        box-shadow: 0 1px 5px rgb(209, 209, 209);
-        -moz-box-shadow: 0 1px 5px rgb(209, 209, 209);
-        -webkit-border-shadow: 0 1px 5px rgb(209, 209, 209);
-    }
-
-    .red-border {
-        border: 1px solid #FF8B8B !important;
-        box-shadow: 0 1px 5px #FF8B8B !important;
-        -moz-box-shadow: 0 1px 5px #FF8B8B !important;
-        -webkit-border-shadow: 0 1px 5px #FF8B8B !important;
-    }
-
-    .group-new-thread {
-        background-color: #F4F4F4;
-        margin-bottom: 20px;
-        border-radius: 4px;
-        box-shadow: rgba(0, 0, 0, .09) 0 2px 0;
-    }
-</style>
+<?php echo render('groups/partials/style'); ?>
 <?php $this->stop(); ?>
 
 <?php $this->start('content-group'); ?>
@@ -243,33 +107,7 @@ $comments = $dbh->query($sql)->fetchAll();
 </table>
 <div id="response">
     <section id="result">
-        <?php foreach($comments as $row) : ?>
-            <div class="borderkis padkis <?php if((int)$row['ugt_hidden'] === 1 || (int)$row['ug_hidden'] === 1) : ?>red-border<?php endif; ?>">
-                <h2 class="noblock">Тема: <a href="/viewugthread_<?= $row['ugthread_id']; ?>"><?= $row['ugt_title']; ?></a></h2>
-                <span class="count"> сообщений:<?= $row['cnt']; ?></span>
-                <br/><br/>
-                <table>
-                    <tr>
-                        <td valign="top" width="100">
-                            <div class="avatar" style="background-image: url(<?php echo avatar($myrow, $row['commpic1'], $row['commphoto_visibility']); ?>);"></div>
-                            <a href="/id<?= $row['commid']; ?>" class="hover-tip" target="_blank">
-                                <img src="/img/info_small_<?= $row['commgender']; ?>.png" width="15" height="14"/>
-                            </a>
-                            <a href="/id<?= $row['commid']; ?>" target="_blank"><b><?= $row['commlogin']; ?></b></a>
-                            <br/>
-                            <?= $row['ugc_date']; ?>
-                        </td>
-                        <td>
-                            <?= nl2br(nickart(imgart(smile($parse->parse($row['ugc_text']))))); ?>
-                            <br/>
-                        </td>
-                    </tr>
-                </table>
-                <p>Групппа: <a href="/groups/<?= $row['ugroup_id']; ?>" target="_blank"><?= $row['ug_title']; ?></a>
-                </p>
-                <br/>
-            </div>
-        <?php endforeach; ?>
+        <?php echo render('groups/partials/comments', compact('comments')) ?>
     </section>
 </div>
 <?php $this->stop(); ?>

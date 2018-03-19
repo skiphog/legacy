@@ -6,7 +6,7 @@ use System\Controller;
 
 /**
  * Class DiaryController
- *
+ * @todo:: добавить возможность не публиковать дневники на главной странице
  * @package App\Controllers
  */
 class DiaryController extends Controller

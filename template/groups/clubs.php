@@ -34,7 +34,7 @@ $groups = array_merge($user_clubs, $clubs);
 
 <?php $this->start('content-group'); ?>
 <?php if(!empty($groups)) : ?>
-    <?php echo render('partials/groups', compact('groups')) ?>
+    <?php echo render('groups/partials/groups', compact('groups')) ?>
 <?php else : ?>
     Нет Клубов
 <?php endif; ?>

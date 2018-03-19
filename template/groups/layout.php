@@ -6,10 +6,11 @@
 $uri = request()->uri();
 
 $links = [
-    'groups/activity'   => 'Лента активности',
-    'groups'     => 'Все группы',
-    'groups/new' => 'Новые группы',
-    'groups/clubs'   => 'Региональные клубы'
+    'my/groups/activity' => 'Мои новости',
+    'groups/activity'    => 'Лента групп',
+    'groups'             => 'Все группы',
+    'groups/new'         => 'Новые группы',
+    'groups/clubs'       => 'Региональные клубы'
 ];
 
 ?>
@@ -39,10 +40,9 @@ $links = [
 .group-list li {
     display: inline-block;
     vertical-align: top;
-    font-size: 20px;
-    line-height: 1.15;
+    font-size: 16px;
     font-weight: 700;
-    padding: 1px 5px;
+    padding: 5px;
 }
 .group-list li:not(:last-child)::after{
     content: ' •';

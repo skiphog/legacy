@@ -47,7 +47,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 <?php $this->start('content-group'); ?>
 <?php if(!empty($groups)) : ?>
     <?php echo $paging_page; ?>
-    <?php echo render('partials/groups', compact('groups')) ?>
+    <?php echo render('groups/partials/groups', compact('groups')) ?>
     <?php echo $paging_page; ?>
 <?php else : ?>
     Нет груп

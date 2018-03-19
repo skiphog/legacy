@@ -53,10 +53,10 @@ $my_groups = $dbh->query($sql)->fetchAll();
 <?php endif; ?>
 <?php if(!empty($my_groups)) : ?>
     <h2>Состою в группах</h2>
-    <?php echo render('partials/groups', ['groups' => $my_groups]) ?>
+    <?php echo render('groups/partials/groups', ['groups' => $my_groups]) ?>
 <?php else : ?>
     <h2>Вы не состоите ни в одной группе</h2>
-    <p><a href="/groups">Перейти к списку групп</a></p>
+    <p><a href="/groups">Перейти к списку групп</a> или <a href="/groups/clubs">региональных клубов</a></p>
 <?php endif; ?>
 <?php $this->stop(); ?>
 

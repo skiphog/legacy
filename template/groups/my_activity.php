@@ -3,12 +3,9 @@
 * @var \System\View $this
 */
 use App\Components\SwingDate;
-use App\Components\Parse\All as AllParse;
 
 $dbh = db();
 $myrow = auth();
-
-$parse = new AllParse();
 
 $sql = 'select distinct b.ugroup_id
 from ugroup b
@@ -54,18 +51,52 @@ if ($groups_list = $dbh->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0)) {
 
 ?>
 
-<?php $this->extend('layout/layout'); ?>
+<?php $this->extend('groups/layout'); ?>
 
 <?php $this->start('title'); ?>Акстивность в моих группах<?php $this->stop(); ?>
 <?php $this->start('description'); ?>Активность в моих группах<?php $this->stop(); ?>
 
-<?php $this->start('style'); ?>
+<?php $this->start('style-group'); ?>
+<?php echo render('groups/partials/style'); ?>
 <?php $this->stop(); ?>
 
-<?php $this->start('content'); ?>
-<?php var_dump($threads, $comments); ?>
+<?php $this->start('content-group'); ?>
+<?php if(!empty($threads)) : ?>
+    <table class="group-new-thread" border="0" cellspacing="20" width="100%">
+        <tr>
+            <td valign="top">
+                <h1>Новые темы</h1>
+
+                <?php foreach ($threads as $thread) : ?>
+                    <?php echo $thread['date']->format('d-m-Y'); ?> |
+                    <small><?php echo $thread['date']->getHumansPerson(); ?></small>
+                    <br>
+                    <a style="font-weight:700;font-size:16px;" href="/viewugthread_<?php echo $thread['ugthread_id']; ?>"><?php echo html($thread['ugt_title']); ?></a>
+                    <?php if ($thread['date']->modify('+1 day') > new DateTimeImmutable()) : ?>
+                        <img src="/img/newred.gif" border="0">
+                    <?php endif; ?>
+                    <br>
+                    группа: <span style="font-weight: bold"><?php echo html($thread['ug_title']); ?></span>
+                    <br>
+                    <br>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <?php if(!empty($comments)) : ?>
+        <div id="response">
+            <section id="result">
+                <?php echo render('groups/partials/comments', compact('comments')) ?>
+            </section>
+        </div>
+    <?php else : ?>
+        <p>В темах пока нет новых комментариев</p>
+    <?php endif; ?>
+<?php else : ?>
+    <h2>Вы не состоите ни в одной группе</h2>
+    <p><a href="/groups">Перейти к списку групп</a> или <a href="/groups/clubs">региональных клубов</a></p>
+<?php endif; ?>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>
 <?php $this->stop(); ?>
-

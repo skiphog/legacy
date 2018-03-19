@@ -15,6 +15,7 @@
     <filter>
         <whitelist>
             <directory suffix=".php">./system</directory>
+            <directory suffix=".php">./app/Components</directory>
         </whitelist>
     </filter>
 

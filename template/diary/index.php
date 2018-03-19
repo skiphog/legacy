@@ -7,6 +7,8 @@ $dbh = db();
 $myrow = auth();
 
 $diaries = [];
+$paging_page = 'Одна страница';
+
 $page = request()->getInteger('page');
 $parse = new \App\Components\Parse\NoSession();
 
@@ -31,7 +33,6 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
     $diaries = $sth->fetchAll();
     $paging = $pagination->build();
 
-    $paging_page = 'Одна страница';
     if (!empty($paging)) {
         $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/diary']);
     }
@@ -82,7 +83,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
                         <?php
 
                         if($myrow->id === (int)$diary['id'] || $myrow->isModerator()) :?>
-                            <a href="/reddiary_<?=$diary['id_di'];?>">// редактировать</a>
+                            <a href="/diaries/<?=$diary['id_di'];?>/edit">// редактировать</a>
                         <?php endif;?>
                     </div>
                 </td>

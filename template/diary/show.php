@@ -128,11 +128,11 @@ $parse = new $parse_class();
             <div>
                 <a href="/udiary_<?= $diary['id_user']; ?>_page_1">Весь дневник <?= $diary['login']; ?></a>
                 <?php if ($access) { ?>
-                    &bull; <a href="/reddiary_<?= $diary_id; ?>">Редактировать</a> &bull;
+                    &bull; <a href="/diaries/<?= $diary_id; ?>/edit">Редактировать</a> &bull;
                     <?php if ($myrow->isModerator()) { ?>
-                        <a href="/hidediary_<?= $diary_id; ?>" onclick="return window.confirm('Вы уверены что хотите скрыть этот дневник?')">Скрыть</a> &bull;
+                        <a href="/diaries/<?= $diary_id; ?>/hide" onclick="return window.confirm('Вы уверены что хотите скрыть этот дневник?')">Скрыть</a> &bull;
                     <?php } ?>
-                    <a class="del-comm" href="/deldiary_<?= $diary_id; ?>" onclick="return window.confirm('Вы уверены что хотите удалить этот дневник?')">Удалить</a>
+                    <a class="red" href="/diaries/<?= $diary_id; ?>/delete" onclick="return window.confirm('Вы уверены что хотите удалить этот дневник?')">Удалить</a>
                 <?php } ?>
 
             </div>

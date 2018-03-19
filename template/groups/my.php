@@ -49,7 +49,7 @@ $my_groups = $dbh->query($sql)->fetchAll();
 <a class="btn btn-primary" href="/groups/create">Создать группу</a>
 <?php if(!empty($master_groups)) : ?>
     <h2>Мои группы</h2>
-    <?php echo render('partials/groups', ['groups' => $master_groups]) ?>
+    <?php echo render('groups/partials/groups', ['groups' => $master_groups]) ?>
 <?php endif; ?>
 <?php if(!empty($my_groups)) : ?>
     <h2>Состою в группах</h2>

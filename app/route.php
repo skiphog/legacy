@@ -43,6 +43,7 @@ $route->get('/travel/create', 'TravelController@create');
 
 // Diary
 $route->get('/my/diaries', 'User\DiaryController@index');
+$route->get('/diaries/create', 'User\DiaryController@create');
 
 $route->get('/diary', 'DiaryController@index');
 $route->get('/viewdiary_{id}', 'DiaryController@show', ['id' => '\d+']);

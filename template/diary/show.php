@@ -8,7 +8,7 @@ use App\Exceptions\NotFoundException;
 $dbh = db();
 $myrow = auth();
 
-$diary_id = abs((int)request()->get('id'));
+$diary_id = request()->getInteger('id');
 
 $sql = 'select d.title_di,d.text_di, d.data_di,d.likes,d.dislikes,d.v_count,
   u.id id_user,u.login,u.gender,u.pic1,u.photo_visibility

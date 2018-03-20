@@ -8,7 +8,7 @@
 $route->get('/', 'IndexController@index');
 
 // Private message
-$route->get('/private','User\NotificationController@private');
+$route->get('/private', 'User\NotificationController@private');
 
 // Profile
 $route->get('/profile', 'User\ProfileController@index');
@@ -44,6 +44,7 @@ $route->get('/travel/create', 'TravelController@create');
 // Diary
 $route->get('/my/diaries', 'User\DiaryController@index');
 $route->get('/diaries/create', 'User\DiaryController@create');
+$route->get('/diaries/{id}/edit', 'User\DiaryController@edit', ['id' => '\d+']);
 
 $route->get('/diary', 'DiaryController@index');
 $route->get('/viewdiary_{id}', 'DiaryController@show', ['id' => '\d+']);

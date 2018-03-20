@@ -24,4 +24,12 @@ class DiaryController extends UserController
     {
         return view('diary/create');
     }
+
+    /**
+     * @return mixed
+     */
+    public function edit()
+    {
+        return view('diary/edit');
+    }
 }

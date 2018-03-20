@@ -24,18 +24,7 @@ if (!$myrow->isActive()) {
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
-    <h2>Добавить дневник</h2>
-    <form method="post">
-        <label for="title">Заголовок:</label>
-        <br>
-        <input id="title" style="width: 90%; border: 1px solid #888; padding: 5px;" type="text" name="title" required>
-        <br>
-        <label for="editor">Текст:</label>
-        <br>
-        <textarea style="width: 90%; height: 150px; border: 1px solid #888;padding: 5px;" name="text" id="editor"></textarea>
-        <br>
-        <button class="btn btn-primary" type="submit">Опубликовать</button>
-    </form>
+<?php require __PATH__ . '/template/diary/form.php'; ?>
 <?php $this->stop(); ?>
 
 <?php $this->start('script'); ?>

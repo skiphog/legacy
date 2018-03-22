@@ -49,6 +49,14 @@ function cache()
 }
 
 /**
+ * @return \Predis\Client
+ */
+function redis()
+{
+    return app(\Predis\Client::class);
+}
+
+/**
  * @return \App\Models\Myrow
  */
 function auth()

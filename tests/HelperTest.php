@@ -68,35 +68,42 @@ class HelperTest extends TestCase
     public function testPlural()
     {
         $parts = 'тест|теста|тестов';
-        $this->assertEquals('тест', plural(1,$parts));
-        $this->assertEquals('теста', plural(2,$parts));
-        $this->assertEquals('тестов', plural(0,$parts));
-        $this->assertEquals('тестов', plural(30,$parts));
-        $this->assertEquals('теста', plural(43,$parts));
-        $this->assertEquals('тест', plural(1051,$parts));
-        $this->assertEquals('', plural(1051,'1|2'));
+        $this->assertEquals('тест', plural(1, $parts));
+        $this->assertEquals('теста', plural(2, $parts));
+        $this->assertEquals('тестов', plural(0, $parts));
+        $this->assertEquals('тестов', plural(30, $parts));
+        $this->assertEquals('теста', plural(43, $parts));
+        $this->assertEquals('тест', plural(1051, $parts));
+        $this->assertEquals('', plural(1051, '1|2'));
     }
 
     public function testStrCompare()
     {
-        $this->assertEquals(1, strCompare('test','test'));
-        $this->assertEquals(1, strCompare('Привет','привет'));
-        $this->assertEquals(1, strCompare('TEst','teST'));
-        $this->assertEquals(0, strCompare('tests','test'));
-        $this->assertEquals(0, strCompare('tesT','tests'));
-        $this->assertEquals(0, strCompare('test`s','test\'s'));
+        $this->assertEquals(1, strCompare('test', 'test'));
+        $this->assertEquals(1, strCompare('Привет', 'привет'));
+        $this->assertEquals(1, strCompare('TEst', 'teST'));
+        $this->assertEquals(0, strCompare('tests', 'test'));
+        $this->assertEquals(0, strCompare('tesT', 'tests'));
+        $this->assertEquals(0, strCompare('test`s', 'test\'s'));
     }
 
     public function testClearString()
     {
-        $this->assertEquals('test',clearString('<a>test</a>'));
-        $this->assertEquals('test',clearString('<a>test'));
-        $this->assertEquals('test',clearString('test</a>'));
+        $this->assertEquals('test', clearString('<a>test</a>'));
+        $this->assertEquals('test', clearString('<a>test'));
+        $this->assertEquals('test', clearString('test</a>'));
     }
 
     public function testCompress()
     {
         $this->assertEquals('<tag><tag>test<tag>', compress("\n\n<tag>\n\n <tag>test\t\n\n<tag>"));
         $this->assertEquals('<tag> <tag>test<tag>', compressOld("\n\n<tag>\n\n <tag>test\t\n\n<tag>"));
+    }
+
+    public function testRedis()
+    {
+        $redis = redis();
+        $this->assertInstanceOf(\Predis\Client::class, $redis);
+        $this->assertSame($redis, redis());
     }
 }

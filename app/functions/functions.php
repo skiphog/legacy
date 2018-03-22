@@ -11,14 +11,14 @@
 function avatar(\App\Models\Myrow $myrow, string $pic, int $uVis): string
 {
     if (0 === $uVis || (2 === $uVis && $myrow->isUser()) || (3 === $uVis && $myrow->isReal())) {
-        return 'https://swing-kiska.ru/avatars/user_thumb/' . $pic;
+        return '/avatars/user_thumb/' . $pic;
     }
 
     if (2 === $uVis) {
-        return 'https://swing-kiska.ru/img/avatars/user.jpg';
+        return '/img/avatars/user.jpg';
     }
 
-    return 'https://swing-kiska.ru/img/avatars/real.jpg';
+    return '/img/avatars/real.jpg';
 }
 
 /**

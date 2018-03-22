@@ -3,8 +3,8 @@
  * Доступ к аватарке пользователя
  *
  * @param \App\Models\Myrow $myrow
- * @param string              $pic
- * @param int                 $uVis
+ * @param string            $pic
+ * @param int               $uVis
  *
  * @return string
  */
@@ -172,7 +172,9 @@ function smile($text)
  */
 function imgart($text)
 {
-    return preg_replace('#{{(.+?)}}#', '<img src="/imgart/$1">', $text);
+    return preg_replace_callback('~{{(.+?)}}~', function ($matches) {
+        return '<img class="ug-imgart" src="/imgart/'. urlencode($matches[1]) .'">';
+    }, $text);
 }
 
 /**

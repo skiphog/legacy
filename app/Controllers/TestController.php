@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Components\Parse\All;
 use System\Controller;
-use System\Request;
 
 /**
  * Class TestController
@@ -12,10 +12,30 @@ use System\Request;
  */
 class TestController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        var_dump(
-            $request->getClientIp2long()
-        );
+        return urlencode('<script>alert("hello")</script>');
+    }
+
+    public function replaceDiary()
+    {
+        $dbh = db();
+
+        $sql = 'select id_di, text_di from diary';
+        $diaries = $dbh->query($sql)->fetchAll();
+
+        $sql = 'update diary set text_di = :text where id_di = :id';
+        $sth = $dbh->prepare($sql);
+
+        foreach ($diaries as $diary) {
+            $text = preg_replace('~\[img\]imgart/~', '[img]/imgart/', $diary['text_di']);
+
+            $sth->execute([
+                'text' => $text,
+                'id'   => $diary['id_di']
+            ]);
+        }
+
+        var_dump('ok');
     }
 }

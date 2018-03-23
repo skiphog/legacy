@@ -28,21 +28,19 @@ class Router
     /**
      * @param string $pattern
      * @param string $handler
-     * @param array  $tokens
      */
-    public function get($pattern, $handler, array $tokens = []): void
+    public function get($pattern, $handler): void
     {
-        $this->setRoute('GET', $pattern, $handler, $tokens);
+        $this->setRoute('GET', $pattern, $handler);
     }
 
     /**
      * @param string $pattern
      * @param string $handler
-     * @param array  $tokens
      */
-    public function post($pattern, $handler, array $tokens = []): void
+    public function post($pattern, $handler): void
     {
-        $this->setRoute('POST', $pattern, $handler, $tokens);
+        $this->setRoute('POST', $pattern, $handler);
     }
 
     /**
@@ -56,38 +54,33 @@ class Router
         $uri = $request->uri();
 
         foreach ((array)$this->routes[$request->type()] as $pattern => $handler) {
-            $pattern = $this->getPattern($pattern, current($handler));
-
-            if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
-                return array_merge(explode('@', key($handler)), [$matches]);
+            if (preg_match('#^' . $this->getPattern($pattern) . '$#', $uri, $matches)) {
+                return array_merge(explode('@', $handler), [$matches]);
             }
         }
 
         throw new \InvalidArgumentException('Роут ' . $request->type() . ' [' . $uri . '] не зарегистрирован');
     }
 
-    /** @noinspection MoreThanThreeArgumentsInspection */
     /**
      * @param string $method
      * @param string $pattern
      * @param string $handler
-     * @param array  $tokens
      */
-    protected function setRoute($method, $pattern, $handler, $tokens): void
+    protected function setRoute($method, $pattern, $handler): void
     {
-        $this->routes[$method][trim($pattern, '/')] = [$handler => $tokens];
+        $this->routes[$method][trim($pattern, '/')] = $handler;
     }
 
     /**
      * @param string $pattern
-     * @param array  $handler
      *
-     * @return mixed
+     * @return string
      */
-    protected function getPattern($pattern, array $handler)
+    protected function getPattern($pattern): string
     {
-        return preg_replace_callback('#{([^\}]+)\}#', function ($matches) use ($handler) {
-            return '(?P<' . $matches[1] . '>' . ($handler[$matches[1]] ?? '[^}]+') . ')';
+        return preg_replace_callback('#{([^\}:]+):?([^\}]*?)\}#', function ($matches) {
+            return '(?P<' . $matches[1] . '>' . ($matches[2] ?: '.+') . ')';
         }, $pattern);
     }
 }

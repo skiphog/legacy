@@ -14,7 +14,7 @@ $route->get('/private', 'User\NotificationController@private');
 $route->get('/profile', 'User\ProfileController@index');
 
 // User
-$route->get('/id{id}', 'User\IndexController@show', ['id' => '\d+']);
+$route->get('/id{id:\d+}', 'User\IndexController@show');
 
 // Dialogs
 $route->get('/my/dialogs', 'User\NotificationController@messages');
@@ -44,10 +44,10 @@ $route->get('/travel/create', 'TravelController@create');
 // Diary
 $route->get('/my/diaries', 'User\DiaryController@index');
 $route->get('/diaries/create', 'User\DiaryController@create');
-$route->get('/diaries/{id}/edit', 'User\DiaryController@edit', ['id' => '\d+']);
+$route->get('/diaries/{id:\d+}/edit', 'User\DiaryController@edit');
 
 $route->get('/diary', 'DiaryController@index');
-$route->get('/viewdiary_{id}', 'DiaryController@show', ['id' => '\d+']);
+$route->get('/viewdiary_{id:\d+}', 'DiaryController@show');
 
 // Chat
 $route->get('/chat', 'ChatController@index');
@@ -60,26 +60,26 @@ $route->get('/groups', 'GroupController@index');
 $route->get('/groups/activity', 'GroupController@activity');
 $route->get('/groups/new', 'GroupController@new');
 $route->get('/groups/clubs', 'GroupController@clubs');
-$route->get('/groups/{id}', 'GroupController@show', ['id' => '\d+']);
+$route->get('/groups/{id:\d+}', 'GroupController@show');
 
 // Threads
-$route->get('/viewugthread_{id}_{page}', 'ThreadController@show', ['id' => '\d+', 'page' => '\d+']);
-$route->get('/viewugthread_{id}', 'ThreadController@redirect', ['id' => '\d+']);
+$route->get('/viewugthread_{id:\d+}_{page:\d+}', 'ThreadController@show');
+$route->get('/viewugthread_{id:\d+}', 'ThreadController@redirect');
 
 // Party
 $route->get('/parties', 'PartyController@index');
-$route->get('/parties/{id}', 'PartyController@show', ['id' => '\d+']);
+$route->get('/parties/{id:\d+}', 'PartyController@show');
 $route->get('/parties/create', 'PartyController@create');
-$route->get('/parties/{id}/edit', 'PartyController@edit', ['id' => '\d+']);
+$route->get('/parties/{id:\d+}/edit', 'PartyController@edit');
 $route->get('/my/parties', 'PartyController@my');
 
 // Albums
 $route->get('/newalbums', 'AlbumController@index');
-$route->get('/albums_{album_id}_{photo_id}', 'AlbumController@show', ['album_id' => '\d+', 'photo_id' => '\d+']);
+$route->get('/albums_{album_id:\d+}_{photo_id:\d+}', 'AlbumController@show');
 
 // Story
-$route->get('/story_{id}_{page}', 'ArticleController@index', ['id' => '\d+', 'page' => '\d+']);
-$route->get('/viewstory_{id}', 'ArticleController@show', ['id' => '\d+']);
+$route->get('/story_{id:\d+}_{page:\d+}', 'ArticleController@index');
+$route->get('/viewstory_{id:\d+}', 'ArticleController@show');
 
 // Any
 $route->get('/last_comments', 'AnyController@comments');

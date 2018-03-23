@@ -1,7 +1,9 @@
 <?php
 
+use System\Router;
+
 /**
- * @var System\Router $route
+ * @var Router $route
  */
 
 // Main page
@@ -16,9 +18,15 @@ $route->get('/profile', 'User\ProfileController@index');
 // User
 $route->get('/id{id:\d+}', 'User\IndexController@show');
 
-// Dialogs
-$route->get('/my/dialogs', 'User\NotificationController@messages');
-$route->get('/my/guests', 'User\NotificationController@guests');
+// My
+$route->group('my', function (Router $r) {
+    $r->get('/dialogs', 'User\NotificationController@messages');
+    $r->get('/guests', 'User\NotificationController@guests');
+    $r->get('/groups', 'User\GroupController@index');
+    $r->get('/groups/activity', 'User\GroupController@activity');
+    $r->get('/diaries', 'User\DiaryController@index');
+    $r->get('/parties', 'PartyController@my');
+});
 
 //Search
 $route->get('/findlist', 'FindController@index');
@@ -38,40 +46,43 @@ $route->get('/onlinemeet', 'MeetController@online');
 $route->get('/newmeet', 'MeetController@new');
 
 // Travel
-$route->get('/travel', 'TravelController@index');
-$route->get('/travel/create', 'TravelController@create');
+$route->group('travel', function (Router $r) {
+    $r->get('/', 'TravelController@index');
+    $r->get('/create', 'TravelController@create');
+});
 
 // Diary
-$route->get('/my/diaries', 'User\DiaryController@index');
-$route->get('/diaries/create', 'User\DiaryController@create');
-$route->get('/diaries/{id:\d+}/edit', 'User\DiaryController@edit');
-
 $route->get('/diary', 'DiaryController@index');
 $route->get('/viewdiary_{id:\d+}', 'DiaryController@show');
+
+$route->group('diaries', function (Router $r) {
+    $r->get('/create', 'User\DiaryController@create');
+    $r->get('/{id:\d+}/edit', 'User\DiaryController@edit');
+});
 
 // Chat
 $route->get('/chat', 'ChatController@index');
 
 // Groups
-$route->get('/my/groups', 'User\GroupController@index');
-$route->get('/my/groups/activity', 'User\GroupController@activity');
-
-$route->get('/groups', 'GroupController@index');
-$route->get('/groups/activity', 'GroupController@activity');
-$route->get('/groups/new', 'GroupController@new');
-$route->get('/groups/clubs', 'GroupController@clubs');
-$route->get('/groups/{id:\d+}', 'GroupController@show');
+$route->group('groups', function (Router $r) {
+    $r->get('/', 'GroupController@index');
+    $r->get('/activity', 'GroupController@activity');
+    $r->get('/new', 'GroupController@new');
+    $r->get('/clubs', 'GroupController@clubs');
+    $r->get('/{id:\d+}', 'GroupController@show');
+});
 
 // Threads
 $route->get('/viewugthread_{id:\d+}_{page:\d+}', 'ThreadController@show');
 $route->get('/viewugthread_{id:\d+}', 'ThreadController@redirect');
 
 // Party
-$route->get('/parties', 'PartyController@index');
-$route->get('/parties/{id:\d+}', 'PartyController@show');
-$route->get('/parties/create', 'PartyController@create');
-$route->get('/parties/{id:\d+}/edit', 'PartyController@edit');
-$route->get('/my/parties', 'PartyController@my');
+$route->group('parties', function (Router $r) {
+    $r->get('/', 'PartyController@index');
+    $r->get('/{id:\d+}', 'PartyController@show');
+    $r->get('/create', 'PartyController@create');
+    $r->get('/{id:\d+}/edit', 'PartyController@edit');
+});
 
 // Albums
 $route->get('/newalbums', 'AlbumController@index');
@@ -92,9 +103,11 @@ $route->get('/donate', 'AnyController@donate');
 $route->get('/personal', 'AnyController@personal');
 
 // Moderation
-$route->get('/moderator/list', 'Moderator\IndexController@index');
-$route->get('/moderator/parties', 'Moderator\IndexController@parties');
-$route->get('/moderator/statistics', 'Moderator\IndexController@statistics');
+$route->group('moderator', function (Router $r) {
+    $r->get('/list', 'Moderator\IndexController@index');
+    $r->get('/parties', 'Moderator\IndexController@parties');
+    $r->get('/statistics', 'Moderator\IndexController@statistics');
+});
 
 // Test
 $route->get('/test', 'TestController@index');

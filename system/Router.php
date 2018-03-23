@@ -9,10 +9,18 @@ namespace System;
  */
 class Router
 {
+    /**
+     * @var array $routes
+     */
     public $routes = [
         'GET'  => [],
         'POST' => []
     ];
+
+    /**
+     * @var string
+     */
+    public $prefix;
 
     /**
      * @return Router
@@ -44,6 +52,18 @@ class Router
     }
 
     /**
+     * @param string   $prefix
+     * @param callable $callback
+     */
+    public function group($prefix, callable $callback): void
+    {
+        $this->prefix = $prefix;
+        $callback($this);
+        $this->prefix = null;
+    }
+
+    /**
+     * @todo:: Закешировать все роуты на продакшн
      * @param Request $request
      *
      * @return array
@@ -69,7 +89,9 @@ class Router
      */
     protected function setRoute($method, $pattern, $handler): void
     {
-        $this->routes[$method][trim($pattern, '/')] = $handler;
+        $pattern = trim(trim($this->prefix, '/') . '/' . trim($pattern, '/'), '/');
+
+        $this->routes[$method][$pattern] = $handler;
     }
 
     /**

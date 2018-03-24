@@ -108,8 +108,8 @@ $parse = new $parse_class();
 <?php $this->start('content') ?>
 <div id="mass-content">
     <div class="d-breadcrumbs">
-        <a href="/diary">Все дневники</a> &bull;
-        <a href="/udiary_<?= $diary['id_user']; ?>_page_1">дневник <?= $diary['login']; ?></a>
+        <a href="/diaries">Все дневники</a> &bull;
+        <a href="/diaries/user/<?= $diary['id_user']; ?>">дневник <?= $diary['login']; ?></a>
     </div>
 
     <div class="d-user-info">
@@ -126,7 +126,7 @@ $parse = new $parse_class();
                 <strong><?= (new \App\Components\SwingDate($diary['data_di']))->getHumans(); ?></strong></div>
             <div>Посещений: <strong><?= $diary['v_count']; ?></strong></div>
             <div>
-                <a href="/udiary_<?= $diary['id_user']; ?>_page_1">Весь дневник <?= $diary['login']; ?></a>
+                <a href="/diaries/user/<?= $diary['id_user']; ?>">Весь дневник <?= $diary['login']; ?></a>
                 <?php if ($access) { ?>
                     &bull; <a href="/diaries/<?= $diary_id; ?>/edit">Редактировать</a> &bull;
                     <?php if ($myrow->isModerator()) { ?>

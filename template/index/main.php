@@ -35,8 +35,8 @@ $parse = new \App\Components\Parse\Clear();
                                 <li><a href="/findlist">Поиск анкет</a> с учетом специфики свинг-знакомств</li>
                                 <li>Реал-статус, гарантирует знакомство с реальными свингер-парами</li>
                                 <li>Чат, система мгновеных сообщений,
-                                    <a href="/group_result_1">свинг группы и клубы</a>, свинг
-                                    <a href="/diary">дневники</a>, "горячие" знакомства, удобный поиск по анкетам свингеров и многое другое.
+                                    <a href="/groups/clubs">свинг группы и клубы</a>, свинг
+                                    <a href="/diaries">дневники</a>, "горячие" знакомства, удобный поиск по анкетам свингеров и многое другое.
                                 </li>
                                 <li>Вы самостоятельно задаете уровень доступа к личной информации.</li>
                                 <li>Строгая модерация.</li>
@@ -97,7 +97,7 @@ $parse = new \App\Components\Parse\Clear();
                         <table id="table-diary" width=100% style="border:1px solid #AAA;">
                             <tr>
                                 <td bgcolor=#e1eaff style="border:1px solid #AAA; height: 20px; padding: 5px;">
-                                    <h2><a href="/diary">Новые дневники</a></h2>
+                                    <h2><a href="/diaries">Новые дневники</a></h2>
                                 </td>
                             </tr>
                             <tr>

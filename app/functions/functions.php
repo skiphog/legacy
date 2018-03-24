@@ -173,7 +173,7 @@ function smile($text)
 function imgart($text)
 {
     return preg_replace_callback('~{{(.+?)}}~', function ($matches) {
-        return '<img class="ug-imgart" src="/imgart/'. urlencode($matches[1]) .'">';
+        return '<img class="ug-imgart" src="/imgart/' . urlencode($matches[1]) . '">';
     }, $text);
 }
 
@@ -198,7 +198,9 @@ function imgart_no_reg($text)
  */
 function nickartGlobal($text)
 {
-    return preg_replace('#\|\|(.+?)\|\|#', '<b style="color:#747474">$1</b>', $text);
+    return preg_replace_callback('#\|\|(.+?)\|\|#', function ($value) {
+        return '<b style="color:#747474">' . html($value[1]) . '</b>';
+    }, $text);
 }
 
 /**

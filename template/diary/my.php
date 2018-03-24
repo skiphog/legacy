@@ -3,11 +3,11 @@
  * @var \System\View $this
  */
 
-use App\Components\Parse\All as Allparse;
+use App\Components\Parse\All as ParseAll;
 
 $dbh = db();
 $myrow = auth();
-$parse = new Allparse();
+$parse = new ParseAll();
 
 $page = request()->getInteger('page');
 $paging_page = '';
@@ -16,10 +16,8 @@ $sql = 'select count(*) from diary where user_di = ' . $myrow->id . ' and delete
 if ($count = $dbh->query($sql)->fetchColumn()) {
     $pagination = new Kilte\Pagination\Pagination($count, $page, 10, 2);
 
-    $sql = 'select d.id_di, d.title_di, d.text_di, d.data_di,d.v_count,
-      u.id, u.login, u.gender, u.pic1, u.city, u.fname,u.photo_visibility
+    $sql = 'select d.id_di, d.title_di, d.text_di, d.data_di,d.v_count
       from diary d
-        join users u on u.id = d.user_di
       where d.user_di = ' . $myrow->id . ' and d.deleted = 0 
     order by d.id_di desc limit ' . $pagination->offset() . ', 10';
 
@@ -45,32 +43,12 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
 <?php $this->start('style'); ?>
 <style>
-    .my-diary {
-        padding: 5px;
-        margin-bottom: 20px;
-        box-shadow: rgba(0,0,0,.09) 0 2px 0;
-    }
-    .my-diary-header{
-        margin-bottom: 20px;
-    }
-
-    .my-diary-title {
-        margin: 0;
-        font-size: 20px;
-    }
-    .my-diary-control{
-        margin: 0;
-    }
-
-    .my-diary-title > a {
-
-    }
-
-    .my-diary-date {
-        margin: 0;
-        color: #A99898;
-        font-size: 0.9em;
-    }
+    .my-diary {padding:5px;margin-bottom:20px;box-shadow:rgba(0,0,0,.09) 0 2px 0;}
+    .my-diary-header{margin-bottom:20px;}
+    .my-diary-title{margin:0;font-size:20px;}
+    .my-diary-control{margin:0;}
+    .my-diary-title>a{}
+    .my-diary-date{margin:0;color:#A99898;font-size:.9em;}
 </style>
 <?php $this->stop(); ?>
 
@@ -87,7 +65,8 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
         <article class="my-diary">
             <header class="my-diary-header">
                 <h2 class="my-diary-title">
-                    <a href="/viewdiary_<?php echo $diary['id_di']; ?>"><?php echo html($diary['title_di']) ?></a></h2>
+                    <a href="/viewdiary_<?php echo $diary['id_di']; ?>"><?php echo html($diary['title_di']) ?></a>
+                </h2>
                 <p class="my-diary-date">
                     <?php echo date('d-m-Y H:i', strtotime($diary['data_di'])); ?> |
                     <strong><?php echo (new \App\Components\SwingDate($diary['data_di']))->getHumans(); ?></strong>

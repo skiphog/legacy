@@ -52,12 +52,13 @@ $route->group('travel', function (Router $r) {
 });
 
 // Diary
-$route->get('/diary', 'DiaryController@index');
 $route->get('/viewdiary_{id:\d+}', 'DiaryController@show');
 
 $route->group('diaries', function (Router $r) {
+    $r->get('/', 'DiaryController@index');
     $r->get('/create', 'User\DiaryController@create');
     $r->get('/{id:\d+}/edit', 'User\DiaryController@edit');
+    $r->get('/user/{user_id:\d+}', 'DiaryController@user');
 });
 
 // Chat

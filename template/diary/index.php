@@ -5,9 +5,7 @@
 
 $dbh = db();
 $myrow = auth();
-
-$diaries = [];
-$paging_page = 'Одна страница';
+$paging_page = '';
 
 $page = request()->getInteger('page');
 $parse = new \App\Components\Parse\NoSession();
@@ -34,7 +32,7 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
     $paging = $pagination->build();
 
     if (!empty($paging)) {
-        $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/diary']);
+        $paging_page = render('partials/paginate', ['paginate' => $paging, 'link' => '/diaries']);
     }
 }?>
 
@@ -45,58 +43,37 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
 
 <?php $this->start('content') ?>
 <table width=100%>
-    <tr>
-        <td>
-            <h2>Дневники</h2>
-            &nbsp;
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <?php echo $paging_page; ?>
-        </td>
-    </tr>
-    <tr>
-        <td height=2 bgcolor=#e1eaff></td>
-    </tr>
-
+    <tr><td><h2>Дневники</h2></td></tr>
+    <tr><td><?php echo $paging_page; ?></td></tr>
+    <tr><td height=2 bgcolor=#e1eaff></td></tr>
     <?php if(!empty($diaries)) : ?>
         <?php foreach($diaries as $diary) : ?>
             <tr>
                 <td style="padding:5px;">
-                    <h1><?php echo html($diary['title_di']); ?></h1>
+                    <h1>  <a href="/viewdiary_<?=$diary['id_di']?>"><?php echo html($diary['title_di']); ?></a></h1>
                     <div class="avatar" style="float:left;background-image: url(<?php echo avatar($myrow, $diary['pic1'], $diary['photo_visibility']); ?>)"></div>
                     <div>
                         <i><?php echo $diary['data_di']?></i>
                         <br>
-                        Автор: <img src="/img/info_small_<?php echo $diary['gender'];?>.png" width="15" height="14" />
+                        Автор: <img src="/img/info_small_<?php echo $diary['gender'];?>.png" width="15" height="14">
                         <a href="/id<?=$diary['id']?>"><?=html($diary['login'])?></a>
                         <br>
                         <?php echo html($diary['fname']); ?>
                     </div>
                     <div style="clear: both;"></div>
                     <div>
-                        <?=nl2br(smile(imgart_no_reg($parse->parse($diary['text_di']))));?>
+                        <?php echo nl2br(smile(imgart_no_reg($parse->parse($diary['text_di']))));?>
                         <br>
                         <br>
-                        <a href="/viewdiary_<?=$diary['id_di']?>">Читать запись</a>
-                        <?php
-
-                        if($myrow->id === (int)$diary['id'] || $myrow->isModerator()) :?>
-                            <a href="/diaries/<?=$diary['id_di'];?>/edit">// редактировать</a>
+                        <?php if($myrow->id === (int)$diary['id'] || $myrow->isModerator()) :?>
+                            <a href="/diaries/<?=$diary['id_di'];?>/edit">редактировать</a>
                         <?php endif;?>
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td height=2 bgcolor=#e1eaff></td>
-            </tr>
+            <tr><td height=2 bgcolor=#e1eaff></td></tr>
         <?php endforeach; ?>
-        <tr>
-            <td>
-                <?php echo $paging_page; ?>
-            </td>
-        </tr>
+        <tr><td><?php echo $paging_page; ?></td></tr>
     <?php else : ?>
     <tr>
         <td>Нет записей</td>

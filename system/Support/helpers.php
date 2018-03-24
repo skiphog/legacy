@@ -90,12 +90,13 @@ function view($name, array $params = [])
 
 /**
  * @param string $url
+ * @param int    $code
  *
  * @return \System\Response
  */
-function redirect($url = null)
+function redirect($url, $code = 302)
 {
-    return (new \System\Response())->redirect($url);
+    return (new \System\Response())->redirect($url, $code);
 }
 
 /**
@@ -103,7 +104,7 @@ function redirect($url = null)
  */
 function back()
 {
-    return redirect();
+    return redirect(null);
 }
 
 /**

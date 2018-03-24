@@ -32,7 +32,7 @@ class HelperTest extends TestCase
      */
     public function testRedirect()
     {
-        $this->assertInstanceOf(\System\Response::class, redirect());
+        $this->assertInstanceOf(\System\Response::class, redirect(null));
     }
 
     /**

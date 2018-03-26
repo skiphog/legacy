@@ -21,9 +21,10 @@ $route->get('/id{id:\d+}', 'User\IndexController@show');
 // My
 $route->group('my', function (Router $r) {
     $r->get('/dialogs', 'User\NotificationController@messages');
+    $r->get('/groups/activity', 'User\GroupController@activity');
     $r->get('/guests', 'User\NotificationController@guests');
     $r->get('/groups', 'User\GroupController@index');
-    $r->get('/groups/activity', 'User\GroupController@activity');
+    $r->get('/friends', 'User\FriendController@index');
     $r->get('/diaries', 'User\DiaryController@index');
     $r->get('/parties', 'PartyController@my');
 });
@@ -59,6 +60,12 @@ $route->group('diaries', function (Router $r) {
     $r->get('/create', 'User\DiaryController@create');
     $r->get('/{id:\d+}/edit', 'User\DiaryController@edit');
     $r->get('/user/{user_id:\d+}', 'DiaryController@user');
+});
+
+// Friends
+$route->group('friends', function (Router $r) {
+    $r->get('/user/{user_id:\d+}', 'User\FriendController@user');
+    $r->get('/user/{user_id:\d+}/mutual', 'User\FriendController@mutual');
 });
 
 // Chat

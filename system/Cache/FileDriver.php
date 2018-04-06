@@ -26,7 +26,7 @@ class FileDriver implements CacheDriverInterface
         $file = $this->path . '/' . $key;
 
         if (file_exists($file)) {
-            $data = unserialize(file_get_contents($file), []);
+            $data = unserialize(file_get_contents($file), ['allowed_classes' => false]);
 
             if ($data['time'] === 0 || $data['time'] > time()) {
                 return $data['data'];

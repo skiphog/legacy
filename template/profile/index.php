@@ -6,12 +6,14 @@
 $dbh = db();
 $myrow = auth();
 
+
+
 ?>
 
 <?php $this->extend('layout/layout'); ?>
 
-<?php $this->start('title'); ?><?php $this->stop(); ?>
-<?php $this->start('description'); ?><?php $this->stop(); ?>
+<?php $this->start('title'); ?>Моя страница<?php $this->stop(); ?>
+<?php $this->start('description'); ?>Моя страница<?php $this->stop(); ?>
 
 <?php $this->start('style'); ?>
 <?php $this->stop(); ?>

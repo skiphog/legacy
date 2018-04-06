@@ -70,8 +70,8 @@ if ($ses_uuid !== $uuid) {
     }
 
     $sql = 'update users 
-              set uuid = UNHEX(' . $dbh->quote($min_uuid) . ') 
-            where uuid = UNHEX(' . $dbh->quote($max_uuid) . ')';
+      set uuid = UNHEX(' . $dbh->quote($min_uuid) . ') 
+    where uuid = UNHEX(' . $dbh->quote($max_uuid) . ')';
     $dbh->exec($sql);
 
     $sql = 'insert into log_moder (id_type,id_user,content) values (1, ' . (int)$id_user . ',' . $dbh->quote($min_uuid) . ')';

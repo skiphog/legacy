@@ -14,6 +14,6 @@ class ProfileController extends UserController
      */
     public function index()
     {
-        return view('profile/index');
+        return redirect('/id' . auth()->id);
     }
 }

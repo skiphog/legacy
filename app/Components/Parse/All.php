@@ -39,7 +39,7 @@ class All extends NoSession
                     $param = 'width:' . (int)$wh[0] . 'px;height:' . (int)$wh[1] . 'px';
                 }
                 $txt = str_replace($match[0][$key],
-                    '<img class="new-imgart" style="' . $param . '" src="' . htmlspecialchars($val, ENT_QUOTES) . '">',
+                    '<img class="new-imgart" style="' . $param . '" src="/' . htmlspecialchars($val, ENT_QUOTES) . '">',
                     $txt);
             }
         }

@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <td style="padding-left: 30px;">
-            <a href="/profile">Моя страница</a> | <a href="/profile/edit"><span style="color:#961313">Редакт.</span></a>
+            <a href="/id<?php echo $myrow->id; ?>">Моя страница</a> | <a href="/profile/edit"><span style="color:#961313">Редакт.</span></a>
             <br>
             <a href="/my/albums">Мои фотографии</a>
             <br>

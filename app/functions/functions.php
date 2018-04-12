@@ -173,7 +173,7 @@ function smile($text)
 function imgart($text)
 {
     return preg_replace_callback('~{{(.+?)}}~', function ($matches) {
-        return '<img class="ug-imgart" src="/imgart/' . urlencode($matches[1]) . '">';
+        return '<img class="ug-imgart" src="/imgart/' . html($matches[1]) . '">';
     }, $text);
 }
 

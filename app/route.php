@@ -12,9 +12,6 @@ $route->get('/', 'IndexController@index');
 // Private message
 $route->get('/private', 'User\NotificationController@private');
 
-// Profile
-$route->get('/profile', 'User\ProfileController@index');
-
 // User
 $route->get('/id{id:\d+}', 'User\IndexController@show');
 
@@ -116,6 +113,9 @@ $route->group('moderator', function (Router $r) {
     $r->get('/parties', 'Moderator\IndexController@parties');
     $r->get('/statistics', 'Moderator\IndexController@statistics');
 });
+
+// Profile => redirect to id[user_id]
+$route->get('/profile', 'User\ProfileController@index');
 
 // Test
 $route->get('/test', 'TestController@index');

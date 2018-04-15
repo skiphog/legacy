@@ -70,7 +70,11 @@ if ($count = $dbh->query($sql)->fetchColumn()) {
     <?php endforeach; ?>
 <?php endif; ?>
 
-<h1>Мои друзья <?php if ($count > 0) : ?>(<?php echo $count; ?>)<?php endif; ?></h1>
+<h1>
+    <a href="/id<?php echo $myrow->id; ?>">Моя сраница</a>
+    &bull;
+    Мои друзья <?php if ($count > 0) : ?>(<?php echo $count; ?>)<?php endif; ?>
+</h1>
 <?php if(!empty($friends)) : ?>
     <?php echo $paging_page; ?>
     <table width="100%">

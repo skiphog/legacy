@@ -40,129 +40,8 @@ if (false === $user = $dbh->query($sql)->fetchObject(\App\Models\Profile::class)
         .profile {
             background: <?php echo $user->getBackground(); ?>
         }
-
-        .profile-header {
-            padding: 5px;
-            border-bottom: 5px solid #fff;
-        }
-
-        .profile-header-login {
-            font-size: 18px;
-            font-weight: 700
-        }
-
-        .profile-table {
-            display: table-cell;
-        }
-
-        .profile-left {
-            width: 250px;
-            border-right: 5px solid #fff;
-        }
-
-        .profile-avatar {
-            background: #fff;
-            border-bottom: 5px solid #fff;
-        }
-
-        .profile-avatar img {
-            width: 250px;
-            padding: 2px;
-            border: 1px solid #ccc;
-            vertical-align: middle;
-        }
-
-        .relevance {
-            width: 255px;
-            font-size: 0;
-            margin: 0 auto;
-            background: #fff;
-        }
-
-        input[name=relevance] {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            border: 0;
-            padding: 0;
-            white-space: nowrap;
-            -webkit-clip-path: inset(100%);
-            clip-path: inset(100%);
-            clip: rect(0 0 0 0);
-            overflow: hidden;
-        }
-
-        .relevance::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .relevance label {
-            display: inline-block;
-            width: 80px;
-            height: 35px;
-            font-size: 12px;
-            padding: 5px 2px;
-            overflow: hidden;
-            vertical-align: middle;
-            text-align: center;
-            border: 1px solid rgba(0, 0, 0, .2);
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            margin-left: -1px;
-            -webkit-transition: all .1s;
-            -o-transition: all .1s;
-            transition: all .1s;
-        }
-
-        .relevance label:hover {
-            -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1);
-        }
-
-        .relevance label:active {
-            -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, .2);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, .2);
-        }
-
-        .relevance input[type=radio]:checked + label {
-            color: #ffffff;
-            -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .2);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, .2);
-        }
-
-        .relevance input[type=radio]:checked + label[for=rev2] {
-            background-color: #24b662;
-        }
-
-        .relevance input[type=radio]:checked + label[for=rev1] {
-            background-color: #e8b222;
-        }
-
-        .relevance input[type=radio]:checked + label[for=rev0] {
-            background-color: #a52a2a;
-        }
-        .profile-panel {
-            border-top: 15px solid #fff;
-        }
-        .profile-panel-header{
-            font-size: 14px;
-            font-weight: 700;
-            text-align: center;
-            padding: 5px;
-            border: 1px solid #ccc;
-        }
-        .profile-panel-content{
-            background: #fff;
-            padding: 5px;
-            border: 1px solid #ccc;
-        }
     </style>
+    <link rel="stylesheet" href="/css/profile.css">
 <?php $this->stop(); ?>
 
 <?php $this->start('content'); ?>
@@ -203,14 +82,58 @@ if (false === $user = $dbh->query($sql)->fetchObject(\App\Models\Profile::class)
                 <?php endforeach; ?>
             </div>
             <div class="profile-panel">
-                <div class="profile-panel-header">Баллы и бонусы</div>
+                <div class="profile-panel-header">Информация</div>
                 <div class="profile-panel-content">
-                    <div>Баллы: <strong><?php echo $user->rate; ?></strong></div>
+                    <div class="profile-panel-info">Ваши баллы:
+                        <strong><?php echo number_format($user->rate, 0, '', ' '); ?></strong>
+                    </div>
+                    <?php if ($user->isVip()) : ?>
+                        <div class="profile-panel-info">
+                            <img src="/img/vip1.gif" width="17" height="16" alt="vip"> действует:
+                            <strong><?php echo (new \App\Components\SwingDate($user->vip_time))->getHumansShort(); ?></strong>
+                        </div>
+                        <?php if (!empty($user->id_vip)) : ?>
+                            <div class="profile-panel-info">
+                                VIP подарил: <a href="/id<?php echo $user->id_vip; ?>">
+                                    <strong><?php echo html($user->getGifterVip()); ?></strong>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <hr class="profile-hr">
+                    <div class="profile-panel-info">
+                        <a>Как получить баллы?</a><br>
+                        <a>Как получить статус реальности?</a><br>
+                        <a>Как получить VIP статус?</a>
+                    </div>
+                    <hr class="profile-hr">
+                    <div class="profile-panel-info">
+                        <a>Администрация</a>
+                    </div>
+                </div>
+                <div></div>
+            </div>
+            <div class="profile-panel">
+                <div class="profile-panel-header">
+                    Друзья
+                    <?php if(!empty($cnt_friends = $user->getCountFriends())) : ?>
+                        <a href="/my/friends">(<?php echo $cnt_friends; ?>)</a>
+                    <?php endif; ?>
+                </div>
+                <div class="profile-panel-content">
+                    <?php if(!empty($cnt_friends)) : ?>
 
+                    <?php else : ?>
+                        <div class="profile-panel-info">
+                            У вас пока нет друзей
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="profile-table"></div>
+        <div class="profile-table">
+            <?php var_dump($user); ?>
+        </div>
         <?php /*var_dump($user) */ ?>
     </div>
 <?php $this->stop(); ?>

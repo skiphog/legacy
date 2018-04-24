@@ -16,7 +16,7 @@ return [
      * Настройка соединения с базой данных
      */
     'db'            => [
-        'host'     => 'localhost',
+        'host'     => '127.0.0.1',
         'dbname'   => 'swingsite',
         'username' => 'root',
         'password' => '',

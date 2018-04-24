@@ -24,21 +24,27 @@ class Response
     }
 
     /**
-     * @param mixed $url
-     * @param int   $code
+     * @param string $url
+     * @param int    $code
      *
      * @return Response
      */
-    public function redirect($url = null, $code = 302): Response
+    public function redirect($url, $code = 302): Response
     {
-        if (null === $url) {
-            $url = !empty($_SERVER['HTTP_REFERER']) && filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL)
-                ? $_SERVER['HTTP_REFERER'] : '/';
-        }
-
         $this->setHeader('Location: ' . $url, $code);
 
         return $this;
+    }
+
+    /**
+     * @return Response
+     */
+    public function back(): Response
+    {
+        $url = !empty($_SERVER['HTTP_REFERER']) && false !== filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL)
+            ? $_SERVER['HTTP_REFERER'] : '/';
+
+        return $this->redirect($url, 302);
     }
 
     /**

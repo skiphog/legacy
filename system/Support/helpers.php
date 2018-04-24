@@ -104,7 +104,7 @@ function redirect($url, $code = 302)
  */
 function back()
 {
-    return redirect(null);
+    return (new \System\Response())->back();
 }
 
 /**

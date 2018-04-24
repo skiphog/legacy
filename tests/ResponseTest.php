@@ -28,11 +28,21 @@ class ResponseTest extends TestCase
      */
     public function testRedirect()
     {
-        $this->assertInstanceOf(Response::class, $this->response->redirect());
+        $this->assertInstanceOf(Response::class, $this->response->redirect('/'));
         $this->assertEquals(302, http_response_code());
         $this->assertArraySubset(['Location: /'], xdebug_get_headers());
         $this->response->redirect('/test/test');
         $this->assertArraySubset(['Location: /test/test'], xdebug_get_headers());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testBack()
+    {
+        $this->assertInstanceOf(Response::class, $this->response->back());
+        $this->assertEquals(302, http_response_code());
+        $this->assertArraySubset(['Location: /'], xdebug_get_headers());
     }
 
     /**
@@ -58,7 +68,7 @@ class ResponseTest extends TestCase
      */
     public function testWithSession()
     {
-        $this->response->redirect()
+        $this->response->redirect('/')
             ->withSession('foo', 'bar')
             ->withSession(['baz' => 'bla', 'b' => 'g']);
 
@@ -70,7 +80,7 @@ class ResponseTest extends TestCase
      */
     public function testWithCookie()
     {
-        $this->response->redirect()
+        $this->response->redirect('/')
             ->withSession('foo', 'bar')
             ->withCookie('foo', 'bar');
         $this->assertNotFalse(strpos(xdebug_get_headers()[1],'Set-Cookie: foo=bar;'));
@@ -81,7 +91,7 @@ class ResponseTest extends TestCase
      */
     public function testWithHeaders()
     {
-        $this->response->redirect()
+        $this->response->back()
             ->withSession('foo', 'bar')
             ->withCookie('foo', 'bar')
             ->withHeaders(['test' => 'headers']);

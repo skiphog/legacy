@@ -3,7 +3,7 @@
 namespace System;
 
 /**
- * Class Redirector
+ * Class Response
  *
  * @package System
  */

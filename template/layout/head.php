@@ -8,6 +8,9 @@
 <?php if ($this->ensure('title')) : ?><?php echo html($site_title); ?><?php $this->stop(); endif; ?>
 <?php if ($this->ensure('description')) : ?><?php echo html($site_description); ?><?php $this->stop(); endif; ?>
 <meta charset="utf-8">
+<!-- Временный тег -->
+<base href="/">
+<!--// Временный тег -->
 <title><?php echo $this->renderBlock('title'); ?></title>
 <meta name="description" content="<?php echo $this->renderBlock('description'); ?>">
 <link rel="stylesheet" href="/css/main-1475653197766.css">
